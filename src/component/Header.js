@@ -4,15 +4,17 @@ export default function Header() {
   return (
     <>
       <div className="top-bar">
-        <div className="brand">
-          <div className="logo">
-            <img src="assests/icon/logo.png" />
+        <Link to="/">
+          <div className="brand">
+            <div className="logo">
+              <img src="assests/icon/logo.png" />
+            </div>
+            <div className="brand-name">
+              <h1>Lifeline</h1>
+              <p>Clinical Laboratory</p>
+            </div>
           </div>
-          <div className="brand-name">
-            <h1>Lifeline</h1>
-            <p>Clinical Laboratory</p>
-          </div>
-        </div>
+        </Link>
         <div className="contact">
           <div className="contact-info">
             <i className="icofont-ui-call" />
@@ -39,14 +41,18 @@ export default function Header() {
           </div>
         </div>
         <div className="cart-sign">
-          <div className="cart">
-            <i className="icofont-cart" />
-            <div className="secondary-text">cart</div>
-          </div>
-          <div className="cart">
-            <i className="icofont-user" />
-            <div className="secondary-text">Sign in</div>
-          </div>
+          <Link to="">
+            <div className="cart">
+              <i className="icofont-cart" />
+              <div className="secondary-text">cart</div>
+            </div>
+          </Link>
+          <Link>
+            <div className="cart">
+              <i className="icofont-user" />
+              <div className="secondary-text">Sign in</div>
+            </div>
+          </Link>
         </div>
       </div>
 

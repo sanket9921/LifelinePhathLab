@@ -5,6 +5,7 @@ import BookTest from "./component/BookTest";
 import UploadPrescription from "./component/UploadPrescription";
 import DownloadReport from "./component/DownloadReport";
 import Contact from "./component/Contact";
+import Cart from "./component/Cart";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "contact",
         element: <Contact />,
+      },
+      {
+        path: "cart",
+        element: <Cart />,
       },
     ],
   },
