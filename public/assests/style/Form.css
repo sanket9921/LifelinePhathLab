@@ -53,7 +53,7 @@ input[type="date"] {
   text-decoration: solid;
   font-size: 16px;
   color: white;
-  width: 40%;
+  width: 90%;
   padding: 2% 0%;
   border: none;
   border-radius: 15px;
@@ -133,8 +133,9 @@ input[type="date"]:valid:before {
 /*Footer Styling start*/
 
 .footer-container {
+  margin-top: 3%;
   background-color: #7cb9e8;
-  padding: 2% 4% 2% 4%;
+  padding: 2% 4% 2% 8%;
   color: rgba(50, 49, 49, 1);
   width: 100%;
 }
@@ -165,31 +166,112 @@ input[type="date"]:valid:before {
   text-wrap: wrap;
 }
 
+.footer-contactDetails ul li {
+  text-align: start;
+  text-overflow: clip;
+}
+
 /*Footer Styling ends here*/
 
 /*About section styling starts here*/
 
 .about-container {
-  
   font-weight: 500;
   color: white;
   border: 1px solid #2e9aec;
   border-radius: 15px;
   padding: 8% 2% 5% 3%;
-
-
- 
 }
 
-.background-img{
+.background-img {
   background-image: url("About+Us+photo.jpeg");
-  
-  position: absolute; 
-  height: 100%; 
-  width: 100%; 
 
-  background-size: cover; 
-  background-position: center; 
-  filter: blur(4px); 
+  position: absolute;
+  height: 100%;
+  width: 100%;
+
+  background-size: cover;
+  background-position: center;
+  filter: blur(4px);
+}
+/*About section Styling ends here*/
+
+/*Upload Prescription section styling starts here*/
+
+.uploadPresc-container {
+  margin-top: 3%;
+  border: 1px solid #2e9aec;
+  border-radius: 15px;
+  padding: 4% 2% 3% 3%;
+  text-align: center;
 }
 
+.uploadPresc-container:hover {
+  outline: 2px solid blue;
+}
+
+.file-upload {
+  content-visibility: none;
+}
+
+.uploadPresc-container .file-upload-format {
+  font-size: 14px;
+  text-indent: 4%;
+}
+
+.uploadPresc-container .upload-steps {
+  padding: 10%;
+  color: white;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: #1a1ab1;
+}
+
+.upload-steps-circle {
+  margin-left: 35%;
+  padding-top: 15px;
+  text-align: center;
+  color: white;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background-color: #1a1ab1;
+}
+
+/*Upload Prescription section styling ends here*/
+
+/*ReportDownload section styling starts here*/
+
+.download-container {
+  margin-top: 3%;
+  border: 1px solid #2e9aec;
+  border-radius: 15px;
+  padding: 5% 2% 8% 3%;
+  text-align: center;
+  background-color: rgb(195, 208, 241);
+}
+
+.download-icon {
+  padding-top: 18px;
+  margin-left: 45%;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  background-color: #1a1ab1;
+}
+
+.dwl-container-inner {
+  margin-left: 25%;
+  width: 50%;
+}
+
+.download-container a {
+  padding: 1.5% 10%;
+  color: black;
+  font-weight: 500;
+  background-color: #0fd015;
+  border-radius: 10px;
+}
+
+/*ReportDownload section styling ends here*/
