@@ -6,6 +6,8 @@ import UploadPrescription from "./component/UploadPrescription";
 import DownloadReport from "./component/DownloadReport";
 import Contact from "./component/Contact";
 import Cart from "./component/Cart";
+import Login from "./component/Login";
+import Signup from "./component/Signup";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +40,16 @@ const router = createBrowserRouter([
       },
     ],
   },
+  {
+    path: "login",
+    element: <Login />,
+  },
+  {
+    path: "signup",
+    element: <Signup />,
+  },
+
+  
 ]);
 
 export default router;
