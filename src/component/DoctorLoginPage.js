@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Login() {
+export default function DoctorLoginPage() {
   return (
     <div className="main-container">
       <form className="form-control">
@@ -42,17 +42,7 @@ export default function Login() {
               Don't Have An Account?
               <br />
               <button className="button" type="submit" value="submit">
-                Sign Up
-              </button>
-              <br />
-              Or
-              <br />
-              <button
-                className="button google-btn"
-                type="submit"
-                value="submit"
-              >
-                Sign In With Google
+                Register
               </button>
             </div>
           </div>
