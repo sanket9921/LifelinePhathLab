@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import App from "./Admin/App";
-import Content from "./Admin/Content";
 import Dashboard from "./Admin/Dashboard";
 import Appointments from "./Admin/Appointments";
 import TestBook from "./Admin/TestBook";
@@ -10,6 +9,8 @@ import Admin from "./Admin/Users/Admin";
 import AddTest from "./Admin/Tests/AddTest";
 import AllTest from "./Admin/Tests/AllTest";
 import AddDoctor from "./Admin/Users/AddDoctor";
+import Feedback from "./Admin/Feedback";
+import Enquiry from "./Admin/Enquiry";
 
 const adminRouter = createBrowserRouter([
   {
@@ -51,6 +52,14 @@ const adminRouter = createBrowserRouter([
       {
         path: "addDoctor",
         element: <AddDoctor />,
+      },
+      {
+        path: "feedback",
+        element: <Feedback />,
+      },
+      {
+        path: "enquiry",
+        element: <Enquiry />,
       },
     ],
   },

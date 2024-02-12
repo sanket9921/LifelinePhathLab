@@ -82,6 +82,24 @@ function Sidebar() {
             </ul>
           </div>
         </li>
+        <li class="nav-item">
+          <Link class="nav-link" to="addDoctor">
+            <i class="mdi mdi-file-document-box"></i>
+            <span class="menu-title">Doctors Register</span>
+          </Link>
+        </li>
+        <li class="nav-item">
+          <Link class="nav-link" to="enquiry">
+            <i class="mdi mdi-comment-question-outline"></i>
+            <span class="menu-title">User Enquiry </span>
+          </Link>
+        </li>
+        <li class="nav-item">
+          <Link class="nav-link" to="feedback">
+            <i class="mdi mdi-message-draw"></i>
+            <span class="menu-title">Feedback</span>
+          </Link>
+        </li>
       </ul>
     </nav>
   );

@@ -6,6 +6,7 @@ export default function Patients() {
       <div class="col-12 col-xl-8 mb-4 mb-xl-0">
         <h3 class="font-weight-bold">Patients</h3>
       </div>
+
       <div className="form-group m-4">
         <div className="input-group">
           <input

@@ -1,24 +1,10 @@
 import React from "react";
 
-export default function AllTest() {
+export default function Feedback() {
   return (
     <>
       <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-        <h3 class="font-weight-bold">All Test</h3>
-      </div>
-      <div className="form-group m-4">
-        <div className="input-group">
-          <input
-            type="text"
-            className="form-control"
-            placeholder="Enter the Test Name"
-          />
-          <div className="input-group-append">
-            <button className="btn btn-sm btn-primary" type="button">
-              Search
-            </button>
-          </div>
-        </div>
+        <h3 class="font-weight-bold">Feedback</h3>
       </div>
 
       <div className="col-lg-12 grid-margin stretch-card">
@@ -31,26 +17,19 @@ export default function AllTest() {
               >
                 <thead>
                   <tr>
-                    <th style={{ padding: 8, textAlign: "left" }}>Test ID</th>
-                    <th style={{ padding: 8, textAlign: "left" }}>Test Name</th>
-                    <th style={{ padding: 8, textAlign: "left" }}>Test Type</th>
+                    <th style={{ padding: 8, textAlign: "left" }}>ID</th>
+                    <th style={{ padding: 8, textAlign: "left" }}>User Name</th>
+                    <th style={{ padding: 8, textAlign: "left" }}>Phone No</th>
 
                     <th
                       style={{
                         padding: 8,
                         textAlign: "left",
-                        width: "30%",
+                        width: "50%",
                         wordWrap: "break-word",
                       }}
                     >
-                      Test Description
-                    </th>
-                    <th style={{ padding: 8, textAlign: "left" }}>
-                      Actual price
-                    </th>
-                    <th style={{ padding: 8, textAlign: "left" }}>Discount</th>
-                    <th style={{ padding: 8, textAlign: "left" }}>
-                      Final price
+                      Feedback
                     </th>
                   </tr>
                 </thead>
@@ -67,32 +46,16 @@ export default function AllTest() {
                     >
                       JohnDoe
                     </td>
-
                     <td
                       style={{ borderTop: "1px solid lightgray", padding: 8 }}
                     >
-                      Allergies
+                      9839988934
                     </td>
                     <td
                       style={{ borderTop: "1px solid lightgray", padding: 8 }}
                     >
                       123 Main Street, Lorem Ipsum, Dolor Sit Amet, Consectetur
                       adipiscing elit.
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      1000
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      20%
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      800
                     </td>
                   </tr>
                   <tr>
@@ -109,23 +72,13 @@ export default function AllTest() {
                     <td
                       style={{ borderTop: "1px solid lightgray", padding: 8 }}
                     >
+                      9839988934
+                    </td>
+                    <td
+                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
+                    >
                       123 Main Street, Lorem Ipsum, Dolor Sit Amet, Consectetur
                       adipiscing elit.
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      1000
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      20%
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      800
                     </td>
                   </tr>
                   <tr>
@@ -142,23 +95,13 @@ export default function AllTest() {
                     <td
                       style={{ borderTop: "1px solid lightgray", padding: 8 }}
                     >
+                      9839988934
+                    </td>
+                    <td
+                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
+                    >
                       123 Main Street, Lorem Ipsum, Dolor Sit Amet, Consectetur
                       adipiscing elit.
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      1000
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      20%
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      800
                     </td>
                   </tr>
                 </tbody>

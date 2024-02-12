@@ -68,7 +68,16 @@ export default function AddTest() {
             type="text"
             className="form-control"
             id="exampleInputName1"
-            placeholder="Name"
+            placeholder="Enter name or the test or package"
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="exampleInputName1">Test type</label>
+          <input
+            type="text"
+            className="form-control"
+            id="exampleInputName1"
+            placeholder="Enter type of the test or package eg. blood, liver, allergies etc."
           />
         </div>
         <div class="form-group">
