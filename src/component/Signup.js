@@ -1,19 +1,21 @@
 import React from "react";
 import TopBar from "./TopBar";
+import "../vendors/mdi/css/materialdesignicons.min.css";
+import { Link } from "react-router-dom";
+import Topbar2 from "./Topbar2";
 
 export default function Signup() {
   return (
     <>
-      <TopBar />
-      <div className="main-container">
-        <form className="form-control">
-          <h1>Please Enter Your details</h1>
+      <Topbar2 />
+      <div className="container mt-2">
+        <form className="form-control p-5">
+          <h3>Please Enter Your details</h3>
           <br />
           <div className="row">
             <div className="col-md-6 col-12">
-              
               <div className="input-icons ">
-                <i className="fa fa-user icon" />
+                <i className="mdi mdi-account" />
                 <input
                   className="input-field"
                   type="text"
@@ -23,7 +25,7 @@ export default function Signup() {
               </div>
 
               <div className="input-icons ">
-                <i className="fa fa-user icon" />
+                <i className="mdi mdi-account" />
                 <input
                   className="input-field"
                   type="text"
@@ -32,7 +34,7 @@ export default function Signup() {
                 />
               </div>
               <div className="input-icons ">
-                <i className="fa fa-user icon" />
+                <i className="mdi mdi-email-outline" />
                 <input
                   className="input-field"
                   type="email"
@@ -40,7 +42,7 @@ export default function Signup() {
                 />
               </div>
               <div className="input-icons ">
-                <i className="fa fa-user icon" />
+                <i className="mdi mdi-cellphone" />
                 <input
                   className="input-field"
                   type="text"
@@ -49,7 +51,7 @@ export default function Signup() {
                 />
               </div>
               <div className="input-icons ">
-                <i className="fa fa-user icon" />
+                <i className="mdi mdi-lock-outline" />
                 <input
                   className="input-field"
                   type="password"
@@ -58,7 +60,7 @@ export default function Signup() {
                 />
               </div>
               <div className="input-icons ">
-                <i className="fa fa-user icon" />
+                <i className="mdi mdi-lock-outline" />
                 <input
                   className="input-field"
                   type="password"
@@ -75,16 +77,22 @@ export default function Signup() {
                   placeholder="Date Of Birth"
                 />
               </div>
-              <div className="input-icons ">
-                <i className="fa fa-user icon" />
-                <input
+
+              <div className="input-icons">
+                <i className="mdi mdi-account-multiple" />
+                <select
                   className="input-field"
-                  type="text"
-                  placeholder="Gender"
-                />
+                  name="SelectDoctors"
+                  id="language"
+                >
+                  <option value="">Select Gender</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Others</option>
+                </select>
               </div>
               <div className="input-icons ">
-                <i className="fa fa-user icon" />
+                <i className="mdi mdi-water" />
                 <input
                   className="input-field"
                   type="text"
@@ -92,7 +100,7 @@ export default function Signup() {
                 />
               </div>
               <div className="input-icons ">
-                <i className="fa fa-user icon" />
+                <i className="icofont-location-pin" />
                 <input
                   className="input-field"
                   type="text"
@@ -104,7 +112,10 @@ export default function Signup() {
                 <b>Sign Up</b>
               </button>
               <p className="redirect">
-                Already Have An Account<a href="#"> Click Here</a>
+                Already Have An Account
+                <Link to="/login" style={{ color: "blue" }}>
+                  Click Here
+                </Link>
               </p>
             </div>
           </div>

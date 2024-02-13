@@ -3,20 +3,18 @@ import React from "react";
 export default function Home() {
   return (
     <>
-      <>
-        <div className="hero">
-          <img
-            src="assests/image/backgroudimg.jpg"
-            alt="Snow"
-            style={{ width: "100%" }}
-          />
-          <div className="heading">
-            <h1>Reliable &amp; High-Quality Laboratory Services</h1>
-            <div>We employ the latest technology and innovations</div>
-          </div>
+      <div className="hero">
+        <img
+          src="assests/image/backgroudimg.jpg"
+          alt="Snow"
+          style={{ width: "100%" }}
+        />
+        <div className="heading">
+          <h1>Reliable &amp; High-Quality Laboratory Services</h1>
+          <p>We employ the latest technology and innovations</p>
         </div>
-        {/* End Hero */}
-      </>
+      </div>
+      {/* End Hero */}
 
       {/* start Scroll bar */}
       <div className=" container mt-3 rounded scroll-container">
@@ -94,7 +92,7 @@ export default function Home() {
         <h3 className="text-center">Best Offer</h3>
         <div className="row">
           {/* ===================================== */}
-          <div className="product-cart rounded col-3 mt-3">
+          <div className="product-cart rounded col-md-3 col-xs-6 mt-3">
             <div className="img">
               <img
                 className="img-fluid"
@@ -117,7 +115,7 @@ export default function Home() {
             </div>
           </div>
           {/* ======================================= */}
-          <div className="product-cart rounded col-3 mt-3">
+          <div className="product-cart rounded col-md-3 col-xs-6 mt-3">
             <div className="img">
               <img
                 className="img-fluid"
@@ -139,7 +137,7 @@ export default function Home() {
               <button className="buy">Buy Now</button>
             </div>
           </div>
-          <div className="product-cart rounded col-3 mt-3">
+          <div className="product-cart rounded col-md-3 col-xs-6 mt-3">
             <div className="img">
               <img
                 className="img-fluid"
@@ -161,7 +159,7 @@ export default function Home() {
               <button className="buy">Buy Now</button>
             </div>
           </div>
-          <div className="product-cart rounded col-3 mt-3">
+          <div className="product-cart rounded col-md-3 col-xs-6 mt-3">
             <div className="img">
               <img
                 className="img-fluid"
@@ -183,7 +181,7 @@ export default function Home() {
               <button className="buy">Buy Now</button>
             </div>
           </div>
-          <div className="product-cart rounded col-3 mt-3">
+          <div className="product-cart rounded col-md-3 col-xs-6 mt-3">
             <div className="img">
               <img
                 className="img-fluid"
@@ -215,7 +213,7 @@ export default function Home() {
             <h1>Leave Your Fedback Here</h1>
             <br />
             <div className="input-icons ">
-              <i className="fa fa-user icon" />
+              <i className="mdi mdi-account" />
               <input
                 className="input-field"
                 type="email/number"
@@ -223,7 +221,7 @@ export default function Home() {
               />
             </div>
             <div className="input-icons ">
-              <i className="fa fa-user icon" />
+              <i className="mdi mdi-cellphone" />
               <input
                 className="input-field"
                 type="text"
