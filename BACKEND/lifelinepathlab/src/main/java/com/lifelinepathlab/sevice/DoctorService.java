@@ -13,9 +13,8 @@ public class DoctorService {
 	@Autowired
 	private DoctorRepository doctorRepositoryRef;
 
-	public Doctor addDoctor(Doctor doctor) {
-		Doctor newDoctor = doctorRepositoryRef.save(doctor);
-		return newDoctor;
+	public void addDoctor(Doctor doctor) {
+		doctorRepositoryRef.save(doctor);
 	}
 
 	public List<Doctor> getDoctors() {
