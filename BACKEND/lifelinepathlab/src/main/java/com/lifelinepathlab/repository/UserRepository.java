@@ -1,4 +1,4 @@
-package com.lifelinepathlab.user_repository;
+package com.lifelinepathlab.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

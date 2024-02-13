@@ -6,8 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
-
 
 @Entity
 @Table(name="UserDetails")
@@ -18,7 +16,6 @@ public class User {
 	private int userId;
 	private String firstName;
 	private String lastName;
-	@Email(message = "Please provide a valid email address")
 	private String emailId;
 	private String contactNo;
 	private Date dateOfBirth;
@@ -26,14 +23,13 @@ public class User {
 	private String bloodGroup;
 	private String address;
 	private String password;
-	private String confirmPassword;
 	
 	public User() {
 	
 	}
 
 	public User(int userId, String firstName, String lastName, String emailId, String contactNo, Date dateOfBirth,
-			String gender, String bloodGroup, String address, String password, String confirmPassword) {
+			String gender, String bloodGroup, String address, String password) {
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -44,7 +40,6 @@ public class User {
 		this.bloodGroup = bloodGroup;
 		this.address = address;
 		this.password = password;
-		this.confirmPassword = confirmPassword;
 	}
 
 	public int getUserId() {
@@ -127,20 +122,12 @@ public class User {
 		this.password = password;
 	}
 
-	public String getConfirmPassword() {
-		return confirmPassword;
-	}
-
-	public void setConfirmPassword(String confirmPassword) {
-		this.confirmPassword = confirmPassword;
-	}
 
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId
 				+ ", contactNo=" + contactNo + ", dateOfBirth=" + dateOfBirth + ", gender=" + gender + ", bloodGroup="
-				+ bloodGroup + ", address=" + address + ", password=" + password + ", confirmPassword="
-				+ confirmPassword + "]";
+				+ bloodGroup + ", address=" + address + ", password=" + password + "]";
 	}
 	
 }
