@@ -1,4 +1,4 @@
-package com.lifelinepathlab.user_sevice;
+package com.lifelinepathlab.sevice;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.lifelinepathlab.exception.ResourceNotFoundException;
 import com.lifelinepathlab.model.User;
-import com.lifelinepathlab.user_repository.UserRepository;
+import com.lifelinepathlab.repository.UserRepository;
 
 @Service
 public class UserService {
@@ -40,7 +40,6 @@ public class UserService {
 			oldUser.setBloodGroup(newUser.getBloodGroup());
 			oldUser.setAddress(newUser.getAddress());
 			oldUser.setPassword(newUser.getPassword());			
-			oldUser.setConfirmPassword(newUser.getConfirmPassword());
 			userRepositoryRef.save(oldUser);
 			
 			return oldUser;
