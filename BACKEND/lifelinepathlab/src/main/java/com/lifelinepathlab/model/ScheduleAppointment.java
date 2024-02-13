@@ -2,14 +2,18 @@ package com.lifelinepathlab.model;
 
 import java.util.Date;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "AppointmentSchedule")
 public class ScheduleAppointment {
-
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int appointmentId;
-	private String patientName;
+	private String patientName; 
 	private String patientContactNo;
 	private String patientAddress;
 	private Date ScheduledTime;
