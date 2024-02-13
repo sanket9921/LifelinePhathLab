@@ -1,10 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import TopBar from "./TopBar";
+import Topbar2 from "./Topbar2";
 export default function Header() {
   return (
     <>
-      <TopBar />
+      <Topbar2 />
 
       <nav className="navbar navbar-expand-lg">
         <div className="container-fluid">

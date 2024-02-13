@@ -8,6 +8,7 @@ import Contact from "./component/Contact";
 import Cart from "./component/Cart";
 import Login from "./component/Login";
 import Signup from "./component/Signup";
+import DisplayReports from "./component/DisplayReports";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
         element: <DownloadReport />,
       },
       {
+        path: "doctor",
+        element: <DisplayReports />,
+      },
+      {
         path: "contact",
         element: <Contact />,
       },
@@ -48,8 +53,6 @@ const router = createBrowserRouter([
     path: "signup",
     element: <Signup />,
   },
-
-  
 ]);
 
 export default router;
