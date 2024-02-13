@@ -4,9 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.lifelinepathlab.exception.ResourceNotFoundException;
-import com.lifelinepathlab.model.Doctor;
 import com.lifelinepathlab.model.ScheduleAppointment;
 import com.lifelinepathlab.repository.ScheduleAppointmentRepository;
 
@@ -17,9 +15,8 @@ public class ScheduleAppointmentService {
 	@Autowired
 	ScheduleAppointmentRepository scheAppointmentRepositoryRef;
 
-	public ScheduleAppointment scheduleAppointment(ScheduleAppointment scheduleAppointment) {
-		ScheduleAppointment schedulledAppointment = scheAppointmentRepositoryRef.save(scheduleAppointment);
-		return schedulledAppointment;
+	public void scheduleAppointment(ScheduleAppointment scheduleAppointment) {
+		scheAppointmentRepositoryRef.save(scheduleAppointment);
 	}
 
 	public List<ScheduleAppointment> getAllAppointments() {
