@@ -41,12 +41,12 @@ public class ScheduleAppointmentController {
 		}
 
 		scheduleAppointmentServiceRef.scheduleAppointment(scheduleAppointment);
-		return ResponseEntity.ok("Appointment shedule request successful...!!!");
+		return ResponseEntity.ok("Appointment schedule request successful...!!!");
 	}
 	
 	// To get all appointments...
 	@GetMapping()
-	public ResponseEntity<List<ScheduleAppointment>> getAllAppointments() {
+	public ResponseEntity<List<ScheduleAppointment>> getAllFeedbacks() {
 		List<ScheduleAppointment> allAppointments = scheduleAppointmentServiceRef.getAllAppointments();
 		return ResponseEntity.ok(allAppointments);
 	}

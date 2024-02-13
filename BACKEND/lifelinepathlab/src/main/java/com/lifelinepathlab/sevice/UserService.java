@@ -14,9 +14,8 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepositoryRef;
 	
-	public User addUser(User user) {
-		User newUser = userRepositoryRef.save(user);
-		return newUser;
+	public void addUser(User user) {
+		userRepositoryRef.save(user);
 	}
 	
 	public List<User> getUsers() {

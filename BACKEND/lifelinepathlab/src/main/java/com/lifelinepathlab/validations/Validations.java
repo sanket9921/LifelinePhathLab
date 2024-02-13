@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
-
+import com.lifelinepathlab.model.ClientFeedback;
 import com.lifelinepathlab.model.Doctor;
 import com.lifelinepathlab.model.Enquiry;
 import com.lifelinepathlab.model.ScheduleAppointment;
@@ -20,7 +20,7 @@ public class Validations implements Validator {
 	 * for support.
 	 */
 	public boolean supports(Class<?> obj) {
-		return User.class.equals(obj) || Doctor.class.equals(obj) || ScheduleAppointment.class.equals(obj) || Enquiry.class.equals(obj);
+		return User.class.equals(obj) || Doctor.class.equals(obj) || ScheduleAppointment.class.equals(obj)|| ClientFeedback.class.equals(obj)|| Enquiry.class.equals(obj);
 	}
 
 	/* Validation logic is written here */
@@ -30,7 +30,7 @@ public class Validations implements Validator {
 			validateUserDetails((User) target, errors);
 		} else if (target instanceof Doctor) {
 			ValidateDoctorDetails((Doctor) target, errors);
-		}else if (target instanceof ScheduleAppointment) {
+		} else if (target instanceof ScheduleAppointment) {
 			ValidateAppointmentDetails((ScheduleAppointment) target, errors);
 		}else if(target instanceof Enquiry) {
 			validateEnquiry((Enquiry) target, errors);
@@ -72,8 +72,7 @@ public class Validations implements Validator {
 		}
 
 		/* password validation */
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty",
-				"Password field cannot be empty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty", "Password field cannot be empty");
 		if (!user.getPassword().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,15}$")) {
 			errors.rejectValue("password", "InvalidFormat", "Invalid password format");
 		}
@@ -134,8 +133,7 @@ public class Validations implements Validator {
 		}
 
 		/* password validation */
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty",
-				"Password field cannot be empty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "password", "NotEmpty", "Password field cannot be empty");
 		if (!doctor.getPassword().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!]).{8,15}$")) {
 			errors.rejectValue("password", "InvalidFormat", "Invalid password format");
 		}
@@ -143,8 +141,7 @@ public class Validations implements Validator {
 	}
 
 	/* Doctor Details Validation logic ends here */
-	
-	
+
 	/* Appointment Details Validation logic starts here */
 
 	public void ValidateAppointmentDetails(ScheduleAppointment scheduleAppointment, Errors errors) {
@@ -155,20 +152,21 @@ public class Validations implements Validator {
 			errors.rejectValue("patientName", "InvalidFormat",
 					"Invalid Patient Name:Name should contain only characters.");
 		}
-		
+
 		/* Mobile number validation */
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "patientContactNo", "NotEmpty", "Mobile number cannot be empty");
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "patientContactNo", "NotEmpty",
+				"Mobile number cannot be empty");
 		if (!scheduleAppointment.getPatientContactNo().matches("^[6-9][0-9]{9}$")) {
 			errors.rejectValue("patientContactNo", "InvalidFormat", "Invalid Mobile Number");
 		}
-		
+
 		/* Prescription document path validation */
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "prescriptionFilePath", "NotEmpty",
 				"Prescription Document path cannot be empty");
 		if (!scheduleAppointment.getPrescriptionFilePath().matches("^.*\\.(doc|pdf|jpg|jpeg|png)$")) {
 			errors.rejectValue("prescriptionFilePath", "InvalidFormat", "Please provide valid file Path");
 		}
-		
+
 		/* Appointment Details Validation logic ends here */
 	}
 	public void validateEnquiry(Enquiry enquiry,Errors errors) {
