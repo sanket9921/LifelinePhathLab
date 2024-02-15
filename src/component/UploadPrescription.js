@@ -8,7 +8,7 @@ export default function UploadPrescription() {
           <div className="col-lg-4 col-12">
             <h3>Upload The Prescription</h3>
             <div className="input-icons">
-              <i className="fa fa-user icon" />
+              <i className="mdi mdi-account" />
               <input
                 className="input-field"
                 type="text"
@@ -17,7 +17,7 @@ export default function UploadPrescription() {
               />
             </div>
             <div className="input-icons">
-              <i className="fa fa-user icon" />
+              <i className="mdi mdi-cellphone" />
               <input
                 className="input-field"
                 type="text"
@@ -25,8 +25,9 @@ export default function UploadPrescription() {
                 required=""
               />
             </div>
+
             <div className="input-icons">
-              <i className="fa fa-user icon" />
+              <i className="mdi mdi-plus-circle" />
               <select
                 className="input-field"
                 name="SelectDoctors"
@@ -40,7 +41,7 @@ export default function UploadPrescription() {
               </select>
             </div>
             <div className="input-icons">
-              <i className="fa fa-user icon" />
+              <i className="icofont-location-pin" />
               <input
                 className="input-field"
                 type="text"

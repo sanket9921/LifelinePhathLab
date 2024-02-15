@@ -1,8 +1,11 @@
-import React from "react";
-
+import TestDescription from "./TestDescription";
 export default function BookTest() {
+  function showModel() {
+    document.querySelector(".overlay").classList.add("showOverlay");
+  }
   return (
     <div className="container mt-2 rounded Test">
+      <TestDescription />
       <div className="row">
         <div className="col-2 border p-2">
           <h5 className="filters">Fillter</h5>
@@ -23,7 +26,10 @@ export default function BookTest() {
         </div>
         <div className="col-10">
           <div className="row">
-            <div className="product-cart rounded col-3 mt-3">
+            <div
+              onClick={showModel}
+              className="product-cart rounded col-3 mt-3"
+            >
               <div className="img">
                 <img
                   className="img-fluid"
@@ -45,7 +51,10 @@ export default function BookTest() {
                 <button className="buy">Buy Now</button>
               </div>
             </div>
-            <div className="product-cart rounded col-3 mt-3">
+            <div
+              onClick={showModel}
+              className="product-cart rounded col-3 mt-3"
+            >
               <div className="img">
                 <img
                   className="img-fluid"
@@ -67,7 +76,10 @@ export default function BookTest() {
                 <button className="buy">Buy Now</button>
               </div>
             </div>
-            <div className="product-cart rounded col-3 mt-3">
+            <div
+              onClick={showModel}
+              className="product-cart rounded col-3 mt-3"
+            >
               <div className="img">
                 <img
                   className="img-fluid"
@@ -89,7 +101,10 @@ export default function BookTest() {
                 <button className="buy">Buy Now</button>
               </div>
             </div>
-            <div className="product-cart rounded col-3 mt-3">
+            <div
+              onClick={showModel}
+              className="product-cart rounded col-3 mt-3"
+            >
               <div className="img">
                 <img
                   className="img-fluid"

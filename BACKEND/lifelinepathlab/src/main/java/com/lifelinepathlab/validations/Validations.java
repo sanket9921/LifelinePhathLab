@@ -6,6 +6,7 @@ import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 import com.lifelinepathlab.model.ClientFeedback;
 import com.lifelinepathlab.model.Doctor;
+import com.lifelinepathlab.model.Enquiry;
 import com.lifelinepathlab.model.ScheduleAppointment;
 import com.lifelinepathlab.model.Test;
 import com.lifelinepathlab.model.User;
@@ -20,8 +21,10 @@ public class Validations implements Validator {
 	 * for support.
 	 */
 	public boolean supports(Class<?> obj) {
+
 		return User.class.equals(obj) || Doctor.class.equals(obj) || ScheduleAppointment.class.equals(obj)
-				|| ClientFeedback.class.equals(obj) || Test.class.equals(obj);
+				|| ClientFeedback.class.equals(obj) || Test.class.equals(obj) || Enquiry.class.equals(obj);
+
 	}
 
 	/* Validation logic is written here */
@@ -33,10 +36,14 @@ public class Validations implements Validator {
 			ValidateDoctorDetails((Doctor) target, errors);
 		} else if (target instanceof ScheduleAppointment) {
 			ValidateAppointmentDetails((ScheduleAppointment) target, errors);
+
 		} else if (target instanceof ClientFeedback) {
 			ValidateFeedbackDetails((ClientFeedback) target, errors);
 		} else if (target instanceof Test) {
 			ValidateTestDetails((Test) target, errors);
+
+		} else if (target instanceof Enquiry) {
+			validateEnquiry((Enquiry) target, errors);
 		}
 	}
 
@@ -194,42 +201,54 @@ public class Validations implements Validator {
 	/* Test Details Validation logic starts here */
 
 	public void ValidateTestDetails(Test test, Errors errors) {
-		
+
 		/* Test name validation */
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "testName", "NotEmpty", "Test name cannot be empty");
 		if (!test.getTestName().matches("^[a-zA-Z]+( [a-zA-Z]+)*$")) {
-			errors.rejectValue("testName", "InvalidFormat",
-					"Invalid Test Name:Name should contain only characters.");
+			errors.rejectValue("testName", "InvalidFormat", "Invalid Test Name:Name should contain only characters.");
 		}
-		
+
 		/* Test type validation */
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "testType", "NotEmpty", "Test Type cannot be empty");
 		if (!test.getTestType().matches("^[a-zA-Z]+( [a-zA-Z]+)*$")) {
-			errors.rejectValue("testType", "InvalidFormat",
-					"Invalid Test Type:Name should contain only characters.");
+			errors.rejectValue("testType", "InvalidFormat", "Invalid Test Type:Name should contain only characters.");
 		}
-		
-		
+
 		/* Test Actual Price validation */
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "actualPrice", "NotEmpty", "Test Price cannot be empty");
 		if (!((test.getActualPrice() > 0) && (test.getActualPrice() <= 100000))) {
-			errors.rejectValue("actualPrice", "InvalidFormat",
-					"Invalid Test price:Please enter valid test pricing");
+			errors.rejectValue("actualPrice", "InvalidFormat", "Invalid Test price:Please enter valid test pricing");
 		}
-		
-		/* Test	discount validation */
+
+		/* Test discount validation */
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "discount", "NotEmpty", "Test discount cannot be empty");
 		if (!((test.getDiscount() > 0) && (test.getDiscount() <= 100))) {
-			errors.rejectValue("discount", "InvalidFormat",
-					"Invalid Test Discount:Please enter valid test discount");
+			errors.rejectValue("discount", "InvalidFormat", "Invalid Test Discount:Please enter valid test discount");
 		}
-		
+
 		/* Test image path validation */
 		if (!test.getTestImagePath().matches("^.*\\.(jpg|jpeg|png)$")) {
 			errors.rejectValue("testImagePath", "InvalidFormat", "Please provide valid image Path");
 		}
 		/* Test Details Validation logic ends here */
-		
-	}
 
+	}
+	public void validateEnquiry(Enquiry enquiry, Errors errors) {
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty", "Name cannot be empty");
+		if (!enquiry.getName().matches("^[a-zA-Z]+( [a-zA-Z]+)*$")) {
+			errors.rejectValue("name", "InvalidFormat", "Invalid  Name:Name should contain only characters.");
+		}
+
+		/* Mobile number validation */
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contactNO", "NotEmpty", "Mobile number cannot be empty");
+		if (!enquiry.getContactNO().matches("^[6-9][0-9]{9}$")) {
+			errors.rejectValue("contactNO", "InvalidFormat", "Invalid Mobile Number");
+		}
+
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty", "E-mail Id cannot be empty");
+		if (!enquiry.getEmail().matches(
+				"^([a-zA-Z0-9]([a-zA-Z0-9.]+)?[a-zA-Z0-9])@([a-zA-Z0-9]([a-zA-Z0-9\\-]+)?[a-zA-Z0-9])\\.([a-zA-Z]{2,})(\\.[a-zA-Z]{2,})?$")) {
+			errors.rejectValue("email", "InvalidFormat", "Invalid E-Mail Address.");
+		}
+	}
 }
