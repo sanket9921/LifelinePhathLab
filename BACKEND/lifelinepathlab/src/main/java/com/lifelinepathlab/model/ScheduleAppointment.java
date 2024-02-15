@@ -29,6 +29,7 @@ public class ScheduleAppointment {
 		// TODO Auto-generated constructor stub
 	}
 
+	
 	public ScheduleAppointment(int appointmentId, String patientName, String patientContactNo, Doctor doctor,
 			String patientAddress, Date scheduledTime, String prescriptionFilePath) {
 		super();
@@ -40,6 +41,18 @@ public class ScheduleAppointment {
 		this.scheduledTime = scheduledTime;
 		this.prescriptionFilePath = prescriptionFilePath;
 	}
+	public ScheduleAppointment( String patientName, String patientContactNo, Doctor doctor,
+			String patientAddress, Date scheduledTime, String prescriptionFilePath) {
+		super();
+		
+		this.patientName = patientName;
+		this.patientContactNo = patientContactNo;
+		this.doctor = doctor;
+		this.patientAddress = patientAddress;
+		this.scheduledTime = scheduledTime;
+		this.prescriptionFilePath = prescriptionFilePath;
+	}
+
 
 	public int getAppointmentId() {
 		return appointmentId;
@@ -96,12 +109,5 @@ public class ScheduleAppointment {
 	public void setPrescriptionFilePath(String prescriptionFilePath) {
 		this.prescriptionFilePath = prescriptionFilePath;
 	}
-
-	@Override
-	public String toString() {
-		return "ScheduleAppointment [appointmentId=" + appointmentId + ", patientName=" + patientName
-				+ ", patientContactNo=" + patientContactNo + ", doctor=" + doctor + ", patientAddress=" + patientAddress
-				+ ", scheduledTime=" + scheduledTime + ", prescriptionFilePath=" + prescriptionFilePath + "]";
-	}
-
+	
 }

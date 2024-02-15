@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.lifelinepathlab.model.Doctor;
 import com.lifelinepathlab.model.ScheduleAppointment;
 import com.lifelinepathlab.sevice.AppointmentService;
 
@@ -48,13 +49,15 @@ public class ScheduleAppointmentController {
                                                  @RequestParam("patientName") String patientName,
                                                  @RequestParam("contact") String contact,
                                                  @RequestParam("address") String address,
-                                                 @RequestParam("doctorName") String doctorName,
+                                                 @RequestParam("doctorName") int doctorid,
                                                  @RequestParam("appointmentDate") String appointmentDate
                                                  ) {
         try {
             String fileId = appointmentService.savePrescriptionFile(file);
+            Doctor doctor = new Doctor();
+            doctor.setDoctorId(doctorid);
 //            ScheduleAppointment appointment = new ScheduleAppointment(patientName, contact, address, doctorName, appointmentDate, fileId);
-            ScheduleAppointment appointment = new ScheduleAppointment(patientName, contact, address ,convertStringToDate(appointmentDate), fileId);
+            ScheduleAppointment appointment = new ScheduleAppointment(patientName, contact, doctor, address ,convertStringToDate(appointmentDate), fileId);
             appointmentService.saveAppointment(appointment);
             return ResponseEntity.ok("Appointment scheduled successfully");
         } catch (Exception e) {
