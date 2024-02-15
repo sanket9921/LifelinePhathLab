@@ -21,12 +21,13 @@ export default function Contact() {
         </div>
         <div className="map-container">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15556.70404177827!2d-122.41923662053645!3d37.774929522228654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808580d466c0b3ef%3A0x4a501367f076adff!2sGolden%20Gate%20Bridge!5e0!3m2!1sen!2sus!4v1644681416449!5m2!1sen!2sus"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3782.6243181802884!2d74.48560637372113!3d18.545871568403825!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bc33d38b36523b3%3A0x5d34a898e1be43ba!2sSAI%20COMPUTERS%20%26%20LIFELINE%20CLINICAL%20LABORATORY!5e0!3m2!1sen!2sin!4v1707980584148!5m2!1sen!2sin"
             width="100%"
             height="100%"
             style={{ border: 0 }}
             allowFullScreen=""
             loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
           />
         </div>
       </div>
