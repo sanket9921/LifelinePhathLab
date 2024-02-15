@@ -36,7 +36,7 @@ export default function TestDescription() {
               ₹900 <del className="actual-price">₹1000</del>
             </span>
           </div>
-          <div className="row act-btn mt-4 ">
+          <div className="row act-btn mt-4">
             <div className="test-cart-btn">
               <button className="card-btn">Add to cart</button>
             </div>

@@ -39,7 +39,6 @@ public class OrderController {
 	public ResponseEntity<String> addOrder(@RequestBody Orders orders) {
 		orderService.addorder(orders);
 		return ResponseEntity.ok("Orders added successfully...!!!");
-
 	}
 	
 	@PutMapping("{id}")

@@ -12,6 +12,10 @@ class Services {
   addEnquiry(enquiry) {
     return axios.post(BACKEND_API + "/enquiry", enquiry);
   }
+
+  getClientFeedbacks() {
+    return axios.get(BACKEND_API + "/feedback");
+  }
 }
 
 export default new Services();
