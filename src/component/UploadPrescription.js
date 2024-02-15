@@ -15,6 +15,7 @@ export default function UploadPrescription() {
       try {
         const response = await axios.get("http://localhost:8083/doctors/list");
         setDoctors(response.data);
+        console.log(doctors);
       } catch (error) {
         console.error("Error fetching doctors:", error);
       }
@@ -96,11 +97,12 @@ export default function UploadPrescription() {
                   onChange={(e) => setDoctorName(e.target.value)}
                 >
                   <option value="">Select Doctor</option>
-                  {doctors.map((doctor) => (
-                    <option key={doctor.id} value={doctor.name}>
-                      {doctor.name}
-                    </option>
-                  ))}
+                  {doctors &&
+                    doctors.map((doctor) => (
+                      <option key={doctor.doctorId} value={doctor.doctorId}>
+                        {doctor.doctorName}
+                      </option>
+                    ))}
                 </select>
               </div>
               <div className="input-icons">

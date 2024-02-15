@@ -31,7 +31,6 @@ export default function Contact() {
           />
         </div>
       </div>
-
       <div class="container rounded bg-white p-5">
         <div class="row">
           <div className="col-sm-6">

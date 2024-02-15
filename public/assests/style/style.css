@@ -334,7 +334,7 @@ nav {
 }
 
 .product-cart .action-btn .card {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   border: 1px solid #7cb9e8;
   padding: 2px 8px;
   border-radius: 8pxs;
@@ -746,13 +746,44 @@ input[type="date"]:valid:before {
 /*Display report section styling ends here*/
 
 /*TestDescription component styling starts here*/
+.overlay {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0%;
+  left: 0%;
+  background-color: rgb(87, 149, 244);
+  visibility: hidden;
+  opacity: 0;
+}
+.showOverlay {
+  opacity: 1;
+  visibility: visible;
+  z-index: 15;
+}
+
+.headIcon {
+  background-color: red;
+  color: white;
+  height: 20px;
+  width: 20px;
+  text-align: center;
+  line-height: 20px;
+  cursor: pointer;
+}
+
 .testDescription {
-  margin-top: 1%;
+  margin-top: 2%;
   padding-bottom: 25px;
   background-color: white;
   height: 645px;
   width: 350px;
   border: 1px solid #2e9aec;
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%);
+  box-shadow: 0px 0px 10px 3px lightblue;
 }
 
 .test-desc-head {

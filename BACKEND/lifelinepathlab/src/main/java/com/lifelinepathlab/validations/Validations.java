@@ -34,11 +34,14 @@ public class Validations implements Validator {
 			ValidateDoctorDetails((Doctor) target, errors);
 		} else if (target instanceof ScheduleAppointment) {
 			ValidateAppointmentDetails((ScheduleAppointment) target, errors);
+
 		} else if (target instanceof ClientFeedback) {
 			ValidateFeedbackDetails((ClientFeedback) target, errors);
 		}else if (target instanceof Test) {
 			ValidateTestDetails((Test) target, errors);
 		}else if(target instanceof Enquiry) {
+
+		} else if (target instanceof Enquiry) {
 			validateEnquiry((Enquiry) target, errors);
 		}
 	}
@@ -178,8 +181,7 @@ public class Validations implements Validator {
 
 	/* Feedback Details Validation logic starts here */
 	public void ValidateFeedbackDetails(ClientFeedback clientFeedback, Errors errors) {
-		
-		/* client name validation clientFeedback*/
+
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "clientName", "NotEmpty", "Name cannot be empty");
 		if (!clientFeedback.getClientName().matches("^[a-zA-Z]+( [a-zA-Z]+)*$")) {
 			errors.rejectValue("clientName", "InvalidFormat",
@@ -189,71 +191,68 @@ public class Validations implements Validator {
 		/* Mobile number validation for clientFeedback*/
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contactNo", "NotEmpty",
 				"Mobile number cannot be empty");
+
+		/* Mobile number validation for clientFeedback */
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contactNo", "NotEmpty", "Mobile number cannot be empty");
 		if (!clientFeedback.getContactNo().matches("^[6-9][0-9]{9}$")) {
 			errors.rejectValue("contactNo", "InvalidFormat", "Invalid Mobile Number");
 		}
 	}
-	/* Feedback Details Validation logic ends here */
 
-	public void validateEnquiry(Enquiry enquiry,Errors errors) {
+
+
+	/* Test Details Validation logic starts here */
+
+	public void ValidateTestDetails(Test test, Errors errors) {
+
+		/* Test name validation */
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "testName", "NotEmpty", "Test name cannot be empty");
+		if (!test.getTestName().matches("^[a-zA-Z]+( [a-zA-Z]+)*$")) {
+			errors.rejectValue("testName", "InvalidFormat", "Invalid Test Name:Name should contain only characters.");
+		}
+
+		/* Test type validation */
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "testType", "NotEmpty", "Test Type cannot be empty");
+		if (!test.getTestType().matches("^[a-zA-Z]+( [a-zA-Z]+)*$")) {
+			errors.rejectValue("testType", "InvalidFormat", "Invalid Test Type:Name should contain only characters.");
+		}
+
+		/* Test Actual Price validation */
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "actualPrice", "NotEmpty", "Test Price cannot be empty");
+		if (!((test.getActualPrice() > 0) && (test.getActualPrice() <= 100000))) {
+			errors.rejectValue("actualPrice", "InvalidFormat", "Invalid Test price:Please enter valid test pricing");
+		}
+
+		/* Test discount validation */
+		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "discount", "NotEmpty", "Test discount cannot be empty");
+		if (!((test.getDiscount() > 0) && (test.getDiscount() <= 100))) {
+			errors.rejectValue("discount", "InvalidFormat", "Invalid Test Discount:Please enter valid test discount");
+		}
+
+		/* Test image path validation */
+		if (!test.getTestImagePath().matches("^.*\\.(jpg|jpeg|png)$")) {
+			errors.rejectValue("testImagePath", "InvalidFormat", "Please provide valid image Path");
+		}
+		/* Test Details Validation logic ends here */
+
+
+	}
+	public void validateEnquiry(Enquiry enquiry, Errors errors) {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "NotEmpty", "Name cannot be empty");
 		if (!enquiry.getName().matches("^[a-zA-Z]+( [a-zA-Z]+)*$")) {
-			errors.rejectValue("name", "InvalidFormat",
-					"Invalid  Name:Name should contain only characters.");
+			errors.rejectValue("name", "InvalidFormat", "Invalid  Name:Name should contain only characters.");
 		}
-		
+
 		/* Mobile number validation */
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "contactNO", "NotEmpty", "Mobile number cannot be empty");
 		if (!enquiry.getContactNO().matches("^[6-9][0-9]{9}$")) {
 			errors.rejectValue("contactNO", "InvalidFormat", "Invalid Mobile Number");
 		}
-		
+
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "NotEmpty", "E-mail Id cannot be empty");
 		if (!enquiry.getEmail().matches(
 				"^([a-zA-Z0-9]([a-zA-Z0-9.]+)?[a-zA-Z0-9])@([a-zA-Z0-9]([a-zA-Z0-9\\-]+)?[a-zA-Z0-9])\\.([a-zA-Z]{2,})(\\.[a-zA-Z]{2,})?$")) {
 			errors.rejectValue("email", "InvalidFormat", "Invalid E-Mail Address.");
 		}
 	}
-
-	/* Test Details Validation logic starts here */
-
-	public void ValidateTestDetails(Test test, Errors errors) {
-		
-		/* Test name validation */
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "testName", "NotEmpty", "Test name cannot be empty");
-		if (!test.getTestName().matches("^[a-zA-Z]+( [a-zA-Z]+)*$")) {
-			errors.rejectValue("testName", "InvalidFormat",
-					"Invalid Test Name:Name should contain only characters.");
-		}
-		
-		/* Test type validation */
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "testType", "NotEmpty", "Test Type cannot be empty");
-		if (!test.getTestType().matches("^[a-zA-Z]+( [a-zA-Z]+)*$")) {
-			errors.rejectValue("testType", "InvalidFormat",
-					"Invalid Test Type:Name should contain only characters.");
-		}
-		
-		
-		/* Test Actual Price validation */
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "actualPrice", "NotEmpty", "Test Price cannot be empty");
-		if (!((test.getActualPrice() > 0) && (test.getActualPrice() <= 100000))) {
-			errors.rejectValue("actualPrice", "InvalidFormat",
-					"Invalid Test price:Please enter valid test pricing");
-		}
-		
-		/* Test	discount validation */
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "discount", "NotEmpty", "Test discount cannot be empty");
-		if (!((test.getDiscount() > 0) && (test.getDiscount() <= 100))) {
-			errors.rejectValue("discount", "InvalidFormat",
-					"Invalid Test Discount:Please enter valid test discount");
-		}
-		
-		/* Test image path validation */
-		if (!test.getTestImagePath().matches("^.*\\.(jpg|jpeg|png)$")) {
-			errors.rejectValue("testImagePath", "InvalidFormat", "Please provide valid image Path");
-		}
-		/* Test Details Validation logic ends here */
-		
-	}
-
 }

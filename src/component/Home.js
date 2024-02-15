@@ -1,4 +1,5 @@
 import React from "react";
+import Feedback from "./Feedback";
 
 export default function Home() {
   return (
@@ -207,42 +208,7 @@ export default function Home() {
       </div>
       {/*  End Offer Section */}
       {/*Feedback Section starts here*/}
-      <div class="container rounded feedback-post-container">
-        <div class="row">
-          <div className="col-sm-6">
-            <h1>Leave Your Fedback Here</h1>
-            <br />
-            <div className="input-icons ">
-              <i className="mdi mdi-account" />
-              <input
-                className="input-field"
-                type="email/number"
-                placeholder="Enter Your Name"
-              />
-            </div>
-            <div className="input-icons ">
-              <i className="mdi mdi-cellphone" />
-              <input
-                className="input-field"
-                type="text"
-                placeholder="Enter Mobile Number"
-                required=""
-              />
-            </div>
-            <br />
-          </div>
-          <div className="col-sm-6 vl">
-            <label>Write your feedback:</label>
-            <br />
-            <textarea class="text-box"></textarea>
-          </div>
-        </div>
-        <div className="col-sm-6 mt-3">
-          <button className="button login-btn" type="submit" value="submit">
-            Submit
-          </button>
-        </div>
-      </div>
+      <Feedback />
       {/*Feedback Section ends here*/}
       {/*review Section starts here*/}
       <div className="container bg-white rounded mt-3 pt-3">

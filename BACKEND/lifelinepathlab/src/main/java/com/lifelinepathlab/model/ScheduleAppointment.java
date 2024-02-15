@@ -5,7 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
 
 @Entity
 @Table(name = "AppointmentSchedule")
@@ -13,35 +16,43 @@ public class ScheduleAppointment {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int appointmentId;
-	private String patientName; 
+	private String patientName;
 	private String patientContactNo;
+	@ManyToOne
+	@JoinColumn(name = "doctorId")
+	private Doctor doctor;
 	private String patientAddress;
-	private Date ScheduledTime;
+	private Date scheduledTime;
 	private String prescriptionFilePath;
 
 	public ScheduleAppointment() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ScheduleAppointment(int appointmentId, String patientName, String patientContactNo, String patientAddress,
-			Date scheduledTime, String prescriptionFilePath) {
+	
+	public ScheduleAppointment(int appointmentId, String patientName, String patientContactNo, Doctor doctor,
+			String patientAddress, Date scheduledTime, String prescriptionFilePath) {
 		super();
 		this.appointmentId = appointmentId;
 		this.patientName = patientName;
 		this.patientContactNo = patientContactNo;
+		this.doctor = doctor;
 		this.patientAddress = patientAddress;
-		ScheduledTime = scheduledTime;
+		this.scheduledTime = scheduledTime;
 		this.prescriptionFilePath = prescriptionFilePath;
 	}
-	
-	public ScheduleAppointment( String patientName, String patientContactNo, String patientAddress,
-			Date scheduledTime, String prescriptionFilePath) {
+	public ScheduleAppointment( String patientName, String patientContactNo, Doctor doctor,
+			String patientAddress, Date scheduledTime, String prescriptionFilePath) {
+		super();
+		
 		this.patientName = patientName;
 		this.patientContactNo = patientContactNo;
+		this.doctor = doctor;
 		this.patientAddress = patientAddress;
-		ScheduledTime = scheduledTime;
+		this.scheduledTime = scheduledTime;
 		this.prescriptionFilePath = prescriptionFilePath;
 	}
+
 
 	public int getAppointmentId() {
 		return appointmentId;
@@ -67,6 +78,14 @@ public class ScheduleAppointment {
 		this.patientContactNo = patientContactNo;
 	}
 
+	public Doctor getDoctor() {
+		return doctor;
+	}
+
+	public void setDoctor(Doctor doctor) {
+		this.doctor = doctor;
+	}
+
 	public String getPatientAddress() {
 		return patientAddress;
 	}
@@ -76,11 +95,11 @@ public class ScheduleAppointment {
 	}
 
 	public Date getScheduledTime() {
-		return ScheduledTime;
+		return scheduledTime;
 	}
 
 	public void setScheduledTime(Date scheduledTime) {
-		ScheduledTime = scheduledTime;
+		this.scheduledTime = scheduledTime;
 	}
 
 	public String getPrescriptionFilePath() {
@@ -90,12 +109,5 @@ public class ScheduleAppointment {
 	public void setPrescriptionFilePath(String prescriptionFilePath) {
 		this.prescriptionFilePath = prescriptionFilePath;
 	}
-
-	@Override
-	public String toString() {
-		return "ScheduleAppointment [appointmentId=" + appointmentId + ", patientName=" + patientName
-				+ ", patientContactNo=" + patientContactNo + ", patientAddress=" + patientAddress + ", ScheduledTime="
-				+ ScheduledTime + ", prescriptionFilePath=" + prescriptionFilePath + "]";
-	}
-
+	
 }
