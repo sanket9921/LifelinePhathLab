@@ -33,6 +33,15 @@ public class ScheduleAppointment {
 		ScheduledTime = scheduledTime;
 		this.prescriptionFilePath = prescriptionFilePath;
 	}
+	
+	public ScheduleAppointment( String patientName, String patientContactNo, String patientAddress,
+			Date scheduledTime, String prescriptionFilePath) {
+		this.patientName = patientName;
+		this.patientContactNo = patientContactNo;
+		this.patientAddress = patientAddress;
+		ScheduledTime = scheduledTime;
+		this.prescriptionFilePath = prescriptionFilePath;
+	}
 
 	public int getAppointmentId() {
 		return appointmentId;
