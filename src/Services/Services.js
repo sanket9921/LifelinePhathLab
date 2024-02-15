@@ -12,6 +12,18 @@ class Services {
   addEnquiry(enquiry) {
     return axios.post(BACKEND_API + "/enquiry", enquiry);
   }
+
+  // Test Services
+
+  addTest(formDataToSend) {
+    return axios.post(BACKEND_API + "/tests/create", formDataToSend, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  }
+
+  getAllTest() {
+    return axios.get(BACKEND_API + "/tests/all");
+  }
 }
 
 export default new Services();

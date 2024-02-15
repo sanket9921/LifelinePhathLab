@@ -1,6 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Services from "../../Services/Services";
 
 export default function AllTest() {
+  const [Tests, setTest] = useState([]);
+
+  useEffect(() => {
+    Services.getAllTest()
+      .then((res) => {
+        setTest(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <>
       <div class="col-12 col-xl-8 mb-4 mb-xl-0">
@@ -56,111 +69,68 @@ export default function AllTest() {
                 </thead>
 
                 <tbody>
-                  <tr>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      1
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      JohnDoe
-                    </td>
+                  {Tests &&
+                    Tests.map((test) => (
+                      <tr>
+                        <td
+                          style={{
+                            borderTop: "1px solid lightgray",
+                            padding: 8,
+                          }}
+                        >
+                          {test.testId}
+                        </td>
+                        <td
+                          style={{
+                            borderTop: "1px solid lightgray",
+                            padding: 8,
+                          }}
+                        >
+                          {test.testName}
+                        </td>
 
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      Allergies
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      123 Main Street, Lorem Ipsum, Dolor Sit Amet, Consectetur
-                      adipiscing elit.
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      1000
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      20%
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      800
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      1
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      JohnDoe
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      123 Main Street, Lorem Ipsum, Dolor Sit Amet, Consectetur
-                      adipiscing elit.
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      1000
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      20%
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      800
-                    </td>
-                  </tr>
-                  <tr>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      1
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      JohnDoe
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      123 Main Street, Lorem Ipsum, Dolor Sit Amet, Consectetur
-                      adipiscing elit.
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      1000
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      20%
-                    </td>
-                    <td
-                      style={{ borderTop: "1px solid lightgray", padding: 8 }}
-                    >
-                      800
-                    </td>
-                  </tr>
+                        <td
+                          style={{
+                            borderTop: "1px solid lightgray",
+                            padding: 8,
+                          }}
+                        >
+                          {test.testType}
+                        </td>
+                        <td
+                          style={{
+                            borderTop: "1px solid lightgray",
+                            padding: 8,
+                          }}
+                        >
+                          {test.testDescription}
+                        </td>
+                        <td
+                          style={{
+                            borderTop: "1px solid lightgray",
+                            padding: 8,
+                          }}
+                        >
+                          {test.actualPrice}
+                        </td>
+                        <td
+                          style={{
+                            borderTop: "1px solid lightgray",
+                            padding: 8,
+                          }}
+                        >
+                          {test.discount}%
+                        </td>
+                        <td
+                          style={{
+                            borderTop: "1px solid lightgray",
+                            padding: 8,
+                          }}
+                        >
+                          {test.finalPrice}
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>
