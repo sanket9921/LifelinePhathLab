@@ -6,49 +6,78 @@ import org.springframework.stereotype.Service;
 import com.lifelinepathlab.exception.ResourceNotFoundException;
 import com.lifelinepathlab.model.Doctor;
 import com.lifelinepathlab.repository.DoctorRepository;
+import org.springframework.web.multipart.MultipartFile;
+import java.io.IOException;
+import java.util.UUID;
 
 @Service
 public class DoctorService {
 
-	@Autowired
-	private DoctorRepository doctorRepositoryRef;
+    @Autowired
+    private DoctorRepository doctorRepository;
 
-	public void addDoctor(Doctor doctor) {
-		doctorRepositoryRef.save(doctor);
-	}
+    @Autowired
+    private FileStorageService fileStorageService;
 
-	public List<Doctor> getDoctors() {
-		List<Doctor> doctors = doctorRepositoryRef.findAll();
-		return doctors;
-	}
+    public String saveDoctorLicense(MultipartFile licenseFile) throws IOException {
+        String fileId = UUID.randomUUID().toString();
+        return fileStorageService.storeFile(licenseFile, fileId, "doctor-licenses");
+       
+    }
 
-	public Doctor getDoctor(int doctorId) {
-		Doctor doctor = doctorRepositoryRef.findById(doctorId)
-				.orElseThrow(() -> new ResourceNotFoundException("Doctor does not exits with Doctor Id: ", doctorId));
-		return doctor;
-	}
+    public Doctor saveDoctor(
+            String name, String clinicName, String address, String email,
+            String contact, String password, String specialization,
+            int experience, MultipartFile licenseFile) throws IOException {
+        String licenseFileId = saveDoctorLicense(licenseFile);
 
-	public Doctor updateDoctor(Doctor newDoctor, int doctorId) {
-		Doctor oldDoctor = doctorRepositoryRef.findById(doctorId)
-				.orElseThrow(() -> new ResourceNotFoundException("Doctor does not exits with Doctor Id: ", doctorId));
-		oldDoctor.setDoctorName(newDoctor.getDoctorName());
-		oldDoctor.setClinicName(newDoctor.getClinicName());
-		oldDoctor.setEmailId(newDoctor.getEmailId());
-		oldDoctor.setContactNo(newDoctor.getContactNo());
-		oldDoctor.setSpecialization(newDoctor.getSpecialization());
-		oldDoctor.setExperience(newDoctor.getExperience());
-		oldDoctor.setLicencePath(newDoctor.getLicencePath());
-		oldDoctor.setAddress(newDoctor.getAddress());
-		oldDoctor.setPassword(newDoctor.getPassword());
-		doctorRepositoryRef.save(oldDoctor);
+        Doctor doctor = new Doctor();
+        doctor.setDoctorName(name);
+        doctor.setClinicName(clinicName);
+        doctor.setAddress(address);
+        doctor.setEmailId(email);
+        doctor.setContactNo(contact);
+        doctor.setPassword(password);
+        doctor.setSpecialization(specialization);
+        doctor.setExperience(experience);
+        doctor.setLicencePath(licenseFileId);
+        System.out.println(doctor);
 
-		return oldDoctor;
-	}
+        return doctorRepository.save(doctor);
+    }
 
-	public void deleteDoctor(int doctorId) {
-		Doctor doctor = doctorRepositoryRef.findById(doctorId)
-				.orElseThrow(() -> new ResourceNotFoundException("Doctor does not exits with Doctor Id: ", doctorId));
-		doctorRepositoryRef.delete(doctor);
-	}
+    public List<Doctor> getAllDoctors() {
+        return doctorRepository.findAll();
+    }
 
+    public Doctor getDoctorById(int id) {
+        return doctorRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id: " , id));
+    }
+
+    public void updateDoctor(
+            int id, String name, String clinicName, String address, String email,
+            String contact, String password, String specialization,
+            int experience, MultipartFile licenseFile) throws IOException {
+        Doctor existingDoctor = getDoctorById(id);
+
+        String licenseFileId = saveDoctorLicense(licenseFile);
+
+        existingDoctor.setDoctorName(name);
+        existingDoctor.setClinicName(clinicName);
+        existingDoctor.setAddress(address);
+        existingDoctor.setEmailId(email);
+        existingDoctor.setContactNo(contact);
+        existingDoctor.setPassword(password);
+        existingDoctor.setSpecialization(specialization);
+        existingDoctor.setExperience(experience);
+        existingDoctor.setLicencePath(licenseFileId);
+
+        doctorRepository.save(existingDoctor);
+    }
+
+    public void deleteDoctor(int id) {
+        Doctor doctor = getDoctorById(id);
+        doctorRepository.delete(doctor);
+    }
 }

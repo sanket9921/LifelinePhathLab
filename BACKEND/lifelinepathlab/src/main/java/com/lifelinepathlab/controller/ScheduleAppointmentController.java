@@ -1,11 +1,18 @@
 package com.lifelinepathlab.controller;
 
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,69 +21,76 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
+
 import com.lifelinepathlab.model.ScheduleAppointment;
-import com.lifelinepathlab.sevice.ScheduleAppointmentService;
-import com.lifelinepathlab.validations.Validations;
+import com.lifelinepathlab.sevice.AppointmentService;
+
+
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/appointment")
+@RequestMapping("/appointments")
 public class ScheduleAppointmentController {
-	
-	@Autowired
-	private Validations validationsRef;
-	@Autowired
-	ScheduleAppointmentService scheduleAppointmentServiceRef;
 
-	// To Schedule a new appointment...
-	@PostMapping()
-	public ResponseEntity<String>  scheduleAppointment(@RequestBody ScheduleAppointment scheduleAppointment, BindingResult result) {
+    @Autowired
+    private AppointmentService appointmentService;
+    
+    public static Date convertStringToDate(String dateString) throws ParseException {
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); // Specify the format of your input date
+        return formatter.parse(dateString);
+    }
 
-		validationsRef.validate(scheduleAppointment, result);
-		if (result.hasErrors()) {
-			// Handle validation errors
-			String errorMessage = result.getFieldErrors().get(0).getDefaultMessage();
-			return ResponseEntity.badRequest().body("Validation error: " + errorMessage);
-		}
+    @PostMapping("/schedule")
+    public ResponseEntity<?> scheduleAppointment(@RequestParam("file") MultipartFile file,
+                                                 @RequestParam("patientName") String patientName,
+                                                 @RequestParam("contact") String contact,
+                                                 @RequestParam("address") String address,
+                                                 @RequestParam("doctorName") String doctorName,
+                                                 @RequestParam("appointmentDate") String appointmentDate
+                                                 ) {
+        try {
+            String fileId = appointmentService.savePrescriptionFile(file);
+//            ScheduleAppointment appointment = new ScheduleAppointment(patientName, contact, address, doctorName, appointmentDate, fileId);
+            ScheduleAppointment appointment = new ScheduleAppointment(patientName, contact, address ,convertStringToDate(appointmentDate), fileId);
+            appointmentService.saveAppointment(appointment);
+            return ResponseEntity.ok("Appointment scheduled successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error scheduling appointment");
+        }
+    }
 
-		scheduleAppointmentServiceRef.scheduleAppointment(scheduleAppointment);
-		return ResponseEntity.ok("Appointment schedule request successful...!!!");
-	}
-	
-	// To get all appointments...
-	@GetMapping()
-	public ResponseEntity<List<ScheduleAppointment>> getAllFeedbacks() {
-		List<ScheduleAppointment> allAppointments = scheduleAppointmentServiceRef.getAllAppointments();
-		return ResponseEntity.ok(allAppointments);
-	}
-	
-	// To get appointment by Id...
-	@GetMapping("/{appointmentId}")
-	public ResponseEntity<ScheduleAppointment> getAppointmentById(@PathVariable int appointmentId) {
-		ScheduleAppointment userAppointment = scheduleAppointmentServiceRef.getAppointmentById(appointmentId);
-		return ResponseEntity.ok(userAppointment);
-	}
-	
-	// To update the Appointment details...
-	@PutMapping("/{appointmentId}")
-	public ResponseEntity<String> updateAppointmentSchedule(@RequestBody ScheduleAppointment updatedUserAppointment, @PathVariable int appointmentId,
-			BindingResult result) {
-		validationsRef.validate(updatedUserAppointment, result);
-		if (result.hasErrors()) {
-			// Handle validation errors
-			String errorMessage = result.getFieldErrors().get(0).getDefaultMessage();
-			return ResponseEntity.badRequest().body("Validation error: " + errorMessage);
-		}
-		
-		scheduleAppointmentServiceRef.updateAppointmentSchedule(updatedUserAppointment, appointmentId);
-		return ResponseEntity.ok("Appointment details updated successfully...!!!");
-	}
+    @GetMapping("/list")
+    public ResponseEntity<List<ScheduleAppointment>> getAllAppointments() {
+        List<ScheduleAppointment> appointments = appointmentService.getAllAppointments();
+        return ResponseEntity.ok(appointments);
+    }
 
-	// To delete the Appointment...
-	@DeleteMapping("/{appointmentId}")
-	public ResponseEntity<ScheduleAppointment> deleteAppointment(@PathVariable int appointmentId) {
-		scheduleAppointmentServiceRef.deleteAppointment(appointmentId);
-		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	}
+    @GetMapping("/{id}")
+    public ResponseEntity<ScheduleAppointment> getAppointmentById(@PathVariable("id") int id) {
+    	ScheduleAppointment appointment = appointmentService.getAppointmentById(id);
+        return ResponseEntity.ok(appointment);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> updateAppointment(@PathVariable("id") int id, @RequestBody ScheduleAppointment updatedAppointment) {
+        try {
+            appointmentService.updateAppointment(id, updatedAppointment);
+            return ResponseEntity.ok("Appointment updated successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error updating appointment");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteAppointment(@PathVariable("id") int id) {
+        try {
+            appointmentService.deleteAppointment(id);
+            return ResponseEntity.ok("Appointment deleted successfully");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error deleting appointment");
+        }
+    }
 }

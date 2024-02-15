@@ -8,6 +8,10 @@ class Services {
   addClientFeedback(clientFeedback) {
     return axios.post(BACKEND_API + "/feedback", clientFeedback);
   }
+
+  addEnquiry(enquiry) {
+    return axios.post(BACKEND_API + "/enquiry", enquiry);
+  }
 }
 
 export default new Services();

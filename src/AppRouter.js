@@ -9,6 +9,7 @@ import Cart from "./component/Cart";
 import Login from "./component/Login";
 import Signup from "./component/Signup";
 import DisplayReports from "./component/DisplayReports";
+import DoctorRegistration from "./component/DoctorRegistration";
 
 const router = createBrowserRouter([
   {
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
       },
       {
         path: "doctor",
-        element: <DisplayReports />,
+        element: <DoctorRegistration />,
       },
       {
         path: "contact",
