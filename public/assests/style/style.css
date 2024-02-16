@@ -291,6 +291,9 @@ nav {
   background-color: white;
   padding: 1.2%;
 }
+.img {
+  height: 115px;
+}
 .Test h6 {
   color: #6f6f6f;
 }
@@ -305,6 +308,7 @@ nav {
 }
 .product-cart .img img {
   width: 100%;
+  height: 100%;
 }
 .product-cart .price {
   display: flex;

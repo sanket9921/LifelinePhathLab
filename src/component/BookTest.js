@@ -16,6 +16,7 @@ export default function BookTest() {
       .catch((err) => {
         alert(err.message);
       });
+    console.log(tests);
   }, []);
 
   return (
@@ -51,7 +52,7 @@ export default function BookTest() {
                   <div className="img">
                     <img
                       className="img-fluid"
-                      src={`http://localhost:3000/${test.testImagePath}`}
+                      src={`http://localhost:3000/file/TestImage/${test.testImagePath}`}
                       alt="default"
                     />
                   </div>
@@ -71,81 +72,6 @@ export default function BookTest() {
                   </div>
                 </div>
               ))}
-            {/* <div
-              onClick={showModel}
-              className="product-cart rounded col-3 mt-3"
-            >
-              <div className="img">
-                <img
-                  className="img-fluid"
-                  src="./assests/image/download.jpg"
-                  alt=""
-                />
-              </div>
-              <div className="title mt-3 text-center">
-                <h4>Allergy Package</h4>
-              </div>
-              <div className="price">
-                <span className="off">45% off</span>
-                <span className="dis-price">
-                  ₹900 <del className="actual-price">₹1000</del>
-                </span>
-              </div>
-              <div className="action-btn mt-3 ">
-                <button className="card">Add to cart</button>
-                <button className="buy">Buy Now</button>
-              </div>
-            </div>
-            <div
-              onClick={showModel}
-              className="product-cart rounded col-3 mt-3"
-            >
-              <div className="img">
-                <img
-                  className="img-fluid"
-                  src="./assests/image/download.jpg"
-                  alt=""
-                />
-              </div>
-              <div className="title mt-3 text-center">
-                <h4>Allergy Package</h4>
-              </div>
-              <div className="price">
-                <span className="off">45% off</span>
-                <span className="dis-price">
-                  ₹900 <del className="actual-price">₹1000</del>
-                </span>
-              </div>
-              <div className="action-btn mt-3 ">
-                <button className="card">Add to cart</button>
-                <button className="buy">Buy Now</button>
-              </div>
-            </div>
-            <div
-              onClick={showModel}
-              className="product-cart rounded col-3 mt-3"
-            >
-              <div className="img">
-                <img
-                  className="img-fluid"
-                  src="./assests/image/download.jpg"
-                  alt=""
-                />
-              </div>
-              <div className="title mt-3 text-center">
-                <h4>Allergy Package</h4>
-              </div>
-              <div className="price">
-                <span className="off">45% off</span>
-                <span className="dis-price">
-                  ₹900 <del className="actual-price">₹1000</del>
-                </span>
-              </div>
-              <div className="action-btn mt-3 ">
-                <button className="card">Add to cart</button>
-                <button className="buy">Buy Now</button>
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
