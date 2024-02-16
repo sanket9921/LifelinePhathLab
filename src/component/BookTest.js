@@ -46,18 +46,17 @@ export default function BookTest() {
                 <div
                   onClick={showModel}
                   className="product-cart rounded col-3 mt-3"
-                  key={test.id} // Add a unique key for each mapped element
+                  key={test.testId}
                 >
                   <div className="img">
-                    {/* Remove the double quotes around the file path */}
                     <img
                       className="img-fluid"
-                      src={`D:\\LifelinePhathLab\\src\\file${test.testImagePath}`}
+                      src={`http://localhost:3000/${test.testImagePath}`}
                       alt="default"
                     />
                   </div>
                   <div className="title mt-3 text-center">
-                    <h4>{`D:\\LifelinePhathLab\\src\\file${test.testImagePath}`}</h4>
+                    <h4>{test.testName}</h4>
                   </div>
                   <div className="price">
                     <span className="off">{test.discount}% off</span>
