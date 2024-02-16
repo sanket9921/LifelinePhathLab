@@ -16,6 +16,22 @@ class Services {
   getClientFeedbacks() {
     return axios.get(BACKEND_API + "/feedback");
   }
+
+  getAllTests() {
+    return axios.get(BACKEND_API + "/tests");
+  }
+
+  // Test Services
+
+  addTest(formDataToSend) {
+    return axios.post(BACKEND_API + "/tests/create", formDataToSend, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  }
+
+  getAllTest() {
+    return axios.get(BACKEND_API + "/tests/all");
+  }
 }
 
 export default new Services();

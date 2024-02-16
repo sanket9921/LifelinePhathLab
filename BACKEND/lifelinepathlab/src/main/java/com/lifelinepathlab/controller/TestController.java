@@ -1,5 +1,6 @@
 package com.lifelinepathlab.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,59 +12,78 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.lifelinepathlab.exception.ResourceNotFoundException;
 import com.lifelinepathlab.model.ClientFeedback;
 import com.lifelinepathlab.model.Test;
-import com.lifelinepathlab.sevice.TestServices;
+import com.lifelinepathlab.sevice.TestService;
 import com.lifelinepathlab.validations.Validations;
+
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import java.util.List;
+import java.util.Map;
+
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/test")
+@RequestMapping("/api/tests")
 public class TestController {
-	
-	@Autowired
-	private Validations validationsRef;
-	@Autowired
-	TestServices testServicesRef;
-	
-	// To add a new test...
-		@PostMapping()
-		public ResponseEntity<String>  addTest(@RequestBody Test test, BindingResult result) {
 
-			validationsRef.validate(test, result);
-			if (result.hasErrors()) {
-				// Handle validation errors
-				String errorMessage = result.getFieldErrors().get(0).getDefaultMessage();
-				return ResponseEntity.badRequest().body("Validation error: " + errorMessage);
-			}
+    @Autowired
+    private TestService testService;
 
-			testServicesRef.addTest(test);
-			return ResponseEntity.ok("New Test Added successfully...!!!");
-		}
-		
-		// To get all tests...
-		@GetMapping()
-		public ResponseEntity<List<Test>> getTests() {
-			List<Test> allTests = testServicesRef.getTests();
-			return ResponseEntity.ok(allTests);
-		}
-		
-		// To get test by Id...
-		@GetMapping("/{testId}")
-		public ResponseEntity<Test> getTestById(@PathVariable int testId) {
-			Test test = testServicesRef.getTestById(testId);
-			return ResponseEntity.ok(test);
-		}
-		
-		// To delete the test...
-		@DeleteMapping("/{testId}")
-		public ResponseEntity<ClientFeedback> deleteTest(@PathVariable int testId) {
-			testServicesRef.deleteTest(testId);
-			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-		}
+    @PostMapping("/create")
+    public void createTest(@RequestParam String testName,
+                           @RequestParam String testType,
+                           @RequestParam String testDescription,
+                           @RequestParam int actualPrice,
+                           @RequestParam int discount,
+                           @RequestParam int finalPrice,
+                           @RequestParam("photoFile") MultipartFile photoFile) throws IOException {
+        testService.createTest(testName, testType, testDescription, actualPrice, discount, finalPrice, photoFile);
+    }
 
+    @GetMapping("/all")
+    public List<Test> getAllTests() {
+        return testService.getAllTests();
+    }
+
+    @GetMapping("/{id}")
+    public Test getTestById(@PathVariable int id) {
+        return testService.getTestById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Test not found with id: " , id));
+    }
+
+    @PutMapping("/{id}")
+    public void updateTest(@PathVariable int id,
+                           @RequestParam String testName,
+                           @RequestParam String testType,
+                           @RequestParam String testDescription,
+                           @RequestParam int actualPrice,
+                           @RequestParam int discount,
+                           @RequestParam int finalPrice,
+                           @RequestParam(required = false) MultipartFile photoFile) throws IOException {
+        testService.updateTest(id, testName, testType, testDescription, actualPrice, discount, finalPrice, photoFile);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteTest(@PathVariable int id) {
+        testService.deleteTest(id);
+    }
+
+//    @ResponseStatus(HttpStatus.BAD_REQUEST)
+//    @ExceptionHandler({ FileStorageException.class, Exception.class })
+//    public Map<String, String> handleException(Exception ex) {
+//        return Map.of("error", ex.getMessage());
+//    }
 }
