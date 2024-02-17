@@ -1,31 +1,119 @@
 import React from "react";
+import { Link } from "react-router-dom";
 function Navbar() {
   return (
-    <nav className="navbar col-lg-12 col-12 p-0 d-flex flex-row">
-      <div className="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-        <a className="navbar-brand brand-logo mr-5" href="index.html">
-          <img src="images/logo.svg" className="mr-2" alt="logo" />
-        </a>
-        <a className="navbar-brand brand-logo-mini" href="index.html">
-          <img src="images/logo-mini.svg" alt="logo" />
-        </a>
-      </div>
-      <div className="navbar-menu-wrapper d-flex align-items-center justify-content-start">
+    <nav className="navbar navbar-expand-lg bg-body-tertiary">
+      <div className="container-fluid">
+        <Link to="/">
+          <div className="brand">
+            <div className="logo">
+              <img src="assests/icon/logo.png" />
+            </div>
+            <div className="brand-name">
+              <h2>Lifeline</h2>
+              <p>Clinical Laboratory</p>
+            </div>
+          </div>
+        </Link>
         <button
-          className="navbar-toggler navbar-toggler align-self-center"
+          className="navbar-toggler"
           type="button"
-          data-toggle="minimize"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
         >
-          <span className="icon-menu" />
+          <span className="navbar-toggler-icon" />
         </button>
-
-        <button
-          class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
-          type="button"
-          data-toggle="offcanvas"
-        >
-          <span class="icon-menu"></span>
-        </button>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul className="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-5">
+            <li className="nav-item">
+              <Link className="nav-link" aria-current="page" to="/">
+                Dashboard
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/testBookings">
+                Test Booking
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/appointments">
+                Appointments
+              </Link>
+            </li>
+            <li className="nav-item dropdown">
+              <Link
+                className="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Users
+              </Link>
+              <ul className="dropdown-menu">
+                <li>
+                  <Link className="dropdown-item" to="/patients">
+                    Patinets
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/doctors">
+                    Doctors
+                  </Link>
+                </li>
+                <li>
+                  <hr className="dropdown-divider" />
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/admins">
+                    Admins
+                  </Link>
+                </li>
+              </ul>
+            </li>
+            <li className="nav-item dropdown">
+              <Link
+                className="nav-link dropdown-toggle"
+                href="#"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Tests
+              </Link>
+              <ul className="dropdown-menu">
+                <li>
+                  <Link className="dropdown-item" to="/addtest">
+                    Add Test
+                  </Link>
+                </li>
+                <li>
+                  <Link className="dropdown-item" to="/allTest">
+                    All Tests
+                  </Link>
+                </li>
+              </ul>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" aria-current="page" to="/addDoctor">
+                Doctor Register
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" aria-current="page" to="/feedback">
+                Feedbacks
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" aria-current="page" to="/enquiry">
+                User Enquiries
+              </Link>
+            </li>
+          </ul>
+        </div>
       </div>
     </nav>
   );

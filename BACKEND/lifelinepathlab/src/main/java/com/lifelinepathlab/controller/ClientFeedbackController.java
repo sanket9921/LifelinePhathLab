@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lifelinepathlab.model.ClientFeedback;
-import com.lifelinepathlab.sevice.ClientFeedbackService;
+import com.lifelinepathlab.service.ClientFeedbackService;
 import com.lifelinepathlab.validations.Validations;
 
 @CrossOrigin("*")

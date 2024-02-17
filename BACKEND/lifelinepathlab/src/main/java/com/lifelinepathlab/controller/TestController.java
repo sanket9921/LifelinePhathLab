@@ -22,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.lifelinepathlab.exception.ResourceNotFoundException;
 import com.lifelinepathlab.model.ClientFeedback;
 import com.lifelinepathlab.model.Test;
-import com.lifelinepathlab.sevice.TestService;
+import com.lifelinepathlab.service.TestService;
 import com.lifelinepathlab.validations.Validations;
 
 

@@ -1,6 +1,6 @@
 import React from "react";
 import Feedback from "./Feedback";
-
+import Review from "./Review";
 export default function Home() {
   return (
     <>
@@ -211,59 +211,7 @@ export default function Home() {
       <Feedback />
       {/*Feedback Section ends here*/}
       {/*review Section starts here*/}
-      <div className="container bg-white rounded mt-3 pt-3">
-        <h3 className="text-center feedback-heading">Patient's feedback</h3>
-        <div class="feedback-container">
-          <div class="feedback-card">
-            <div className="feedback-pri-text">John Doe</div>
-            <div className="feedback-sec-text">
-              " Feedback: Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. "
-            </div>
-          </div>
-          <div class="feedback-card">
-            <div className="feedback-pri-text">John Doe</div>
-            <div className="feedback-sec-text">
-              " Feedback: Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. "
-            </div>
-          </div>
-          <div class="feedback-card">
-            <div className="feedback-pri-text">John Doe</div>
-            <div className="feedback-sec-text">
-              " Feedback: Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. "
-            </div>
-          </div>
-          <div class="feedback-card">
-            <div className="feedback-pri-text">John Doe</div>
-            <div className="feedback-sec-text">
-              " Feedback: Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. "
-            </div>
-          </div>
-          <div class="feedback-card">
-            <div className="feedback-pri-text">John Doe</div>
-            <div className="feedback-sec-text">
-              " Feedback: Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. "
-            </div>
-          </div>
-          <div class="feedback-card">
-            <div className="feedback-pri-text">John Doe</div>
-            <div className="feedback-sec-text">
-              " Feedback: Lorem ipsum dolor sit amet, consectetur adipiscing
-              elit. Sed do eiusmod tempor incididunt ut labore et dolore magna
-              aliqua. "
-            </div>
-          </div>
-        </div>
-      </div>
+      <Review />
       {/*review Section starts here*/}
     </>
   );

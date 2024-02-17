@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.lifelinepathlab.model.Enquiry;
-import com.lifelinepathlab.sevice.EnquiryService;
+import com.lifelinepathlab.service.EnquiryService;
 import com.lifelinepathlab.validations.Validations;
 
 @CrossOrigin("*")

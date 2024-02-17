@@ -3,8 +3,6 @@ package com.lifelinepathlab.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.List;
 
@@ -27,13 +25,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.lifelinepathlab.model.Doctor;
 import com.lifelinepathlab.model.ScheduleAppointment;
-import com.lifelinepathlab.sevice.AppointmentService;
+import com.lifelinepathlab.service.AppointmentService;
 
 
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/appointments")
+@RequestMapping("/api/appointments")
 public class ScheduleAppointmentController {
 
     @Autowired

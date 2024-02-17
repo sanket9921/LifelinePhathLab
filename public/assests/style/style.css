@@ -752,14 +752,15 @@ input[type="date"]:valid:before {
   position: fixed;
   top: 0%;
   left: 0%;
-  background-color: rgb(87, 149, 244);
+  background-color: #c9c9c9;
   visibility: hidden;
   opacity: 0;
+  transition: 400ms;
 }
 .showOverlay {
-  opacity: 1;
+  opacity: 0.95;
   visibility: visible;
-  z-index: 15;
+  z-index: +100;
 }
 
 .headIcon {
@@ -775,7 +776,7 @@ input[type="date"]:valid:before {
 .testDescription {
   margin-top: 2%;
   padding-bottom: 25px;
-  background-color: white;
+  background-color: rgb(255, 255, 255, 1);
   height: 645px;
   width: 350px;
   border: 1px solid #2e9aec;
@@ -783,7 +784,7 @@ input[type="date"]:valid:before {
   left: 50%;
   right: 50%;
   transform: translate(-50%);
-  box-shadow: 0px 0px 10px 3px lightblue;
+  box-shadow: 0px 0px 10px 5px rgb(42, 42, 43);
 }
 
 .test-desc-head {
@@ -847,7 +848,8 @@ input[type="date"]:valid:before {
 }
 
 .test-cart-btn {
-  width: 50%;
+  margin-left: 20px;
+  width: 38%;
 }
 
 .card-btn {
@@ -859,11 +861,12 @@ input[type="date"]:valid:before {
   color: white;
   border-radius: 10px;
   border: none;
-  padding: 5px;
+  padding: 5px 10px;
   background-color: blue;
 }
 .test-buy-btn {
-  width: 50%;
+  margin-right: 5px;
+  width: 38%;
 }
 /*TestDescription component styling ends here*/
 
@@ -917,3 +920,37 @@ input[type="date"]:valid:before {
     margin-bottom: 50px;
   }
 }
+
+h2 {
+  color: #343a40;
+}
+#preview-container {
+  margin-top: 20px;
+  border: 2px dashed #007bff;
+  border-radius: 5px;
+  padding: 20px;
+  cursor: pointer;
+}
+#preview-container.hover {
+  background-color: #f0f0f0;
+}
+#preview-image {
+  max-width: 300px;
+  max-height: 300px;
+  width: auto;
+  height: auto;
+  border-radius: 5px;
+}
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+}
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+
+/*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */

@@ -24,7 +24,6 @@ public class Test {
 	public Test() {
 		// TODO Auto-generated constructor stub
 	}
-
 	public Test(int testId, String testName, String testType, String testDescription, int actualPrice, int discount,
 			int finalPrice, String testImagePath) {
 		super();

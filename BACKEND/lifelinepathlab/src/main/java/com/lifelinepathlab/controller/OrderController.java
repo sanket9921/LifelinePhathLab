@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lifelinepathlab.model.Doctor;
 import com.lifelinepathlab.model.Orders;
-import com.lifelinepathlab.sevice.OrderService;
+import com.lifelinepathlab.service.OrderService;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -39,7 +39,6 @@ public class OrderController {
 	public ResponseEntity<String> addOrder(@RequestBody Orders orders) {
 		orderService.addorder(orders);
 		return ResponseEntity.ok("Orders added successfully...!!!");
-
 	}
 	
 	@PutMapping("{id}")

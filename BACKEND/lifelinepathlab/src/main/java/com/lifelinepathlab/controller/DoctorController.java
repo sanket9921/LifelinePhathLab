@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.lifelinepathlab.model.Doctor;
-import com.lifelinepathlab.sevice.DoctorService;
+import com.lifelinepathlab.service.DoctorService;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;

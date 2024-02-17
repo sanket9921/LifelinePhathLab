@@ -110,7 +110,7 @@ export default function AddTest() {
       <div class="col-12 col-xl-8 mb-4 mb-xl-0">
         <h3 class="font-weight-bold">Add Test</h3>
       </div>
-      <div className="container mt-5">
+      <div className="container mt-5 bg-white pt-3">
         <div className="text-center">
           <h2 className="mb-4">Upload Photo</h2>
           <label
