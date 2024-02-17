@@ -21,15 +21,16 @@ public class Doctor {
 	private int experience;
 	private String address;
 	private String licencePath;
+	private String requestStatus="P";
 	private String password;
 
 	public Doctor() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	
+
 	public Doctor(int doctorId, String doctorName, String clinicName, String emailId, String contactNo,
-			String specialization, int experience, String address, String licencePath, String password) {
+			String specialization, int experience, String address, String licencePath, String requestStatus,
+			String password) {
 		super();
 		this.doctorId = doctorId;
 		this.doctorName = doctorName;
@@ -40,9 +41,9 @@ public class Doctor {
 		this.experience = experience;
 		this.address = address;
 		this.licencePath = licencePath;
+		this.requestStatus = requestStatus;
 		this.password = password;
 	}
-
 
 	public int getDoctorId() {
 		return doctorId;
@@ -116,6 +117,14 @@ public class Doctor {
 		this.licencePath = licencePath;
 	}
 
+	public String getRequestStatus() {
+		return requestStatus;
+	}
+
+	public void setRequestStatus(String requestStatus) {
+		this.requestStatus = requestStatus;
+	}
+
 	public String getPassword() {
 		return password;
 	}
@@ -124,13 +133,12 @@ public class Doctor {
 		this.password = password;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Doctor [doctorId=" + doctorId + ", doctorName=" + doctorName + ", clinicName=" + clinicName
 				+ ", emailId=" + emailId + ", contactNo=" + contactNo + ", specialization=" + specialization
-				+ ", experience=" + experience + ", address=" + address + ", licencePath=" + licencePath + ", password="
-				+ password + "]";
+				+ ", experience=" + experience + ", address=" + address + ", licencePath=" + licencePath
+				+ ", requestStatus=" + requestStatus + ", password=" + password + "]";
 	}
 	
 }

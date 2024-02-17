@@ -15,17 +15,20 @@ public class ClientFeedback {
 	private String clientName;
 	private String contactNo;
 	private String feedback;
+	private String displayToClient="N";
 	
 	public ClientFeedback() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ClientFeedback(int feedbackId, String clientName, String contactNo, String feedback) {
+	public ClientFeedback(int feedbackId, String clientName, String contactNo, String feedback,
+			String displayToClient) {
 		super();
 		this.feedbackId = feedbackId;
 		this.clientName = clientName;
 		this.contactNo = contactNo;
 		this.feedback = feedback;
+		this.displayToClient = displayToClient;
 	}
 
 	public int getFeedbackId() {
@@ -60,10 +63,18 @@ public class ClientFeedback {
 		this.feedback = feedback;
 	}
 
+	public String getDisplayToClient() {
+		return displayToClient;
+	}
+
+	public void setDisplayToClient(String displayToClient) {
+		this.displayToClient = displayToClient;
+	}
+
 	@Override
 	public String toString() {
 		return "ClientFeedback [feedbackId=" + feedbackId + ", clientName=" + clientName + ", contactNo=" + contactNo
-				+ ", feedback=" + feedback + "]";
+				+ ", feedback=" + feedback + ", displayToClient=" + displayToClient + "]";
 	}
-	
+
 }

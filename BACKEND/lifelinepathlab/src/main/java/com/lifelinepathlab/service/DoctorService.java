@@ -1,11 +1,17 @@
 package com.lifelinepathlab.service;
 
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.lifelinepathlab.exception.ResourceNotFoundException;
+import com.lifelinepathlab.model.ClientFeedback;
 import com.lifelinepathlab.model.Doctor;
+import com.lifelinepathlab.model.ScheduleAppointment;
 import com.lifelinepathlab.repository.DoctorRepository;
+import com.lifelinepathlab.repository.ScheduleAppointmentRepository;
+
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.UUID;
@@ -15,6 +21,9 @@ public class DoctorService {
 
     @Autowired
     private DoctorRepository doctorRepository;
+    
+    @Autowired
+    private ScheduleAppointmentRepository scheduleAppointment;
 
     @Autowired
     private FileStorageService fileStorageService;
@@ -75,9 +84,38 @@ public class DoctorService {
 
         doctorRepository.save(existingDoctor);
     }
+    
+    public void updateRequestStatus(int id) {
+    	Doctor doctor = doctorRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Doctor does not exits with doctor Id: ", id));
+    	doctor.setRequestStatus("A");
+    	doctorRepository.save(doctor);
+	}
+    
+    public void rejectDoctorRequest(int id) {
+    	Doctor doctor = doctorRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("Doctor does not exits with doctor Id: ", id));
+    	doctor.setRequestStatus("R");
+    	doctorRepository.save(doctor);
+	}
+    
+    public void deleteDoctor(int doctorId) {
+        Optional<Doctor> optionalDoctor = doctorRepository.findById(doctorId);
+        if (optionalDoctor.isPresent()) {
+            Doctor doctor = optionalDoctor.get();
 
-    public void deleteDoctor(int id) {
-        Doctor doctor = getDoctorById(id);
-        doctorRepository.delete(doctor);
+            // Find and update each appointment associated with the doctor
+            List<ScheduleAppointment> appointments = scheduleAppointment.findByDoctor(doctor);
+            for (ScheduleAppointment appointment : appointments) {
+                appointment.setDoctor(null);
+                scheduleAppointment.save(appointment); // Save the updated appointment
+            }
+
+            // Now delete the doctor
+            doctorRepository.deleteById(doctorId);
+       }
+    } 
+    
+    public List<Doctor> getAllPendingRequest() {
+    	List<Doctor> pendingRequests= doctorRepository.findByRequestStatus("P");
+        return pendingRequests;
     }
 }

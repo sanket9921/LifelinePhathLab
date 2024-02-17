@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.lifelinepathlab.exception.ResourceNotFoundException;
 import com.lifelinepathlab.model.ClientFeedback;
+import com.lifelinepathlab.model.User;
 import com.lifelinepathlab.repository.ClientFeedbackRepository;
 
 @Service
@@ -33,5 +34,17 @@ public class ClientFeedbackService {
 				.orElseThrow(() -> new ResourceNotFoundException("ClientFeedback not available with this Feedback Id: ", feedbackId));
 		clientFeedbackRepositoryRef.delete(clientFeedback);
 	}
+	
+	public void updateFeedback(int feedbackId) {
+		ClientFeedback clientFeedback = clientFeedbackRepositoryRef.findById(feedbackId).orElseThrow(()-> new ResourceNotFoundException("Client Feedback does not exits with Feedback Id: ", feedbackId));
+		clientFeedback.setDisplayToClient("Y");
+		clientFeedbackRepositoryRef.save(clientFeedback);
+
+	}
+	
+    public List<ClientFeedback> getFeedbacksForClient() {
+    	List<ClientFeedback> clientFeedbacks = clientFeedbackRepositoryRef.findByDisplayToClient("Y");
+        return clientFeedbacks;
+    }
 
 }

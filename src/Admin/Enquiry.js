@@ -1,12 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Services from "../Services/Services";
 
 export default function Enquiry() {
+  const [enquiries, setEnquiries] = useState([]);
+
+  useEffect(() => {
+    Services.getAllEnquiries()
+      .then((res) => {
+        setEnquiries(res.data);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  }, []);
+
   return (
     <>
       <div class="col-12 col-xl-8 mb-4 mb-xl-0">
         <h3 class="font-weight-bold">Users Enquiry</h3>
       </div>
-
       <div className="card mt-2 p-3">
         <table
           className="table-hover"
@@ -14,7 +26,7 @@ export default function Enquiry() {
         >
           <thead>
             <tr>
-              <th style={{ padding: 8, textAlign: "left" }}>ID</th>
+              <th style={{ padding: 8, textAlign: "left" }}>Enquiry ID</th>
               <th style={{ padding: 8, textAlign: "left" }}>User Name</th>
               <th style={{ padding: 8, textAlign: "left" }}>Phone No</th>
 
@@ -32,51 +44,43 @@ export default function Enquiry() {
           </thead>
 
           <tbody>
-            <tr>
-              <td style={{ borderTop: "1px solid lightgray", padding: 8 }}>
-                1
-              </td>
-              <td style={{ borderTop: "1px solid lightgray", padding: 8 }}>
-                JohnDoe
-              </td>
-              <td style={{ borderTop: "1px solid lightgray", padding: 8 }}>
-                9839988934
-              </td>
-              <td style={{ borderTop: "1px solid lightgray", padding: 8 }}>
-                123 Main Street, Lorem Ipsum, Dolor Sit Amet, Consectetur
-                adipiscing elit.
-              </td>
-            </tr>
-            <tr>
-              <td style={{ borderTop: "1px solid lightgray", padding: 8 }}>
-                1
-              </td>
-              <td style={{ borderTop: "1px solid lightgray", padding: 8 }}>
-                JohnDoe
-              </td>
-              <td style={{ borderTop: "1px solid lightgray", padding: 8 }}>
-                9839988934
-              </td>
-              <td style={{ borderTop: "1px solid lightgray", padding: 8 }}>
-                123 Main Street, Lorem Ipsum, Dolor Sit Amet, Consectetur
-                adipiscing elit.
-              </td>
-            </tr>
-            <tr>
-              <td style={{ borderTop: "1px solid lightgray", padding: 8 }}>
-                1
-              </td>
-              <td style={{ borderTop: "1px solid lightgray", padding: 8 }}>
-                JohnDoe
-              </td>
-              <td style={{ borderTop: "1px solid lightgray", padding: 8 }}>
-                9839988934
-              </td>
-              <td style={{ borderTop: "1px solid lightgray", padding: 8 }}>
-                123 Main Street, Lorem Ipsum, Dolor Sit Amet, Consectetur
-                adipiscing elit.
-              </td>
-            </tr>
+            {enquiries &&
+              enquiries.map((enquiry) => (
+                <tr>
+                  <td
+                    style={{
+                      borderTop: "1px solid lightgray",
+                      padding: 8,
+                    }}
+                  >
+                    {enquiry.id}
+                  </td>
+                  <td
+                    style={{
+                      borderTop: "1px solid lightgray",
+                      padding: 8,
+                    }}
+                  >
+                    {enquiry.name}
+                  </td>
+                  <td
+                    style={{
+                      borderTop: "1px solid lightgray",
+                      padding: 8,
+                    }}
+                  >
+                    {enquiry.contactNO}
+                  </td>
+                  <td
+                    style={{
+                      borderTop: "1px solid lightgray",
+                      padding: 8,
+                    }}
+                  >
+                    {enquiry.message}
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>

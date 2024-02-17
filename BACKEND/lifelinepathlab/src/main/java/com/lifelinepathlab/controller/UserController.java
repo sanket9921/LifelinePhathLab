@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.lifelinepathlab.model.ClientFeedback;
 import com.lifelinepathlab.model.User;
 import com.lifelinepathlab.service.UserService;
 import com.lifelinepathlab.validations.Validations;
@@ -72,6 +74,27 @@ public class UserController {
 
 		userServiceRef.updateUser(newUser, userId);
 		return ResponseEntity.ok("User details updated successfully...!!!");
+	}
+	
+	// To get all Admins...
+	@GetMapping("/admins")
+	public ResponseEntity<List<User>> getAdminByRole() {
+		List<User> allAdmins = userServiceRef.getAdminByRole();
+		return ResponseEntity.ok(allAdmins);
+	}
+	
+	// To get all Admins...
+	@PutMapping("/admins/{userId}")
+	public ResponseEntity<String> updateUserRole(@PathVariable("userId") int userId) {
+		userServiceRef.updateUserRole(userId);
+		return ResponseEntity.ok("User Is Made admin successfully...!!!");
+	}
+	
+	// To get all Users...
+	@GetMapping("/patients")
+	public ResponseEntity<List<User>> getUsersByRole() {
+		List<User> allUsers = userServiceRef.getUsersByRole();
+		return ResponseEntity.ok(allUsers);
 	}
 
 	// To delete the user...

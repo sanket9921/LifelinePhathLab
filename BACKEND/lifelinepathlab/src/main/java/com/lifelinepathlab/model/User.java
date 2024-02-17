@@ -23,13 +23,15 @@ public class User {
 	private String bloodGroup;
 	private String address;
 	private String password;
+	private String role="USER";
 	
 	public User() {
 	
 	}
 
 	public User(int userId, String firstName, String lastName, String emailId, String contactNo, Date dateOfBirth,
-			String gender, String bloodGroup, String address, String password) {
+			String gender, String bloodGroup, String address, String password, String role) {
+		super();
 		this.userId = userId;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -40,6 +42,7 @@ public class User {
 		this.bloodGroup = bloodGroup;
 		this.address = address;
 		this.password = password;
+		this.role = role;
 	}
 
 	public int getUserId() {
@@ -122,12 +125,19 @@ public class User {
 		this.password = password;
 	}
 
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId
 				+ ", contactNo=" + contactNo + ", dateOfBirth=" + dateOfBirth + ", gender=" + gender + ", bloodGroup="
-				+ bloodGroup + ", address=" + address + ", password=" + password + "]";
+				+ bloodGroup + ", address=" + address + ", password=" + password + ", role=" + role + "]";
 	}
-	
+
 }

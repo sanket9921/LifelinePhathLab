@@ -53,7 +53,7 @@ public class TestController {
         testService.createTest(testName, testType, testDescription, actualPrice, discount, finalPrice, photoFile);
     }
 
-    @GetMapping("/all")
+    @GetMapping("/all/")
     public List<Test> getAllTests() {
         return testService.getAllTests();
     }
@@ -79,6 +79,16 @@ public class TestController {
     @DeleteMapping("/{id}")
     public void deleteTest(@PathVariable int id) {
         testService.deleteTest(id);
+    }
+    
+    @GetMapping("/all/{type}")
+    public List<Test> getByTestType(@PathVariable("type") String type){
+    	return testService.getByTypeName(type);
+    }
+    
+    @GetMapping("/TestType")
+    public List<String> getTestTypes(){
+    	return testService.getDistinctTestTypes();
     }
 
 //    @ResponseStatus(HttpStatus.BAD_REQUEST)

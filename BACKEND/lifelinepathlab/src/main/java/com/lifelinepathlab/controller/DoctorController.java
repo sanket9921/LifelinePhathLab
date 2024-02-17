@@ -21,7 +21,7 @@ import java.io.IOException;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/doctors")
+@RequestMapping("/api/doctors")
 public class DoctorController {
 
     @Autowired
@@ -58,6 +58,25 @@ public class DoctorController {
         Doctor doctor = doctorService.getDoctorById(id);
         return ResponseEntity.ok(doctor);
     }
+    
+    @GetMapping("/pending")
+    public ResponseEntity<List<Doctor>> getAllPendingRequest() {
+        List<Doctor> pendingDoctors = doctorService.getAllPendingRequest();
+        return ResponseEntity.ok(pendingDoctors);
+    }
+    
+    @PutMapping("/request/{id}")
+    public ResponseEntity<String> updateRequestStatus(@PathVariable int id) {
+        doctorService.updateRequestStatus(id);
+        return ResponseEntity.ok("Request Status Updated successfully...!!!");
+    }
+    
+    @PutMapping("/reject/{id}")
+    public ResponseEntity<String> rejectDoctorRequest(@PathVariable int id) {
+        doctorService.rejectDoctorRequest(id);
+        return ResponseEntity.ok("Doctor request rejected...!!!");
+    }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateDoctor(
