@@ -72,8 +72,8 @@ export default function AddDoctor() {
                   <td>{pendingRequest.address}</td>
                   <td>
                     <a
-                      href="../../../file/doctor-licenses/6e61ff89-7513-4f96-974d-c25cbe2cba1d_ApplicationForm.pdf"
-                      // href={`../../file/doctor-licenses/${pendingRequest.licencePath}`}
+                      // href="File/doctor-licenses/6e61ff89-7513-4f96-974d-c25cbe2cba1d_ApplicationForm.pdf"
+                      href={`Files/doctor-licenses/${pendingRequest.licencePath}`}
                       download
                     >
                       Download
