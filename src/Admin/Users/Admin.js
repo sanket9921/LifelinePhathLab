@@ -1,6 +1,29 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import Services from "../../Services/Services";
 
 export default function Admin() {
+  const [admins, setAdmins] = useState([]);
+  const [uId, setUId] = useState("");
+  useEffect(() => {
+    Services.getAllAdmins()
+      .then((res) => {
+        setAdmins(res.data);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  }, []);
+
+  const AdminHandler = () => {
+    Services.UpdateUserRole(uId)
+      .then((res) => {
+        window.location.reload();
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
+
   return (
     <>
       <div class="col-12 col-xl-8 mb-4 mb-xl-0">
@@ -15,16 +38,21 @@ export default function Admin() {
             type="text"
             className="form-control"
             placeholder="Enter the Patient ID"
+            onChange={(e) => setUId(e.target.value)}
           />
           <div className="input-group-append">
-            <button className="btn btn-sm btn-primary" type="button">
+            <button
+              className="btn btn-sm btn-primary"
+              type="button"
+              onClick={AdminHandler}
+            >
               Make User As Admin
             </button>
           </div>
         </div>
       </div>
       <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-        <h4 class="font-weight-bold">All Admin</h4>
+        <h4 class="font-weight-bold">All Admins</h4>
       </div>
       <div className="col-lg-12 grid-margin stretch-card">
         <div className="card">
@@ -33,66 +61,28 @@ export default function Admin() {
               <table className="table table-hover">
                 <thead>
                   <tr>
-                    <th>PatientID</th>
+                    <th>Admin Id</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
                     <th>Phone</th>
                     <th>Address</th>
+                    <th>Role</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>123</td>
-                    <td>sanket</td>
-                    <td>allergies</td>
-                    <td>09-02-2024</td>
-                    <td>9921410715</td>
-                    <td>
-                      A/p Mandavagan Pharata tal. shirur Dist. Pune, 412211
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Messsy</td>
-                    <td>Flash</td>
-                    <td className="text-danger">
-                      21.06% <i className="ti-arrow-down" />
-                    </td>
-                    <td>
-                      <label className="badge badge-warning">In progress</label>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>John</td>
-                    <td>Premier</td>
-                    <td className="text-danger">
-                      {" "}
-                      35.00% <i className="ti-arrow-down" />
-                    </td>
-                    <td>
-                      <label className="badge badge-info">Fixed</label>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Peter</td>
-                    <td>After effects</td>
-                    <td className="text-success">
-                      82.00% <i className="ti-arrow-up" />
-                    </td>
-                    <td>
-                      <label className="badge badge-success">Completed</label>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Dave</td>
-                    <td>53275535</td>
-                    <td className="text-success">
-                      98.05% <i className="ti-arrow-up" />
-                    </td>
-                    <td>
-                      <label className="badge badge-warning">In progress</label>
-                    </td>
-                  </tr>
+                  {admins &&
+                    admins.map((admin) => (
+                      <tr>
+                        <td>{admin.userId}</td>
+                        <td>{admin.firstName}</td>
+                        <td>{admin.lastName}</td>
+                        <td>{admin.emailId}</td>
+                        <td>{admin.contactNo}</td>
+                        <td>{admin.address}</td>
+                        <td>{admin.role}</td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>

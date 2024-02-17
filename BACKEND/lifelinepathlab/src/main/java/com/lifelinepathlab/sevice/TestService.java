@@ -94,4 +94,12 @@ public class TestService {
     public void deleteTest(int id) {
         testRepository.deleteById(id);
     }
+    
+    public List<Test> getByTypeName(String type){
+    	return testRepository.findByTestType(type);
+    }
+    
+    public List<String> getDistinctTestTypes() {
+        return testRepository.findDistinctTestTypes();
+    }
 }

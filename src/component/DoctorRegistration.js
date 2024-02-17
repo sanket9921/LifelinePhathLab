@@ -35,11 +35,15 @@ export default function DoctorRegistration() {
     formDataObj.append("licenseFile", formData.licenseFile);
 
     try {
-      await axios.post("http://localhost:8083/doctors/register", formDataObj, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      await axios.post(
+        "http://localhost:8083/api/doctors/register",
+        formDataObj,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       alert("Doctor registered successfully!");
     } catch (error) {
       console.error("Error registering doctor:", error);

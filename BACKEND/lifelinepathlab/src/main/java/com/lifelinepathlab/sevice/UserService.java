@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.lifelinepathlab.exception.ResourceNotFoundException;
+import com.lifelinepathlab.model.ClientFeedback;
 import com.lifelinepathlab.model.User;
 import com.lifelinepathlab.repository.UserRepository;
 
@@ -42,6 +43,22 @@ public class UserService {
 			userRepositoryRef.save(oldUser);
 			
 			return oldUser;
+	}
+	
+    public List<User> getAdminByRole() {
+    	List<User> admins = userRepositoryRef.findByRole("ADMIN");
+        return admins;
+    }
+    
+    public List<User> getUsersByRole() {
+    	List<User> users = userRepositoryRef.findByRole("USER");
+        return users;
+    }
+	
+	public void updateUserRole(int userId) {
+		User user=userRepositoryRef.findById(userId).orElseThrow(()-> new ResourceNotFoundException("User does not exits with User Id: ", userId));;
+		user.setRole("ADMIN");
+		userRepositoryRef.save(user);
 	}
 	
 	public void deleteUser(int userId) {

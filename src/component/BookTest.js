@@ -1,44 +1,35 @@
 import { useEffect, useState } from "react";
 import TestDescription from "./TestDescription";
 import Services from "../Services/Services";
+import TestTypes from "./TestTypes";
+import { UseSelector, useSelector } from "react-redux";
 export default function BookTest() {
+  const testCategory = useSelector((state) => state.testCategory.value);
+
   function showModel() {
     document.querySelector(".overlay").classList.add("showOverlay");
   }
 
   const [tests, setTests] = useState([]);
-
   useEffect(() => {
-    Services.getAllTest()
+    console.log(testCategory);
+    Services.getTestByTestType(testCategory)
       .then((res) => {
         setTests(res.data);
+        console.log(res.data);
       })
       .catch((err) => {
         alert(err.message);
       });
-    console.log(tests);
-  }, []);
+    // console.log(tests)
+  }, [testCategory]);
 
   return (
     <div className="container mt-2 rounded Test">
       <TestDescription />
       <div className="row">
         <div className="col-2 border p-2">
-          <h5 className="filters">Fillter</h5>
-          <div className="filter-items">
-            <div className="ms-4 mt-2">
-              <div>Heart</div>
-              <div>Kidney</div>
-              <div>Liver</div>
-              <div>Thyroid</div>
-              <div>Brain</div>
-              <div>Intestines</div>
-              <div>Joints</div>
-              <div>Pancreas</div>
-              <div>Stomach</div>
-              <div>Muscle</div>
-            </div>
-          </div>
+          <TestTypes />
         </div>
         <div className="col-10">
           <div className="row">

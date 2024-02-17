@@ -14,7 +14,7 @@ class Services {
   }
 
   getClientFeedbacks() {
-    return axios.get(BACKEND_API + "/feedback");
+    return axios.get(BACKEND_API + "/feedback/review");
   }
 
   getAllTests() {
@@ -30,7 +30,64 @@ class Services {
   }
 
   getAllTest() {
-    return axios.get(BACKEND_API + "/tests/all");
+    return axios.get(BACKEND_API + "/tests/all/");
+  }
+
+  getTestByTestType(type) {
+    return axios.get(BACKEND_API + "/tests/all/" + type);
+  }
+
+  getAllTestType() {
+    return axios.get(BACKEND_API + "/tests/TestType");
+  }
+  //admin panel services
+
+  getAllPatients() {
+    return axios.get(BACKEND_API + "/user/patients");
+  }
+
+  deletePatientById(userId) {
+    return axios.delete(BACKEND_API + "/user/" + userId);
+  }
+
+  getPendingRequests() {
+    return axios.get(BACKEND_API + "/doctors/pending");
+  }
+
+  getAllDoctors() {
+    return axios.get(BACKEND_API + "/doctors/list");
+  }
+
+  updateRequestStatus(doctorId) {
+    return axios.put(BACKEND_API + "/doctors/request/" + doctorId);
+  }
+
+  rejectDoctorRequest(doctorId) {
+    return axios.put(BACKEND_API + "/doctors/reject/" + doctorId);
+  }
+
+  deleteDoctorRecord(doctorId) {
+    return axios.delete(BACKEND_API + "/doctors/" + doctorId);
+  }
+
+  getAllAdmins() {
+    return axios.get(BACKEND_API + "/user/admins");
+  }
+
+  UpdateUserRole(uId) {
+    return axios.put(BACKEND_API + "/user/admins/" + uId);
+  }
+
+  getAllEnquiries() {
+    return axios.get(BACKEND_API + "/enquiry");
+  }
+
+  getAllFeedbacks() {
+    return axios.get(BACKEND_API + "/feedback");
+  }
+
+  showFeedbackToClient(feedbackId) {
+    return axios.put(BACKEND_API + "/feedback/" + feedbackId);
   }
 }
 
