@@ -1,6 +1,7 @@
 import React from "react";
 import Feedback from "./Feedback";
 import Review from "./Review";
+import BestOffers from "./BestOffers";
 export default function Home() {
   return (
     <>
@@ -89,123 +90,7 @@ export default function Home() {
       {/* Add more scroll items as needed */}
       {/* end scroll bar */}
       {/*  Start Offer Section */}
-      <div className="container mt-3 rounded Test">
-        <h3 className="text-center">Best Offer</h3>
-        <div className="row">
-          {/* ===================================== */}
-          <div className="product-cart rounded col-md-3 col-xs-6 mt-3">
-            <div className="img">
-              <img
-                className="img-fluid"
-                src="./assests/image/download.jpg"
-                alt=""
-              />
-            </div>
-            <div className="title mt-3 text-center">
-              <h6>Allergy Package</h6>
-            </div>
-            <div className="price">
-              <span className="off">45% off</span>
-              <span className="dis-price">
-                ₹900 <del className="actual-price">₹1000</del>
-              </span>
-            </div>
-            <div className="action-btn mt-3 ">
-              <button className="card">Add to cart</button>
-              <button className="buy">Buy Now</button>
-            </div>
-          </div>
-          {/* ======================================= */}
-          <div className="product-cart rounded col-md-3 col-xs-6 mt-3">
-            <div className="img">
-              <img
-                className="img-fluid"
-                src="./assests/image/download.jpg"
-                alt=""
-              />
-            </div>
-            <div className="title mt-3 text-center">
-              <h6>Allergy Package</h6>
-            </div>
-            <div className="price">
-              <span className="off">45% off</span>
-              <span className="dis-price">
-                ₹900 <del className="actual-price">₹1000</del>
-              </span>
-            </div>
-            <div className="action-btn mt-3 ">
-              <button className="card">Add to cart</button>
-              <button className="buy">Buy Now</button>
-            </div>
-          </div>
-          <div className="product-cart rounded col-md-3 col-xs-6 mt-3">
-            <div className="img">
-              <img
-                className="img-fluid"
-                src="./assests/image/download.jpg"
-                alt=""
-              />
-            </div>
-            <div className="title mt-3 text-center">
-              <h6>Allergy Package</h6>
-            </div>
-            <div className="price">
-              <span className="off">45% off</span>
-              <span className="dis-price">
-                ₹900 <del className="actual-price">₹1000</del>
-              </span>
-            </div>
-            <div className="action-btn mt-3 ">
-              <button className="card">Add to cart</button>
-              <button className="buy">Buy Now</button>
-            </div>
-          </div>
-          <div className="product-cart rounded col-md-3 col-xs-6 mt-3">
-            <div className="img">
-              <img
-                className="img-fluid"
-                src="./assests/image/download.jpg"
-                alt=""
-              />
-            </div>
-            <div className="title mt-3 text-center">
-              <h6>Allergy Package</h6>
-            </div>
-            <div className="price">
-              <span className="off">45% off</span>
-              <span className="dis-price">
-                ₹900 <del className="actual-price">₹1000</del>
-              </span>
-            </div>
-            <div className="action-btn mt-3 ">
-              <button className="card">Add to cart</button>
-              <button className="buy">Buy Now</button>
-            </div>
-          </div>
-          <div className="product-cart rounded col-md-3 col-xs-6 mt-3">
-            <div className="img">
-              <img
-                className="img-fluid"
-                src="./assests/image/download.jpg"
-                alt=""
-              />
-            </div>
-            <div className="title mt-3 text-center">
-              <h6>Allergy Package</h6>
-            </div>
-            <div className="price">
-              <span className="off">45% off</span>
-              <span className="dis-price">
-                ₹900 <del className="actual-price">₹1000</del>
-              </span>
-            </div>
-            <div className="action-btn mt-3 ">
-              <button className="card">Add to cart</button>
-              <button className="buy">Buy Now</button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <BestOffers/>
       {/*  End Offer Section */}
       {/*Feedback Section starts here*/}
       <Feedback />
