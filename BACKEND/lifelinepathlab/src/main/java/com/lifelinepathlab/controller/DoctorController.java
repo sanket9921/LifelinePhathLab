@@ -65,6 +65,12 @@ public class DoctorController {
         return ResponseEntity.ok(pendingDoctors);
     }
     
+    @GetMapping("/approved")
+    public ResponseEntity<List<Doctor>> getAllDistinctDoctors() {
+    	List<Doctor> approvedDoctors = doctorService.getAllDistinctDoctors();
+        return ResponseEntity.ok(approvedDoctors);
+    }
+    
     @PutMapping("/request/{id}")
     public ResponseEntity<String> updateRequestStatus(@PathVariable int id) {
         doctorService.updateRequestStatus(id);

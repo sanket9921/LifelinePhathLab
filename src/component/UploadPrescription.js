@@ -14,7 +14,7 @@ export default function UploadPrescription() {
     const fetchDoctors = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:8083/api/doctors/list"
+          "http://localhost:8083/api/doctors/approved"
         );
         setDoctors(response.data);
         console.log(doctors);
