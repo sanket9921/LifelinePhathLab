@@ -25,8 +25,8 @@ class Services {
   }
 
   // appoitment schedule service
-  getAllappointment() {
-    return axios.get(BACKEND_API + "/appointments/list");
+  getAppointmentByStatus(status) {
+    return axios.get(BACKEND_API + "/appointments/list/" + status);
   }
   getAppointmentById(id) {
     return axios.get(BACKEND_API + "/appointments/" + id);

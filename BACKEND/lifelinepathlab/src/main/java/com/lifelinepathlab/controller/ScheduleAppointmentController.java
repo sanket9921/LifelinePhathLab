@@ -63,11 +63,18 @@ public class ScheduleAppointmentController {
         }
     }
 
-    @GetMapping("/list")
+    @GetMapping("/list/")
     public ResponseEntity<List<ScheduleAppointment>> getAllAppointments() {
-        List<ScheduleAppointment> appointments = appointmentService.getAllAppointments();
+        List<ScheduleAppointment> appointments = appointmentService.getAllAppointments();	
         return ResponseEntity.ok(appointments);
     }
+    
+    @GetMapping("/list/{status}")
+    public ResponseEntity<List<ScheduleAppointment>> getAllAppointmentsByStatus(@PathVariable ("status") String status) {
+        List<ScheduleAppointment> appointments = appointmentService.getAllAppointmentsByStatus(status);	
+        return ResponseEntity.ok(appointments);
+    }
+    
 
     @GetMapping("/{id}")
     public ResponseEntity<ScheduleAppointment> getAppointmentById(@PathVariable("id") int id) {

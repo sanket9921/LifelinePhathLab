@@ -107,13 +107,20 @@ export default function AppointmentDetails() {
             <h4 class="card-title">Prescription</h4>
             <a
               className="btn btn-primary mb-5"
-              href="../../Files/prescriptions/2fae07f7-8e31-44de-a5c3-c85baede1770_delete.png"
+              href={
+                "../Files/prescriptions/" + appointment.prescriptionFilePath
+              }
+              // href={
+              //   appointment?.prescriptionFilePath
+              //     ? `Files/prescriptions/${appointment.prescriptionFilePath}`
+              //     : "#"
+              // }
               download
             >
               Download Prescriptions
             </a>
             <iframe
-              src="../../Files/prescriptions/2fae07f7-8e31-44de-a5c3-c85baede1770_delete.png"
+              src={`../Files/prescriptions/${appointment.prescriptionFilePath}`}
               width="100%"
               height="500"
             ></iframe>
@@ -121,7 +128,7 @@ export default function AppointmentDetails() {
         </div>
       </div>
 
-      <div className="col-12 grid-margin stretch-card">
+      <div className="col-12 mt-3 grid-margin stretch-card">
         <div className="card">
           <div className="card-body">
             <h4 className="card-title">Upload Patient report</h4>

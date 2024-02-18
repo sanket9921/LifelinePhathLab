@@ -24,14 +24,15 @@ public class ScheduleAppointment {
 	private String patientAddress;
 	private Date scheduledTime;
 	private String prescriptionFilePath;
+	private String status="SCHEDULED";
+	
 
 	public ScheduleAppointment() {
 		// TODO Auto-generated constructor stub
 	}
 
-	
 	public ScheduleAppointment(int appointmentId, String patientName, String patientContactNo, Doctor doctor,
-			String patientAddress, Date scheduledTime, String prescriptionFilePath) {
+			String patientAddress, Date scheduledTime, String prescriptionFilePath, String status) {
 		super();
 		this.appointmentId = appointmentId;
 		this.patientName = patientName;
@@ -40,11 +41,12 @@ public class ScheduleAppointment {
 		this.patientAddress = patientAddress;
 		this.scheduledTime = scheduledTime;
 		this.prescriptionFilePath = prescriptionFilePath;
+		this.status = status;
 	}
+	
 	public ScheduleAppointment( String patientName, String patientContactNo, Doctor doctor,
 			String patientAddress, Date scheduledTime, String prescriptionFilePath) {
 		super();
-		
 		this.patientName = patientName;
 		this.patientContactNo = patientContactNo;
 		this.doctor = doctor;
@@ -52,7 +54,6 @@ public class ScheduleAppointment {
 		this.scheduledTime = scheduledTime;
 		this.prescriptionFilePath = prescriptionFilePath;
 	}
-
 
 	public int getAppointmentId() {
 		return appointmentId;
@@ -109,5 +110,21 @@ public class ScheduleAppointment {
 	public void setPrescriptionFilePath(String prescriptionFilePath) {
 		this.prescriptionFilePath = prescriptionFilePath;
 	}
-	
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	@Override
+	public String toString() {
+		return "ScheduleAppointment [appointmentId=" + appointmentId + ", patientName=" + patientName
+				+ ", patientContactNo=" + patientContactNo + ", doctor=" + doctor + ", patientAddress=" + patientAddress
+				+ ", scheduledTime=" + scheduledTime + ", prescriptionFilePath=" + prescriptionFilePath + ", status="
+				+ status + "]";
+	}
+
 }
