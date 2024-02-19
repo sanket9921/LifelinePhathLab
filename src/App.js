@@ -16,6 +16,7 @@ import Contact from "./component/Contact";
 import Cart from "./component/Cart";
 import Login from "./LandingPage/Login";
 import Signup from "./LandingPage/Signup";
+import TestDescription from "./component/TestDescription";
 
 export default function App() {
   return (
@@ -36,6 +37,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/bookTest" element={<BookTest />} />
+          <Route path="/testDetails/:testName" element={<TestDetails />} />
           <Route path="/uploadPrescription" element={<UploadPrescription />} />
           <Route path="/downloadReport" element={<DownloadReport />} />
           <Route path="/contact" element={<Contact />} />
