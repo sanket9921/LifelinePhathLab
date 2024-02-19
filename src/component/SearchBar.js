@@ -2,8 +2,24 @@ import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Services from "../Services/Services";
+import Cookies from "js-cookie";
 
 export default function SearchBar() {
+
+  const isLoggedIn = Cookies.get("isLoggedIn");
+
+  const handleLogout = () => {
+    // Clear all cookies
+    Cookies.remove("jwtToken");
+    Cookies.remove("username");
+    Cookies.remove("firstName");
+    Cookies.remove("userId");
+    Cookies.remove("role");
+    Cookies.remove("isLoggedIn");
+    // Dispatch logout action
+
+    window.location.reload();
+  };
   const navigate = useNavigate();
   const [input, setInput] = useState("");
   const [results, setResults] = useState([]);
@@ -84,12 +100,48 @@ export default function SearchBar() {
               <div className="secondary-text">cart</div>
             </div>
           </Link>
-          <Link to="/login">
-            <div className="cart">
-              <i className="icofont-user" />
-              <div className="secondary-text">Sign in</div>
-            </div>
-          </Link>
+
+          <div className="cart">
+            {isLoggedIn ? (
+              <>
+                <i className="icofont-user" />
+
+                <div className="secondary-text">
+                  <div class="dropdown">
+                    <div
+                      class="dropdown-toggle"
+                      type="button"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      {Cookies.get("firstName")}
+                    </div>
+                    <ul class="dropdown-menu">
+                      <li>
+                        <button class="dropdown-item" type="button">
+                          Prfile
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          class="dropdown-item text-danger"
+                          type="button"
+                          onClick={handleLogout}
+                        >
+                          Logout
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <Link to="/login">
+                <i className="icofont-user" />
+                <div className="secondary-text">Sign in</div>
+              </Link>
+            )}
+          </div>
         </div>
       </div>
       <div className="container">

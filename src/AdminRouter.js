@@ -1,5 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
-import App from "./Admin/App";
+import App from "./Admin/AdminApp.js";
 import Dashboard from "./Admin/Dashboard";
 import Appointments from "./Admin/Appointments/Appointments.js";
 import TestBook from "./Admin/TestBook";

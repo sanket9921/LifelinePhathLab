@@ -7,7 +7,10 @@ class Services {
   }
 
   userRegistration(user) {
-    return axios.post(BACKEND_API + "/user", user);
+    return axios.post(BACKEND_API + "/user/create", user);
+  }
+  userLogin(user) {
+    return axios.post(BACKEND_API + "/user/login", user);
   }
 
   //search bar api

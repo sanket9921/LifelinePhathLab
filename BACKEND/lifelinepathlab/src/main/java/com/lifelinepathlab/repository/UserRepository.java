@@ -9,5 +9,7 @@ import com.lifelinepathlab.model.User;
 public interface UserRepository extends JpaRepository<User, Integer> {
 	
 	public List<User> findByRole(String role);
+	
+	public User findByEmailId(String email);
 
 }

@@ -1,8 +1,11 @@
 package com.lifelinepathlab.service;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.lifelinepathlab.exception.ResourceNotFoundException;
 import com.lifelinepathlab.model.ClientFeedback;
@@ -15,7 +18,12 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepositoryRef;
 	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
+	
 	public void addUser(User user) {
+		user.setUuid(UUID.randomUUID().toString());
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		userRepositoryRef.save(user);
 	}
 	
@@ -39,7 +47,7 @@ public class UserService {
 			oldUser.setGender(newUser.getGender());
 			oldUser.setBloodGroup(newUser.getBloodGroup());
 			oldUser.setAddress(newUser.getAddress());
-			oldUser.setPassword(newUser.getPassword());			
+			oldUser.setPassword(passwordEncoder.encode(newUser.getPassword()));			
 			userRepositoryRef.save(oldUser);
 			
 			return oldUser;
@@ -65,5 +73,10 @@ public class UserService {
 		User user = userRepositoryRef.findById(userId).orElseThrow(()-> new ResourceNotFoundException("User does not exits with User Id: ", userId));
 		userRepositoryRef.delete(user);
 	}
+	public User loadUserByUsername(String username) throws UsernameNotFoundException {
+		// load user from 
+				User user = userRepositoryRef.findByEmailId(username);
+				return user;
+			}
 
 }
