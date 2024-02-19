@@ -1,6 +1,11 @@
 import axios from "axios";
 const BACKEND_API = "http://localhost:8083/api";
 class Services {
+  //Homepage Best Offers
+  getBestOffers() {
+    return axios.get(BACKEND_API + "/tests/bestOffers");
+  }
+
   userRegistration(user) {
     return axios.post(BACKEND_API + "/user/create", user);
   }
@@ -28,8 +33,8 @@ class Services {
   }
 
   // appoitment schedule service
-  getAllappointment() {
-    return axios.get(BACKEND_API + "/appointments/list");
+  getAppointmentByStatus(status) {
+    return axios.get(BACKEND_API + "/appointments/list/" + status);
   }
   getAppointmentById(id) {
     return axios.get(BACKEND_API + "/appointments/" + id);

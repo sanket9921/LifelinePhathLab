@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
 import Services from "../../Services/Services";
 import { Link } from "react-router-dom";
+import AppointmentTypes from "./AppointmentTypes";
+import { useSelector } from "react-redux";
 
 export default function Appointments() {
+  const appointmentTypes = useSelector(
+    (state) => state.appointmentStatus.value
+  );
   const [appointments, setAppointments] = useState(null);
 
   useEffect(() => {
-    Services.getAllappointment()
+    Services.getAppointmentByStatus(appointmentTypes)
       .then((res) => {
         setAppointments(res.data);
         console.log(res.data);
@@ -14,7 +19,7 @@ export default function Appointments() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  }, [appointmentTypes]);
 
   return (
     <>
@@ -22,36 +27,7 @@ export default function Appointments() {
         <h3 class="font-weight-bold">Appointments</h3>
       </div>
       <div class="dropdown mb-4 ms-4 mt-4">
-        <button
-          class="btn btn-light dropdown-toggle"
-          type="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-        >
-          Filter
-        </button>
-        <ul class="dropdown-menu">
-          <li>
-            <a class="dropdown-item" href="#">
-              All
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">
-              Scheduled
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">
-              Completed
-            </a>
-          </li>
-          <li>
-            <a class="dropdown-item" href="#">
-              Cancelled
-            </a>
-          </li>
-        </ul>
+        <AppointmentTypes />
       </div>
       <div className="card mt-2 p-3">
         <table className="table table-hover">
@@ -74,17 +50,23 @@ export default function Appointments() {
                   <td>{appoitment.patientName}</td>
                   <td>{appoitment.patientContactNo}</td>
                   <td>{appoitment.scheduledTime}</td>
-                  <td>{appoitment.doctor.doctorName}</td>
+                  {appoitment.doctor ? (
+                    <p>{appoitment.doctor.doctorName}</p>
+                  ) : (
+                    <p>"null"</p>
+                  )}
+                  <td>{appoitment.status}</td>
                   <td>
-                    <label className="badge badge-danger">Pending</label>
-                  </td>
-                  <td>
-                    <Link
-                      className="text-primary"
-                      to={"/appointmentsDetails/" + appoitment.appointmentId}
-                    >
-                      upload report
-                    </Link>
+                    {appoitment.status != "CANCELLED" ? (
+                      <Link
+                        className="text-primary"
+                        to={"/appointmentsDetails/" + appoitment.appointmentId}
+                      >
+                        upload report
+                      </Link>
+                    ) : (
+                      <p>NA</p>
+                    )}
                   </td>
                 </tr>
               ))}

@@ -13,7 +13,9 @@ export default function UploadPrescription() {
     // Fetch doctors data from the backend when the component mounts
     const fetchDoctors = async () => {
       try {
-        const response = await axios.get("http://localhost:8083/doctors/list");
+        const response = await axios.get(
+          "http://localhost:8083/api/doctors/approved"
+        );
         setDoctors(response.data);
         console.log(doctors);
       } catch (error) {
@@ -37,7 +39,7 @@ export default function UploadPrescription() {
     console.log(formData.files);
     try {
       await axios.post(
-        "http://localhost:8083/appointments/schedule",
+        "http://localhost:8083/api/appointments/schedule",
         formData,
         {
           headers: {

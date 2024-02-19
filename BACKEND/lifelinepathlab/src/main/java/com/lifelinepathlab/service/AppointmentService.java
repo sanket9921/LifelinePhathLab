@@ -19,43 +19,48 @@ import java.util.UUID;
 @Service
 public class AppointmentService {
 
-    @Autowired
-    private ScheduleAppointmentRepository appointmentRepository;
+	@Autowired
+	private ScheduleAppointmentRepository appointmentRepository;
 
-    @Autowired
-    private FileStorageService fileStorageService; // Your file storage service implementation
+	@Autowired
+	private FileStorageService fileStorageService; // Your file storage service implementation
 
-    public String savePrescriptionFile(MultipartFile file) throws IOException {
-        // Generate a UUID for the file
-        String fileId = UUID.randomUUID().toString();
-        // Save the file to the file storage location with the UUID as the filename
-        return fileStorageService.storeFile(file, fileId,"prescriptions");
-    }
+	public String savePrescriptionFile(MultipartFile file) throws IOException {
+		// Generate a UUID for the file
+		String fileId = UUID.randomUUID().toString();
+		// Save the file to the file storage location with the UUID as the filename
+		return fileStorageService.storeFile(file, fileId, "prescriptions");
+	}
 
-    public void saveAppointment(ScheduleAppointment appointment) {
-        appointmentRepository.save(appointment);
-    }
+	public void saveAppointment(ScheduleAppointment appointment) {
+		appointmentRepository.save(appointment);
+	}
 
-    public List<ScheduleAppointment> getAllAppointments() {
-        return appointmentRepository.findAll();
-    }
+	public List<ScheduleAppointment> getAllAppointmentsByStatus(String status) {
+		return appointmentRepository.findByStatus(status);
+	}
+	
+	public List<ScheduleAppointment> getAllAppointments() {
+		return appointmentRepository.findAll();
+	}
 
-    public ScheduleAppointment getAppointmentById(int id) {
-        return appointmentRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Appointment not found with id: ", id));
-    }
+	public ScheduleAppointment getAppointmentById(int id) {
+		return appointmentRepository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Appointment not found with id: ", id));
+	}
 
-    public void updateAppointment(int id, ScheduleAppointment updatedAppointment) {
-    	ScheduleAppointment appointment = getAppointmentById(id);
-        appointment.setPatientName(updatedAppointment.getPatientName());
-        appointment.setPatientContactNo(updatedAppointment.getPatientContactNo());
-        appointment.setPatientAddress(updatedAppointment.getPatientAddress());
+	public void updateAppointment(int id, ScheduleAppointment updatedAppointment) {
+		ScheduleAppointment appointment = getAppointmentById(id);
+		appointment.setPatientName(updatedAppointment.getPatientName());
+		appointment.setPatientContactNo(updatedAppointment.getPatientContactNo());
+		appointment.setPatientAddress(updatedAppointment.getPatientAddress());
 //        appointment.setDoctorName(updatedAppointment.getDoctorName());
-        appointment.setScheduledTime(updatedAppointment.getScheduledTime());
-        appointmentRepository.save(appointment);
-    }
+		appointment.setScheduledTime(updatedAppointment.getScheduledTime());
+		appointmentRepository.save(appointment);
+	}
 
-    public void deleteAppointment(int id) {
-        appointmentRepository.deleteById(id);
-    }
+	public void deleteAppointment(int id) {
+		appointmentRepository.deleteById(id);
+	}
+	
 }

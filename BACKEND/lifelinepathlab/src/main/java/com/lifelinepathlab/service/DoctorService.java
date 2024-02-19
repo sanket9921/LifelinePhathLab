@@ -58,6 +58,10 @@ public class DoctorService {
     public List<Doctor> getAllDoctors() {
         return doctorRepository.findAll();
     }
+    
+    public List<Doctor> getAllDistinctDoctors() {
+        return doctorRepository.findDoctorsByRequestStatus("A");
+    }
 
     public Doctor getDoctorById(int id) {
         return doctorRepository.findById(id)

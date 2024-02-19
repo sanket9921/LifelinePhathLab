@@ -102,4 +102,8 @@ public class TestService {
     public List<String> getDistinctTestTypes() {
         return testRepository.findDistinctTestTypes();
     }
+    
+    public List<Test> getBestOffers() {
+        return testRepository.findTop5TestsByBesTDiscount();
+    }
 }

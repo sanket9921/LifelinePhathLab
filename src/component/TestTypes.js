@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Services from "../Services/Services";
-import { UseDispatch, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { sendTestCategoryData } from "../redux/reducers/categoryReducer";
 export default function TestTypes() {
   const [testTypes, setTestTypes] = useState([]);

@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.lifelinepathlab.exception.ResourceNotFoundException;
 import com.lifelinepathlab.model.ClientFeedback;
+import com.lifelinepathlab.model.Doctor;
 import com.lifelinepathlab.model.Test;
 import com.lifelinepathlab.service.TestService;
 import com.lifelinepathlab.validations.Validations;
@@ -90,6 +91,13 @@ public class TestController {
     public List<String> getTestTypes(){
     	return testService.getDistinctTestTypes();
     }
+    
+    @GetMapping("/bestOffers")
+    public ResponseEntity<List<Test>> getBestOffers(){
+    	List <Test> bestOffers=  testService.getBestOffers();
+    	return ResponseEntity.ok(bestOffers);
+    }
+     
 
 //    @ResponseStatus(HttpStatus.BAD_REQUEST)
 //    @ExceptionHandler({ FileStorageException.class, Exception.class })

@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import TestDescription from "./TestDescription";
 import Services from "../Services/Services";
 import TestTypes from "./TestTypes";
-import { UseSelector, useSelector } from "react-redux";
+import {useSelector } from "react-redux";
+
 export default function BookTest() {
   const testCategory = useSelector((state) => state.testCategory.value);
 
@@ -43,7 +44,7 @@ export default function BookTest() {
                   <div className="img">
                     <img
                       className="img-fluid"
-                      src={`http://localhost:3000/file/TestImage/${test.testImagePath}`}
+                      src={`Files/TestImage/${test.testImagePath}`}
                       alt="default"
                     />
                   </div>
