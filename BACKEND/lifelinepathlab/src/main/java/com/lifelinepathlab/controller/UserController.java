@@ -4,6 +4,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +22,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lifelinepathlab.model.ClientFeedback;
+import com.lifelinepathlab.model.JwtRequest;
+import com.lifelinepathlab.model.JwtResponse;
 import com.lifelinepathlab.model.User;
+import com.lifelinepathlab.security.JwtHelper;
 import com.lifelinepathlab.service.UserService;
 import com.lifelinepathlab.validations.Validations;
 
@@ -28,12 +37,20 @@ import jakarta.validation.Valid;
 public class UserController {
 
 	@Autowired
+	private UserDetailsService userDetailsService;
+
+	@Autowired
+	private AuthenticationManager manager;
+
+	@Autowired
 	private Validations validationsRef;
 	@Autowired
 	private UserService userServiceRef;
+	@Autowired
+	private JwtHelper helper;
 
 	// To create a new user...
-	@PostMapping()
+	@PostMapping("/create")
 	public ResponseEntity<String> addUser(@RequestBody User user, BindingResult result) {
 
 		validationsRef.validate(user, result);
@@ -45,6 +62,34 @@ public class UserController {
 
 		userServiceRef.addUser(user);
 		return ResponseEntity.ok("User added successfully...!!!");
+	}
+
+	@PostMapping("/login")
+	public ResponseEntity<JwtResponse> login(@RequestBody JwtRequest request) throws UsernameNotFoundException {
+
+		this.doAuthenticate(request.getEmail(), request.getPassword());
+
+		User userDetails = userServiceRef.loadUserByUsername(request.getEmail());
+		String token = this.helper.generateToken(userDetails);
+
+		JwtResponse response = JwtResponse.builder().jwtToken(token)
+				.username(userDetails.getUsername())
+				.userId(userDetails.getUserId())
+				.role(userDetails.getRole())
+				.build();
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
+	private void doAuthenticate(String email, String password) {
+
+		UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(email, password);
+		try {
+			manager.authenticate(authentication);
+
+		} catch (BadCredentialsException e) {
+			throw new BadCredentialsException(" Invalid Username or Password  !!");
+		}
+
 	}
 
 	// To get all users...
@@ -75,21 +120,21 @@ public class UserController {
 		userServiceRef.updateUser(newUser, userId);
 		return ResponseEntity.ok("User details updated successfully...!!!");
 	}
-	
+
 	// To get all Admins...
 	@GetMapping("/admins")
 	public ResponseEntity<List<User>> getAdminByRole() {
 		List<User> allAdmins = userServiceRef.getAdminByRole();
 		return ResponseEntity.ok(allAdmins);
 	}
-	
+
 	// To get all Admins...
 	@PutMapping("/admins/{userId}")
 	public ResponseEntity<String> updateUserRole(@PathVariable("userId") int userId) {
 		userServiceRef.updateUserRole(userId);
 		return ResponseEntity.ok("User Is Made admin successfully...!!!");
 	}
-	
+
 	// To get all Users...
 	@GetMapping("/patients")
 	public ResponseEntity<List<User>> getUsersByRole() {

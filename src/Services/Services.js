@@ -2,7 +2,10 @@ import axios from "axios";
 const BACKEND_API = "http://localhost:8083/api";
 class Services {
   userRegistration(user) {
-    return axios.post(BACKEND_API + "/user", user);
+    return axios.post(BACKEND_API + "/user/create", user);
+  }
+  userLogin(user) {
+    return axios.post(BACKEND_API + "/user/login", user);
   }
 
   addClientFeedback(clientFeedback) {

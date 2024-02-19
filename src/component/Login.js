@@ -1,14 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import TopBar from "./TopBar";
 import "../vendors/mdi/css/materialdesignicons.min.css";
 import { Link } from "react-router-dom";
 import Topbar2 from "./Topbar2";
+import Services from "../Services/Services";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
+
 export default function Login() {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [error, setError] = useState("");
+  const handleLogin = async () => {
+    try {
+      // Perform login request to backend, get token
+      const response = await Services.userLogin({ email, password });
+      const data = response.data;
+
+      // Store token in cookie if login successful
+      if (response.status === 200) {
+        Cookies.set("jwtToken", data.jwtToken);
+        Cookies.set("username", data.username);
+        Cookies.set("userId", data.userId);
+        Cookies.set("role", data.role);
+        // Set loggedIn to true to trigger redirection
+
+        setLoggedIn(true);
+      } else {
+        // Handle login failure
+        setError(data.message);
+      }
+    } catch (error) {
+      // Handle network errors
+      setError("Network error. Please try again later.");
+    }
+  };
+
+  if (loggedIn) {
+    // Redirect user to a different route after successful login
+    navigate("/");
+  }
+
   return (
     <>
       <Topbar2 />
       <div className="container mt-2 text-center">
-        <form className="form-control">
+        <div className="form-control">
           <div className="row login-container">
             <div className="col-xl-6 col-12">
               <img
@@ -34,8 +73,10 @@ export default function Login() {
                 <i className="mdi mdi-email-outline" />
                 <input
                   className="input-field"
-                  type="email/number"
-                  placeholder="Enter E-mail/Mobile Number"
+                  type="email"
+                  placeholder="Enter E-mail"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </div>
 
@@ -45,6 +86,8 @@ export default function Login() {
                   className="input-field"
                   type="password"
                   placeholder="Enter The Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   required=""
                 />
               </div>
@@ -66,9 +109,11 @@ export default function Login() {
                   className="button login-btn"
                   type="submit"
                   value="submit"
+                  onClick={handleLogin}
                 >
                   Log in
                 </button>
+                {error && <p>{error}</p>}
                 <br />
                 <br />
                 Don't Have An Account?
@@ -85,7 +130,7 @@ export default function Login() {
               </div>
             </div>
           </div>
-        </form>
+        </div>
       </div>
     </>
   );
