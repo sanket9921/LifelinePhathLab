@@ -99,6 +99,10 @@ public class TestService {
     	return testRepository.findByTestType(type);
     }
     
+    public Test getByName(String name) {
+    	return testRepository.findByTestName(name);
+    }
+    
     public List<String> getDistinctTestTypes() {
         return testRepository.findDistinctTestTypes();
     }

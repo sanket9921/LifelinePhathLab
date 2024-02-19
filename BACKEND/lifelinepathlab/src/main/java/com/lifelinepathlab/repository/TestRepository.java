@@ -12,6 +12,8 @@ public interface TestRepository  extends JpaRepository<Test, Integer>{
 
 	public List<Test> findByTestType(String type);
 	
+	public Test findByTestName(String name);
+	
 	@Query("SELECT DISTINCT t.testType FROM Test t")
     List<String> findDistinctTestTypes();
 		

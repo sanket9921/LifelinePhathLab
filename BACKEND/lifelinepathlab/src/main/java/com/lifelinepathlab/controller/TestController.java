@@ -65,6 +65,11 @@ public class TestController {
                 .orElseThrow(() -> new ResourceNotFoundException("Test not found with id: " , id));
     }
 
+    @GetMapping("/testName/{name}")
+    public Test getTestByName(@PathVariable String name) {
+        return testService.getByName(name);
+    }
+    
     @PutMapping("/{id}")
     public void updateTest(@PathVariable int id,
                            @RequestParam String testName,

@@ -10,6 +10,7 @@ import Login from "./LandingPage/Login";
 import Signup from "./LandingPage/Signup";
 import DisplayReports from "./component/DisplayReports";
 import DoctorRegistration from "./component/DoctorRegistration";
+import TestDetails from "./component/TestDetails";
 
 const router = createBrowserRouter([
   {
@@ -45,14 +46,18 @@ const router = createBrowserRouter([
         element: <Cart />,
       },
       {
-        path: "login",
-        element: <Login />,
-      },
-      {
-        path: "signup",
-        element: <Signup />,
+        path: "/test-details/:testId",
+        element: <TestDetails />,
       },
     ],
+  },
+  {
+    path: "login",
+    element: <Login />,
+  },
+  {
+    path: "signup",
+    element: <Signup />,
   },
 ]);
 

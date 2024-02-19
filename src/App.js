@@ -7,7 +7,7 @@ import TopBar from "./component/TopBar";
 import SearchBar from "./component/SearchBar";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-
+import TestDetails from "./component/TestDetails";
 import Home from "./component/Home";
 import BookTest from "./component/BookTest";
 import UploadPrescription from "./component/UploadPrescription";
