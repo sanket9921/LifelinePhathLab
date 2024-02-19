@@ -6,6 +6,7 @@ import TopBar from "./component/TopBar";
 import SearchBar from "./component/SearchBar";
 import { Provider } from "react-redux";
 import store from "./redux/store";
+import TestDetails from "./component/TestDetails";
 
 export default function App() {
   return (
@@ -15,6 +16,7 @@ export default function App() {
         <Navbar />
         <SearchBar />
         <Outlet />
+        {/* <TestDetails /> */}
         <Footer />
       </Provider>
     </>

@@ -10,6 +10,11 @@ class Services {
     return axios.post(BACKEND_API + "/user", user);
   }
 
+  //search bar api
+  getTestByName(name) {
+    return axios.get(BACKEND_API + "/tests/testName/" + name);
+  }
+
   addClientFeedback(clientFeedback) {
     return axios.post(BACKEND_API + "/feedback", clientFeedback);
   }
