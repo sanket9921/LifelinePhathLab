@@ -92,9 +92,9 @@ export default function SearchBar() {
             </div>
           </div>
           <div className="search-btn pt-2">
-            <button className="btn btn-primary" onClick={handleSubmit}>
+            <Link to={"/testDetails/" + inputValue} className="btn btn-primary">
               Search
-            </button>
+            </Link>
           </div>
         </div>
         <div className="cart-sign">
