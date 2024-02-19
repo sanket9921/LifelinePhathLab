@@ -1,6 +1,20 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Cookies from "js-cookie";
 function Navbar() {
+  const handleLogout = () => {
+    // Clear all cookies
+    Cookies.remove("jwtToken");
+    Cookies.remove("username");
+    Cookies.remove("firstName");
+    Cookies.remove("userId");
+    Cookies.remove("role");
+    Cookies.remove("isLoggedIn");
+    // Dispatch logout action
+
+    window.location.reload();
+  };
+
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
       <div className="container-fluid">
@@ -111,6 +125,11 @@ function Navbar() {
               <Link className="nav-link" aria-current="page" to="/enquiry">
                 User Enquiries
               </Link>
+            </li>
+            <li className="nav-item">
+              <div className="nav-link text-danger" onClick={handleLogout}>
+                Logout
+              </div>
             </li>
           </ul>
         </div>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Feedback from "./Feedback";
 import Review from "./Review";
 import BestOffers from "./BestOffers";
@@ -90,7 +90,7 @@ export default function Home() {
       {/* Add more scroll items as needed */}
       {/* end scroll bar */}
       {/*  Start Offer Section */}
-      <BestOffers/>
+      <BestOffers />
       {/*  End Offer Section */}
       {/*Feedback Section starts here*/}
       <Feedback />

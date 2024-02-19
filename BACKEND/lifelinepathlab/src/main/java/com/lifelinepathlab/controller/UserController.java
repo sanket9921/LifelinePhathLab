@@ -76,6 +76,7 @@ public class UserController {
 				.username(userDetails.getUsername())
 				.userId(userDetails.getUserId())
 				.role(userDetails.getRole())
+				.firstName(userDetails.getFirstName())
 				.build();
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}

@@ -6,8 +6,8 @@ import UploadPrescription from "./component/UploadPrescription";
 import DownloadReport from "./component/DownloadReport";
 import Contact from "./component/Contact";
 import Cart from "./component/Cart";
-import Login from "./component/Login";
-import Signup from "./component/Signup";
+import Login from "./LandingPage/Login";
+import Signup from "./LandingPage/Signup";
 import DisplayReports from "./component/DisplayReports";
 import DoctorRegistration from "./component/DoctorRegistration";
 
@@ -44,15 +44,15 @@ const router = createBrowserRouter([
         path: "cart",
         element: <Cart />,
       },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "signup",
+        element: <Signup />,
+      },
     ],
-  },
-  {
-    path: "login",
-    element: <Login />,
-  },
-  {
-    path: "signup",
-    element: <Signup />,
   },
 ]);
 
