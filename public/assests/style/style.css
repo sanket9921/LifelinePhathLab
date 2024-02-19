@@ -291,6 +291,7 @@ nav {
   background-color: white;
   padding: 1.2%;
 }
+
 .img {
   height: 115px;
 }
@@ -352,6 +353,10 @@ nav {
   border: none;
   border-radius: 8px;
   font-size: 12px;
+}
+.bk-test:hover {
+  border: 2px solid blue;
+  box-shadow: 3px 3px 5px gray;
 }
 
 .Test .filters {

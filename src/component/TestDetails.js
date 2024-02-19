@@ -3,22 +3,24 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 export default function TestDetails() {
-  const { testId } = useParams();
+  const { testName } = useParams();
   const [testDetails, setTestDetails] = useState(null);
 
   useEffect(() => {
     const fetchTestDetails = async () => {
       try {
+        console.log("Fetching test details for testName:", testName);
         const response = await axios.get(
-          `http://localhost:8083/api/tests/${testId}`
+          `http://localhost:8083/api/tests/testName/${testName}`
         );
         setTestDetails(response.data);
+        console.log(response.data);
       } catch (error) {
         console.error("Error fetching test details:", error);
       }
     };
     fetchTestDetails();
-  }, [testId]);
+  }, [testName]);
 
   return (
     <div className="container rounded bg-white mt-3 mb-3 pb-4">
@@ -27,7 +29,7 @@ export default function TestDetails() {
         <div>
           <div className="text-center">
             <img
-              src={`Files/TestImage/${testDetails.testImagePath}`}
+              src={`../Files/TestImage/${testDetails.testImagePath}`}
               alt="Default"
             />
           </div>

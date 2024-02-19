@@ -7,7 +7,7 @@ import TopBar from "./component/TopBar";
 import SearchBar from "./component/SearchBar";
 import { Provider } from "react-redux";
 import store from "./redux/store";
-
+import TestDetails from "./component/TestDetails";
 import Home from "./component/Home";
 import BookTest from "./component/BookTest";
 import UploadPrescription from "./component/UploadPrescription";
@@ -16,7 +16,6 @@ import Contact from "./component/Contact";
 import Cart from "./component/Cart";
 import Login from "./LandingPage/Login";
 import Signup from "./LandingPage/Signup";
-import TestDetails from "./component/TestDetails";
 
 export default function App() {
   return (
@@ -37,6 +36,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/bookTest" element={<BookTest />} />
+          <Route path="/testDetails/:testName" element={<TestDetails />} />
           <Route path="/uploadPrescription" element={<UploadPrescription />} />
           <Route path="/downloadReport" element={<DownloadReport />} />
           <Route path="/contact" element={<Contact />} />

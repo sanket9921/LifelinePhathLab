@@ -1,10 +1,51 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Services from "../Services/Services";
 import Cookies from "js-cookie";
 
 export default function SearchBar() {
+  const navigate = useNavigate();
+  const [inputValue, setInputValue] = useState();
+  const [filteredOptions, setFilteredOptions] = useState([]);
+
+  useEffect(() => {
+    const fetchTestNames = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:8083/api/tests/all/"
+        );
+        console.log(response);
+        // Assuming the API returns an array of objects with a 'name' property representing the test name
+        const names = response.data.map((item) => item.testName);
+        setFilteredOptions(names);
+      } catch (error) {
+        console.error("Error fetching test names:", error);
+      }
+    };
+
+    fetchTestNames();
+  }, []);
+
+  const handleInputChange = (e) => {
+    const value = e.target.value.toLowerCase();
+    setInputValue(value);
+  };
+
+  const filterOptions = () => {
+    return filteredOptions.filter((option) =>
+      option.toLowerCase().includes(inputValue)
+    );
+  };
+
+  const handleOptionClick = (option) => {
+    setInputValue(option);
+    setFilteredOptions([]);
+  };
+
+  const handleSubmit = () => {
+    navigate("/testDetails/" + inputValue);
+  };
 
   const isLoggedIn = Cookies.get("isLoggedIn");
 
@@ -20,75 +61,37 @@ export default function SearchBar() {
 
     window.location.reload();
   };
-  const navigate = useNavigate();
-  const [input, setInput] = useState("");
-  const [results, setResults] = useState([]);
-  const [error, setError] = useState(null);
-
-  const fetchData = async (value) => {
-    try {
-      const response = await axios.get(`http://localhost:8083/api/tests/all/`);
-      const data = response.data;
-
-      const filteredResults = data.filter((test) =>
-        test.testName.toLowerCase().includes(value.toLowerCase())
-      );
-
-      setResults(filteredResults);
-      setError(filteredResults.length === 0 ? "No matching data found." : null);
-    } catch (error) {
-      console.error("Error fetching data:", error);
-      setError("Error fetching data. Please try again.");
-    }
-  };
-
-  const handleChange = (e) => {
-    const value = e.target.value;
-    setInput(value);
-    if (value.trim() !== "") {
-      fetchData(value);
-    } else {
-      setResults([]);
-      setError(null);
-    }
-  };
-
-  const handleSearch = () => {
-    Services.getTestByName(input)
-      .then((res) => {
-        const testId1 = res.data;
-        // console.log(testId1);
-
-        navigate("/test-details/" + testId1.testId);
-        setInput("");
-        handleSuggestionClick();
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-  };
-
-  const handleSuggestionClick = () => {
-    setInput("");
-    setResults([]); // Clear suggestions when a suggestion is clicked
-  };
-
   return (
     <div className="container-fluid bg-white">
       <div className="search-field">
         <div className="search-items">
           <div className="input-icons ">
-            <i className="icofont-search" />
-            <input
-              className="input-field"
-              type="text"
-              placeholder="Enter Test or Package Name"
-              value={input}
-              onChange={handleChange}
-            />
+            {/* <i className="icofont-search" /> */}
+            <div className="container">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search Test"
+                value={inputValue}
+                onChange={handleInputChange}
+              />
+              {inputValue && (
+                <div className="dropdown-menu show">
+                  {filterOptions().map((option, index) => (
+                    <a
+                      key={index}
+                      className="dropdown-item"
+                      onClick={() => handleOptionClick(option)}
+                    >
+                      {option}
+                    </a>
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
           <div className="search-btn pt-2">
-            <button className="btn btn-primary" onClick={handleSearch}>
+            <button className="btn btn-primary" onClick={handleSubmit}>
               Search
             </button>
           </div>
@@ -143,22 +146,6 @@ export default function SearchBar() {
             )}
           </div>
         </div>
-      </div>
-      <div className="container">
-        {input.trim() !== "" && results.length > 0 && (
-          <p>
-            {results.map((test) => (
-              <Link
-                to={`/test-details/${test.testId}`}
-                key={test.testId}
-                onClick={handleSuggestionClick}
-              >
-                <div>{test.testName}</div>
-              </Link>
-            ))}
-          </p>
-        )}
-        {error && <div className="error-message">{error}</div>}
       </div>
     </div>
   );
