@@ -43,6 +43,7 @@ public class SecurityConfig {
                 		.requestMatchers("/api/tests/testName/**").permitAll()
                 		.requestMatchers("/api/tests/TestType").permitAll()
                 		.requestMatchers("/api/tests/bestOffers").permitAll()
+                		.requestMatchers("/api/doctors/list").permitAll()
                 		.anyRequest().authenticated()
                 		)
                 .exceptionHandling(ex ->ex.authenticationEntryPoint(point))

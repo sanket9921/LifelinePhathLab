@@ -9,6 +9,7 @@ export default function TestDetails() {
   useEffect(() => {
     const fetchTestDetails = async () => {
       try {
+        console.log("Fetching test details for testName:", testName);
         const response = await axios.get(
           `http://localhost:8083/api/tests/testName/${testName}`
         );

@@ -16,7 +16,6 @@ import Contact from "./component/Contact";
 import Cart from "./component/Cart";
 import Login from "./LandingPage/Login";
 import Signup from "./LandingPage/Signup";
-import TestDescription from "./component/TestDescription";
 
 export default function App() {
   return (
