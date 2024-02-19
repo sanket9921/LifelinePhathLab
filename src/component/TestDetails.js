@@ -23,42 +23,67 @@ export default function TestDetails() {
   }, [testName]);
 
   return (
-    <div className="container rounded bg-white mt-3 mb-3 pb-4">
-      <div className=" p-3 text-center test-head-text">Test Details</div>
+    <div className="container rounded bg-white mt-3 p-5 test-details">
+      <div className="text-center fw-semibold mt-3 mb-3">
+        <h3>Test Details</h3>
+      </div>
+
       {testDetails && (
-        <div>
-          <div className="text-center">
-            <img
-              src={`../Files/TestImage/${testDetails.testImagePath}`}
-              alt="Default"
-            />
-          </div>
-          <div>
-            <div className="title mt-3 text-center">
-              <h4>{testDetails.testName}</h4>
-            </div>
-            <div className="test-desc-text">
-              Description: {testDetails.testDescription}
-            </div>
-            <div className="action-btn-container">
-              <div className="test-price mt-3">
-                <span className="test-price-off">
-                  {testDetails.discount}% off
-                </span>
-                <span className="test-dis-price">
-                  ₹{testDetails.finalPrice}{" "}
-                  <del>₹{testDetails.actualPrice}</del>
-                </span>
+        <>
+          <div className="row">
+            <div className="col-xl-6 col-sm-6">
+              <div className="p-3">
+                <img
+                  width={"100%"}
+                  src={`../Files/TestImage/${testDetails.testImagePath}`}
+                  alt="Default"
+                />
               </div>
-              <div className="action-btn-container">
-                <div className="btn-cart-buy">
-                  <button className="test-card-btn">Add to cart</button>
-                  <button className="buy-btn">Buy Now</button>
+            </div>
+            <div className="col-xl-6 col-sm-6 p-5">
+              <div className="row mt-1">
+                <div className="col-6 fw-semibold">
+                  <div>Test Name:</div>
+                </div>
+                <div className="col-6">{testDetails.testName}</div>
+              </div>
+              <div className="row mt-1">
+                <div className="col-6 fw-semibold">Description:</div>{" "}
+                <div className="col-6"> {testDetails.testDescription}</div>
+              </div>
+              <div className="row mt-1">
+                <div className="col-6 fw-semibold">Discount:</div>
+                <div className="col-6 text-primary">
+                  {testDetails.discount}% off{" "}
+                </div>
+              </div>
+              <div className="row mt-1">
+                <div className="col-6 fw-semibold">Actual price:</div>
+                <div className="col-6 text-danger fw-semibold">
+                  <del>₹{testDetails.actualPrice}</del>
+                </div>
+              </div>
+              <div className="row mt-1">
+                <div className="col-6 fw-semibold">Actual price:</div>
+                <div className="col-6 text-success fw-semibold">
+                  ₹{testDetails.finalPrice}
+                </div>
+              </div>
+              <div className="row mt-4">
+                <div className="col-6">
+                  <button className="container btn btn-primary">
+                    Add to cart
+                  </button>
+                </div>
+                <div className="col-6">
+                  <button className="container btn btn-outline-primary">
+                    Buy Now
+                  </button>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );

@@ -888,4 +888,7 @@ h2 {
   margin-bottom: 20px;
 }
 
-/*# sourceMappingURL=../maps/vertical-layout-light/style.css.map */
+.test-details .testImage img {
+  height: 100px;
+  width: 200px;
+}
