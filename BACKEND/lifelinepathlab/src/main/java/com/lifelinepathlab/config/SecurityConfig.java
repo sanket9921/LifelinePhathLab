@@ -3,8 +3,8 @@ package com.lifelinepathlab.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -35,7 +35,7 @@ public class SecurityConfig {
 
         http.csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())
-                .authorizeHttpRequests(auth-> auth.requestMatchers("home/**").authenticated()
+                .authorizeHttpRequests(auth-> auth.requestMatchers(HttpMethod.POST,"home/**").authenticated()
 //                		.requestMatchers("api/user/login").permitAll()
                 		.requestMatchers("/api/user/**").permitAll()
                 		.requestMatchers("/api/feedback/**").permitAll()
@@ -45,13 +45,13 @@ public class SecurityConfig {
                 		.requestMatchers("/api/tests/TestType").permitAll()
                 		.requestMatchers("/api/tests/bestOffers").permitAll()
                 		.requestMatchers("/api/doctors/list").permitAll()
-                		.requestMatchers("/api/doctors/register").permitAll()
-                		.requestMatchers("/api/orders/**").permitAll()
+                		.requestMatchers("/api/tests/create/**").permitAll()
+                		.requestMatchers("/api/orders").permitAll()
                 		.anyRequest().authenticated()
                 		)
                 .exceptionHandling(ex ->ex.authenticationEntryPoint(point))
                 .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                ;
+                ; 
         
         
                 
