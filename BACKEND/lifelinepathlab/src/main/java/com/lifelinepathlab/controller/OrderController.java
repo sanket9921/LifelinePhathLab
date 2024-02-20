@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,6 +20,7 @@ import com.lifelinepathlab.model.Orders;
 import com.lifelinepathlab.service.OrderService;
 
 @RestController
+@CrossOrigin("*")
 @RequestMapping("/api/orders")
 public class OrderController {
 	
@@ -35,7 +37,7 @@ public class OrderController {
 		Orders orders = orderService.getOrdersByid(id);
 		return ResponseEntity.ok(orders);
 	}
-	@PostMapping
+	@PostMapping()
 	public ResponseEntity<String> addOrder(@RequestBody Orders orders) {
 		orderService.addorder(orders);
 		return ResponseEntity.ok("Orders added successfully...!!!");
