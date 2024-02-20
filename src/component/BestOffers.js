@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Services from "../Services/Services";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export default function BestOffers() {
   const navigate = useNavigate();
@@ -18,6 +19,20 @@ export default function BestOffers() {
 
   const NavigationHandler = (testName) => {
     navigate("/testDetails/" + testName);
+  };
+
+  const cartHandler = (id) => {
+    const storedUserId = Cookies.get("userId");
+    const booking = { user: { userId: storedUserId }, tests: { testId: id } };
+
+    // console.log(booking);
+    Services.bookOrder(booking)
+      .then((res) => {
+        alert(res.data);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
   };
 
   return (
@@ -48,7 +63,12 @@ export default function BestOffers() {
                 </div>
               </div>
               <div className="action-btn mt-3 ">
-                <button className="card">Add to cart</button>
+                <button
+                  className="card"
+                  onClick={(e) => cartHandler(offer.testId)}
+                >
+                  Add to cart
+                </button>
                 <button className="buy">Buy Now</button>
               </div>
             </div>

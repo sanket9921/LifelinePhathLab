@@ -1,5 +1,6 @@
 package com.lifelinepathlab.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ public class OrderService {
 	private OrderRepository orderRepository;
 	
 	public void addorder(Orders orders) {
+		orders.setDate(new Date());
+		orders.setStatus("AC");
 		orderRepository.save(orders);
 	}
 	

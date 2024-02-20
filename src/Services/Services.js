@@ -13,6 +13,11 @@ class Services {
   userRegistration(user) {
     return axios.post(BACKEND_API + "/user/create", user);
   }
+
+  bookOrder(order) {
+    return axios.post(BACKEND_API + "/orders", order);
+  }
+
   userLogin(user) {
     return axios.post(BACKEND_API + "/user/login", user);
   }

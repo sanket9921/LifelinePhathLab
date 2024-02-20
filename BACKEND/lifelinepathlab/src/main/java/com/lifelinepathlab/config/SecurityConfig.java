@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -50,11 +50,13 @@ public class SecurityConfig {
                 		.requestMatchers("/api/user/**").permitAll()
                 		.requestMatchers("/api/feedback/**").permitAll()
                 		.requestMatchers("/api/tests/all/**").permitAll()
+                		.requestMatchers("/api/tests/**").permitAll()
                 		.requestMatchers("/api/tests/testName/**").permitAll()
                 		.requestMatchers("/api/tests/TestType").permitAll()
                 		.requestMatchers("/api/tests/bestOffers").permitAll()
                 		.requestMatchers("/api/tests/create/**").permitAll()
                 		.requestMatchers("/api/doctors/list").permitAll()
+                		.requestMatchers("/api/tests/create/**").permitAll()
                 		.requestMatchers("/api/orders").permitAll()
                 		.anyRequest().authenticated()
                 		
@@ -62,7 +64,7 @@ public class SecurityConfig {
                 
                 .exceptionHandling(ex ->ex.authenticationEntryPoint(point))
                 .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                ;
+                ; 
         
         
                 
