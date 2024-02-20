@@ -6,6 +6,10 @@ class Services {
     return axios.get(BACKEND_API + "/tests/bestOffers");
   }
 
+  getUserByid(userId) {
+    return axios.get(BACKEND_API + "/user/" + userId);
+  }
+
   userRegistration(user) {
     return axios.post(BACKEND_API + "/user/create", user);
   }

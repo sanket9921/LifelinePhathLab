@@ -16,6 +16,7 @@ import Contact from "./component/Contact";
 import Cart from "./component/Cart";
 import Login from "./LandingPage/Login";
 import Signup from "./LandingPage/Signup";
+import UserProfile from "./component/UserProfile";
 
 export default function App() {
   return (
@@ -41,6 +42,8 @@ export default function App() {
           <Route path="/downloadReport" element={<DownloadReport />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/userProfile" element={<UserProfile />} />
+
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>

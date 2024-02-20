@@ -58,7 +58,7 @@ export default function SearchBar() {
     Cookies.remove("role");
     Cookies.remove("isLoggedIn");
     // Dispatch logout action
-
+    navigate("/");
     window.location.reload();
   };
   return (
@@ -121,9 +121,13 @@ export default function SearchBar() {
                     </div>
                     <ul class="dropdown-menu">
                       <li>
-                        <button class="dropdown-item" type="button">
-                          Prfile
-                        </button>
+                        <Link
+                          to="/userProfile"
+                          class="dropdown-item"
+                          type="button"
+                        >
+                          Profile
+                        </Link>
                       </li>
                       <li>
                         <button
