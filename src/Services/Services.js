@@ -9,6 +9,11 @@ class Services {
   userRegistration(user) {
     return axios.post(BACKEND_API + "/user/create", user);
   }
+
+  bookOrder(order) {
+    return axios.post(BACKEND_API + "/orders/addOrder", order);
+  }
+
   userLogin(user) {
     return axios.post(BACKEND_API + "/user/login", user);
   }
@@ -51,6 +56,10 @@ class Services {
     return axios.post(BACKEND_API + "/tests/create", formDataToSend, {
       headers: { "Content-Type": "multipart/form-data" },
     });
+  }
+
+  deleteTestById(id){
+    return axios.delete(BACKEND_API + "/tests/" + id);
   }
 
   getAllTest() {

@@ -5,7 +5,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.configurers.userdetails.DaoAuthenticationConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -49,18 +48,28 @@ public class SecurityConfig {
                 		.requestMatchers("api/user/login").permitAll()
                 		.requestMatchers("/api/user/**").permitAll()
                 		.requestMatchers("/api/feedback/**").permitAll()
+                		
                 		.requestMatchers("/api/tests/all/**").permitAll()
+                		.requestMatchers("/api/tests/**").permitAll()
+                		.requestMatchers("/api/tests/create/**").permitAll()
                 		.requestMatchers("/api/tests/testName/**").permitAll()
                 		.requestMatchers("/api/tests/TestType").permitAll()
                 		.requestMatchers("/api/tests/bestOffers").permitAll()
-                		.requestMatchers("/api/tests/create/**").permitAll()
+                		
+                		.requestMatchers("/api/doctors/register/**").permitAll()
+                		.requestMatchers("/api/doctors/pending/**").permitAll()
+                		.requestMatchers("api/doctors/approved/**").permitAll()
+                		.requestMatchers("/api/doctors/list/**").permitAll()
+                		
+                		.requestMatchers("/api/orders/addOrder/**").permitAll()
+                		.requestMatchers("/api/enquiry/**").permitAll()
                 		.anyRequest().authenticated()
                 		
                 )
                 
                 .exceptionHandling(ex ->ex.authenticationEntryPoint(point))
                 .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                ;
+                ; 
         
         
                 
