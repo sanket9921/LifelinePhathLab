@@ -55,6 +55,7 @@ export default function AllTest() {
               <th style={{ padding: 8, textAlign: "left" }}>Actual price</th>
               <th style={{ padding: 8, textAlign: "left" }}>Discount</th>
               <th style={{ padding: 8, textAlign: "left" }}>Final price</th>
+              
             </tr>
           </thead>
 
