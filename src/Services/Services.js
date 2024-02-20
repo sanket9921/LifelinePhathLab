@@ -11,7 +11,7 @@ class Services {
   }
 
   bookOrder(order) {
-    return axios.post(BACKEND_API + "/orders", order);
+    return axios.post(BACKEND_API + "/orders/addOrder", order);
   }
 
   userLogin(user) {
