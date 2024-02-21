@@ -32,7 +32,9 @@ public class ReportController {
     											@RequestParam("file") MultipartFile reportFile,
     										   @RequestParam("userId") int userId,
                                                @RequestParam("doctorId") int doctorId,
-                                               @RequestParam("comment") String comment) {
+                                               @RequestParam("comment") String comment) 
+   
+    {
         try {
             reportService.uploadReport(userId, doctorId, reportFile, comment);
             return ResponseEntity.ok("Report uploaded successfully!");

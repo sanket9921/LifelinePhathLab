@@ -19,7 +19,9 @@ export default function Feedback() {
   const showHandler = (feedbackId) => {
     Services.showFeedbackToClient(feedbackId)
       .then((res) => {
-        // window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
         toast.success("Show HomePage Feedback successfully",{onClose:1000});
       })
       .catch((err) => {

@@ -66,8 +66,19 @@ public class SecurityConfig {
                 		.requestMatchers("api/doctors/reject/**").permitAll()
 
                 		//All api feedback
+                		.requestMatchers("/api/feedback").permitAll()
                 		.requestMatchers("/api/feedback/**").permitAll()
                 		.requestMatchers("/api/feedback/review/**").permitAll()
+                		
+                		//All api appointments
+                		.requestMatchers("/api/appointments/**").permitAll()
+                		.requestMatchers("/api/appointments/schedule/**").hasRole("USER")
+                		.requestMatchers("/api/appointments/list/**").permitAll()
+                		
+                		//All api reports
+                		.requestMatchers("/api/reports/**").permitAll()
+                		.requestMatchers("/api/reports/upload/**").hasRole("ADMIN")
+                		
                 		
                 		
                 		

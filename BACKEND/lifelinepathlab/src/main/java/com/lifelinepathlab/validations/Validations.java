@@ -174,8 +174,8 @@ public class Validations implements Validator {
 		}
 
 		/* Prescription document path validation */
-		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "prescriptionFilePath", "NotEmpty",
-				"Prescription Document path cannot be empty");
+//		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "prescriptionFilePath", "NotEmpty",
+//				"Prescription Document path cannot be empty");
 		if (!scheduleAppointment.getPrescriptionFilePath().matches("^.*\\.(doc|pdf|jpg|jpeg|png)$")) {
 			errors.rejectValue("prescriptionFilePath", "InvalidFormat", "Please provide valid file Path");
 		}
