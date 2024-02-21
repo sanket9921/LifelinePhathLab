@@ -49,15 +49,21 @@ public class SecurityConfig {
                 		.requestMatchers("api/user/login").permitAll()
                 		.requestMatchers("/api/user/**").permitAll()
                 		.requestMatchers("/api/feedback/**").permitAll()
+                		
                 		.requestMatchers("/api/tests/all/**").permitAll()
                 		.requestMatchers("/api/tests/**").permitAll()
+                		.requestMatchers("/api/tests/create/**").permitAll()
                 		.requestMatchers("/api/tests/testName/**").permitAll()
                 		.requestMatchers("/api/tests/TestType").permitAll()
                 		.requestMatchers("/api/tests/bestOffers").permitAll()
-                		.requestMatchers("/api/tests/create/**").permitAll()
-                		.requestMatchers("/api/doctors/list").permitAll()
-                		.requestMatchers("/api/tests/create/**").permitAll()
-                		.requestMatchers("/api/orders").permitAll()
+                		
+                		.requestMatchers("/api/doctors/register/**").permitAll()
+                		.requestMatchers("/api/doctors/pending/**").permitAll()
+                		.requestMatchers("api/doctors/approved/**").permitAll()
+                		.requestMatchers("/api/doctors/list/**").permitAll()
+                		
+                		.requestMatchers("/api/orders/addOrder/**").permitAll()
+                		.requestMatchers("/api/enquiry/**").permitAll()
                 		.anyRequest().authenticated()
                 		
                 )

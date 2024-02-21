@@ -23,7 +23,7 @@ export default function BestOffers() {
 
   const cartHandler = (id) => {
     const storedUserId = Cookies.get("userId");
-    const booking = { user: { userId: storedUserId }, tests: { testId: id } };
+    const booking = { user: { userId: storedUserId }, tests: [{ testId: id }] };
 
     // console.log(booking);
     Services.bookOrder(booking)

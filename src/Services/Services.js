@@ -15,7 +15,7 @@ class Services {
   }
 
   bookOrder(order) {
-    return axios.post(BACKEND_API + "/orders", order);
+    return axios.post(BACKEND_API + "/orders/addOrder", order);
   }
 
   userLogin(user) {
@@ -60,6 +60,10 @@ class Services {
     return axios.post(BACKEND_API + "/tests/create", formDataToSend, {
       headers: { "Content-Type": "multipart/form-data" },
     });
+  }
+
+  deleteTestById(id){
+    return axios.delete(BACKEND_API + "/tests/" + id);
   }
 
   getAllTest() {

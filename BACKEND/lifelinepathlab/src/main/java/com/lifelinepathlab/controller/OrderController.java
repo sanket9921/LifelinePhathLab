@@ -19,6 +19,7 @@ import com.lifelinepathlab.model.Doctor;
 import com.lifelinepathlab.model.Orders;
 import com.lifelinepathlab.service.OrderService;
 
+
 @CrossOrigin("*")
 @RestController
 @RequestMapping("/api/orders")
@@ -32,23 +33,23 @@ public class OrderController {
 		List<Orders> orders = orderService.getAllOrders();
 		return ResponseEntity.ok(orders);
 	}
-	@GetMapping("{id}")
+	@GetMapping("/{id}")
 	public ResponseEntity<Orders> getDoctor(@PathVariable int id) {
 		Orders orders = orderService.getOrdersByid(id);
 		return ResponseEntity.ok(orders);
 	}
-	@PostMapping()
+	@PostMapping("/addOrder")
 	public ResponseEntity<String> addOrder(@RequestBody Orders orders) {
 		orderService.addorder(orders);
 		return ResponseEntity.ok("Orders added successfully...!!!");
 	}
 	
-	@PutMapping("{id}")
+	@PutMapping("/{id}")
 	public ResponseEntity<String> UpdateOrder(@RequestBody Orders orders, @PathVariable int id){
 		orderService.updateOrder(orders, id);
 		return ResponseEntity.ok("Order update successfully");
 	}
-	@DeleteMapping("{id}")
+	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteOrder(@PathVariable int id){
 		orderService.deleteOrder(id);
 		return ResponseEntity.ok("Order Deleted Successfully");
