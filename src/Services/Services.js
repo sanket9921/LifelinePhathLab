@@ -62,6 +62,9 @@ class Services {
     return axios.delete(BACKEND_API + "/tests/" + id);
   }
 
+  editTestById(id){
+    return axios.put(BACKEND_API + "/tests/" + id);
+  }
   getAllTest() {
     return axios.get(BACKEND_API + "/tests/all/");
   }

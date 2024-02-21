@@ -56,10 +56,15 @@ public class SecurityConfig {
                 		.requestMatchers("/api/tests/TestType").permitAll()
                 		.requestMatchers("/api/tests/bestOffers").permitAll()
                 		
+                		//Docter All Api
+                		.requestMatchers("/api/doctors/**").permitAll()
                 		.requestMatchers("/api/doctors/register/**").permitAll()
+                		.requestMatchers("/api/doctors/list/**").permitAll()
                 		.requestMatchers("/api/doctors/pending/**").permitAll()
                 		.requestMatchers("api/doctors/approved/**").permitAll()
-                		.requestMatchers("/api/doctors/list/**").permitAll()
+                		.requestMatchers("api/doctors/request/**").permitAll()
+                		.requestMatchers("api/doctors/reject/**").permitAll()
+
                 		
                 		.requestMatchers("/api/orders/addOrder/**").permitAll()
                 		.requestMatchers("/api/enquiry/**").permitAll()

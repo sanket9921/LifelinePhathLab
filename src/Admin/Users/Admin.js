@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Services from "../../Services/Services";
-
+import { toast } from "react-toastify";
 export default function Admin() {
   const [admins, setAdmins] = useState([]);
   const [uId, setUId] = useState("");
@@ -10,17 +10,22 @@ export default function Admin() {
         setAdmins(res.data);
       })
       .catch((err) => {
-        alert(err.message);
+       // alert(err.message);
+        toast.error(err.message,{autoclose:1000});
       });
   }, []);
 
   const AdminHandler = () => {
     Services.UpdateUserRole(uId)
       .then((res) => {
-        window.location.reload();
+        toast.success("Admin Registered Successfully",{autoclose:1000});
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       })
       .catch((err) => {
-        alert(err.message);
+        //alert(err.message);
+        toast.error(err.message,{autoclose:1000});
       });
   };
 

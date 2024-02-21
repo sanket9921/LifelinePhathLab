@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Services from "../../Services/Services";
-
+import { toast } from "react-toastify";
 export default function Patients() {
   const [patients, setPatients] = useState([]);
 
@@ -10,17 +10,22 @@ export default function Patients() {
         setPatients(res.data);
       })
       .catch((err) => {
-        alert(err.message);
+        //alert(err.message);
+        toast.error(err.message,{onclose: 1000});
       });
   }, []);
 
   const handleDelete = (userId) => {
     Services.deletePatientById(userId)
       .then((res) => {
-        window.location.reload();
+        toast.success("Patient deleted successfully",{onclose: 1000});
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       })
       .catch((err) => {
-        alert(err.message);
+       // alert(err.message);
+        toast.error(err.message,{onclose: 1000});
       });
   };
 
@@ -67,7 +72,7 @@ export default function Patients() {
                   <td>
                     <button
                       onClick={() => handleDelete(patient.userId)}
-                      className="btn btn-danger"
+                      className="btn btn-outline-danger"
                     >
                       Delete
                     </button>

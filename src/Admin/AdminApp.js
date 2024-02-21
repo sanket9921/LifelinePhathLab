@@ -17,6 +17,9 @@ import Enquiry from "./Enquiry";
 import Dashboard from "./Dashboard";
 import Appointments from "./Appointments/Appointments";
 import AppointmentDetails from "./Appointments/AppointmentDetails";
+import EditTest1 from "./Tests/EditTest1";
+import { ToastContainer } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -29,6 +32,8 @@ function App() {
       </Provider> */}
       <Provider store={store}>
         <Navbar />
+        <ToastContainer/>
+
         <div className="container">
           <Routes>
             <Route path="/" element={<Dashboard />} />
@@ -43,6 +48,7 @@ function App() {
             <Route path="/admins" element={<Admin />} />
             <Route path="/addtest" element={<AddTest />} />
             <Route path="/allTest" element={<AllTest />} />
+            <Route path="/editTest1" element={<EditTest1 />} />
             <Route path="/addDoctor" element={<AddDoctor />} />
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/enquiry" element={<Enquiry />} />

@@ -11,6 +11,7 @@ import Signup from "./LandingPage/Signup";
 import DisplayReports from "./component/DisplayReports";
 import DoctorRegistration from "./component/DoctorRegistration";
 import TestDetails from "./component/TestDetails";
+import EditTest from "./Admin/Tests/EditTest";
 
 const router = createBrowserRouter([
   {
