@@ -65,6 +65,12 @@ public class SecurityConfig {
                 		.requestMatchers("api/doctors/request/**").permitAll()
                 		.requestMatchers("api/doctors/reject/**").permitAll()
 
+                		//All api feedback
+                		.requestMatchers("/api/feedback/**").permitAll()
+                		.requestMatchers("/api/feedback/review/**").permitAll()
+                		
+                		
+                		
                 		
                 		.requestMatchers("/api/orders/addOrder/**").permitAll()
                 		.requestMatchers("/api/enquiry/**").permitAll()
