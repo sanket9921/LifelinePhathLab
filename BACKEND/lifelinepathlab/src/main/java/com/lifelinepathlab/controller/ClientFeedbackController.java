@@ -71,4 +71,11 @@ public class ClientFeedbackController {
 		List<ClientFeedback> listedFeedbacks = clientFeedbackServiceRef.getFeedbacksForClient();
 		return ResponseEntity.ok(listedFeedbacks);
 	}
+	//update feedback status 
+	@PutMapping("/{feedbackId}")
+	public ResponseEntity<String> updateFeedback(@PathVariable int feedbackId) {
+		clientFeedbackServiceRef.updateFeedback(feedbackId);
+		return ResponseEntity.ok("feedback status updated sucessfully");
+	}
+
 }

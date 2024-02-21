@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Services from "../../Services/Services";
-import "./notify.css";
 import { toast } from "react-toastify";
 export default function AddTest() {
   const [previewSrc, setPreviewSrc] = useState("");

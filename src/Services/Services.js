@@ -1,5 +1,8 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 const BACKEND_API = "http://localhost:8083/api";
+const jwt = Cookies.get("jwtToken");
+
 class Services {
   //Homepage Best Offers
   getBestOffers() {
@@ -46,7 +49,9 @@ class Services {
   }
 
   getClientFeedbacks() {
-    return axios.get(BACKEND_API + "/feedback/review");
+    return axios.get(BACKEND_API + "/feedback/review",
+    {headers: { "Authorization": "Bearer "+jwt }}
+    );
   }
 
   getAllTests() {
@@ -60,7 +65,14 @@ class Services {
   getAppointmentById(id) {
     return axios.get(BACKEND_API + "/appointments/" + id);
   }
+  SheduleAppointment(formData){
+    return axios.post(BACKEND_API + "/appointments/schedule",formData,{
+      headers: { "Content-Type": "multipart/form-data",
+      "Authorization": "Bearer "+jwt
+    },
 
+    });
+  }
   // Test Services
 
   addTest(formDataToSend) {
@@ -105,6 +117,9 @@ class Services {
     return axios.get(BACKEND_API + "/doctors/list");
   }
 
+  getAllApprovalDoctor(){
+    return axios.get(BACKEND_API + "/doctors/approved")
+  }
   updateRequestStatus(doctorId) {
     return axios.put(BACKEND_API + "/doctors/request/" + doctorId);
   }
@@ -134,14 +149,20 @@ class Services {
   }
 
   showFeedbackToClient(feedbackId) {
-    return axios.put(BACKEND_API + "/feedback/" + feedbackId);
-    return axios.get(BACKEND_API + "/tests/all");
+    return axios.put(BACKEND_API + "/feedback/" + feedbackId
+    // {headers: { "Authorization": "Bearer "+jwt }}
+
+    );
+    // return axios.get(BACKEND_API + "/tests/all");
   }
 
   // Report Service
   addReport(formDataToSend) {
     return axios.post(BACKEND_API + "/reports/upload", formDataToSend, {
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: { "Content-Type": "multipart/form-data",
+      "Authorization": "Bearer "+jwt
+
+    },
     });
   }
 }

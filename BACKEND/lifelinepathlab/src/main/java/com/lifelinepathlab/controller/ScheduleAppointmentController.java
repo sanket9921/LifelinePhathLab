@@ -3,6 +3,7 @@ package com.lifelinepathlab.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -25,6 +26,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.lifelinepathlab.model.Doctor;
 import com.lifelinepathlab.model.ScheduleAppointment;
+import com.lifelinepathlab.model.User;
 import com.lifelinepathlab.service.AppointmentService;
 
 
@@ -44,19 +46,29 @@ public class ScheduleAppointmentController {
 
     @PostMapping("/schedule")
     public ResponseEntity<?> scheduleAppointment(@RequestParam("file") MultipartFile file,
+    											 @RequestParam("userId") int user_id,
                                                  @RequestParam("patientName") String patientName,
                                                  @RequestParam("contact") String contact,
                                                  @RequestParam("address") String address,
-                                                 @RequestParam("doctorName") int doctorid,
+                                                 @RequestParam(value = "doctorName", required = false) String doctorid,
                                                  @RequestParam("appointmentDate") String appointmentDate
                                                  ) {
         try {
             String fileId = appointmentService.savePrescriptionFile(file);
-            Doctor doctor = new Doctor();
-            doctor.setDoctorId(doctorid);
-//            ScheduleAppointment appointment = new ScheduleAppointment(patientName, contact, address, doctorName, appointmentDate, fileId);
-            ScheduleAppointment appointment = new ScheduleAppointment(patientName, contact, doctor, address ,convertStringToDate(appointmentDate), fileId);
+            ScheduleAppointment appointment ;
+            User user = new User();
+        	user.setUserId(user_id);
+
+            if(doctorid.isEmpty()) {
+                 appointment = new ScheduleAppointment(patientName,contact,user,address,convertStringToDate(appointmentDate),fileId);
+            }else {
+            	Doctor doctor = new Doctor();
+                doctor.setDoctorId(Integer.parseInt( doctorid));
+                 appointment = new ScheduleAppointment(patientName, contact, user,doctor, address ,convertStringToDate(appointmentDate), fileId);
+            }
+            
             appointmentService.saveAppointment(appointment);
+
             return ResponseEntity.ok("Appointment scheduled successfully");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error scheduling appointment");

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Services from "../../Services/Services";
-import EditTest from "./EditTest";
 import { toast } from "react-toastify";
 export default function AllTest() {
   const [Tests, setTest] = useState([]);
@@ -30,7 +29,8 @@ export default function AllTest() {
   }
 
   const navigateToNewPage = () => {
-    window.location.href = '/editTest1'; // Change the URL to the desired page
+    // window.location.href = '/editTest1'; 
+    // Change the URL to the desired page
 };
 
 
