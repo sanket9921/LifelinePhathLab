@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Services from "../Services/Services";
-
+import { toast } from "react-toastify";
 export default function Enquiry() {
   const [enquiries, setEnquiries] = useState([]);
 
@@ -10,7 +10,8 @@ export default function Enquiry() {
         setEnquiries(res.data);
       })
       .catch((err) => {
-        alert(err.message);
+        //alert(err.message);
+        toast.error(err.message,{onclose:1000});
       });
   }, []);
 

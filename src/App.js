@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Switch from "react-router-dom";
+//import Switch from "react-router-dom";
 import Footer from "./component/Footer";
 import Navbar from "./component/Navbar";
 import TopBar from "./component/TopBar";
@@ -16,6 +16,7 @@ import Contact from "./component/Contact";
 import Cart from "./component/Cart";
 import Login from "./LandingPage/Login";
 import Signup from "./LandingPage/Signup";
+import { ToastContainer } from "react-toastify";
 import UserProfile from "./component/UserProfile";
 import Otp from "./LandingPage/Otp";
 
@@ -35,6 +36,8 @@ export default function App() {
         <TopBar />
         <Navbar />
         <SearchBar />
+        <ToastContainer />
+
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/bookTest" element={<BookTest />} />

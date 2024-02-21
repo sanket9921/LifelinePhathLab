@@ -12,6 +12,7 @@ import AddDoctor from "./Admin/Users/AddDoctor";
 import Feedback from "./Admin/Feedback";
 import Enquiry from "./Admin/Enquiry";
 import AppointmentDetails from "./Admin/Appointments/AppointmentDetails.js";
+import EditTest1 from "./Admin/Tests/EditTest1.js";
 
 const adminRouter = createBrowserRouter([
   {
@@ -53,6 +54,10 @@ const adminRouter = createBrowserRouter([
       {
         path: "allTest",
         element: <AllTest />,
+      },
+      {
+        path: "editTest",
+        element: <EditTest1 />,
       },
       {
         path: "addDoctor",

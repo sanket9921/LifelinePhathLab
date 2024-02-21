@@ -1,25 +1,49 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Services from "../../Services/Services";
-import "./notify.css";
-import { toast } from "react-toastify";
-export default function AddTest() {
+
+export default function AddTest({ isUpdate, testId }) {
+    //const { testId } = useParams();
+
   const [previewSrc, setPreviewSrc] = useState("");
+  const [formData, setFormData] = useState({
+    testName: "",
+    testType: "",
+    testDescription: "",
+    actualPrice: 0,
+    discount: 0,
+    finalPrice: 0,
+    photoFile: null,
+  });
+
+  useEffect(() => {
+    // Fetch test details if in update mode
+    if (isUpdate) {
+      // Fetch test details based on testId
+      Services.getTestDetails(testId)
+        .then((res) => {
+          const { testName, testType, testDescription, actualPrice, discount, finalPrice } = res.data;
+          setFormData({ testName, testType, testDescription, actualPrice, discount, finalPrice });
+        })
+        .catch((err) => {
+          console.log("Error fetching test details:", err);
+        });
+    }
+  }, [isUpdate, testId]);
+
   const previewImage = (input) => {
     if (input.files && input.files[0]) {
       const reader = new FileReader();
-
       reader.onload = function (e) {
         setPreviewSrc(e.target.result);
       };
-
       reader.readAsDataURL(input.files[0]);
     }
   };
 
   const handleFileInputChange = (e) => {
     previewImage(e.target);
+    setFormData({ ...formData, photoFile: e.target.files[0] });
   };
-
   const handleDragOver = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -32,113 +56,46 @@ export default function AddTest() {
     const droppedFiles = e.dataTransfer.files;
     previewImage(droppedFiles[0]);
   };
-
-  // ======================================================
-  const [formData, setFormData] = useState({
-    testName: "",
-    testType: "",
-    testDescription: "",
-    actualPrice: 0,
-    discount: 0,
-    finalPrice: 0,
-    photoFile: null,
-  });
-
-  // const calculateFinalPrice = () => {
-  //   const actualPrice = Number(formData.actualPrice);
-  //   const discount = Number(formData.discount);
-
-  //   // Check if both actualPrice and discount are valid numbers
-  //   if (!isNaN(actualPrice) && !isNaN(discount)) {
-  //     // Calculate final price with 2 decimal places
-  //     const discountedAmount = (actualPrice * discount) / 100;
-  //     const finalPrice = actualPrice - discountedAmount;
-
-  //     // Update the state
-  //     setFormData((prevData) => ({ ...prevData, finalPrice }));
-  //   } else {
-  //     // Handle invalid input (non-numeric values)
-  //     setFormData((prevData) => ({ ...prevData, finalPrice: "" }));
-  //   }
-  // };
-
-  // const handleChange = (e) => {
-  //   const { name, value } = e.target;
-  //   setFormData({ ...formData, [name]: value });
-
-  //   // If the changed field is actualPrice or discount, recalculate finalPrice
-  //   if (name == "actualPrice" || name == "discount") {
-  //     calculateFinalPrice();
-  //   }
-  // };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-
-    setFormData((prevData) => ({ ...prevData, [name]: value }));
-
-    // If the changed field is actualPrice or discount, recalculate finalPrice
+    setFormData({ ...formData, [name]: value });
     if (name === "actualPrice" || name === "discount") {
       calculateFinalPrice();
     }
   };
 
   const calculateFinalPrice = () => {
-    setFormData((prevData) => {
-      const actualPrice = Number(prevData.actualPrice);
-      const discount = Number(prevData.discount);
-
-      // Check if both actualPrice and discount are valid numbers
-      if (!isNaN(actualPrice) && !isNaN(discount)) {
-        // Calculate final price with 2 decimal places
-        const discountedAmount = (actualPrice * discount) / 100;
-        const finalPrice = actualPrice - discountedAmount;
-
-        // Return the updated state
-        return { ...prevData, finalPrice };
-      } else {
-        // Handle invalid input (non-numeric values)
-        return { ...prevData, finalPrice: 0 };
-      }
-    });
-  };
-
-  const handleFileChange = (e) => {
-    setFormData({ ...formData, photoFile: e.target.files[0] });
+    const actualPrice = Number(formData.actualPrice);
+    const discount = Number(formData.discount);
+    if (!isNaN(actualPrice) && !isNaN(discount)) {
+      const discountedAmount = (actualPrice * discount) / 100;
+      const finalPrice = actualPrice - discountedAmount;
+      setFormData((prevData) => ({ ...prevData, finalPrice }));
+    } else {
+      setFormData((prevData) => ({ ...prevData, finalPrice: 0 }));
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const {
-        testName,
-        testType,
-        testDescription,
-        actualPrice,
-        discount,
-        finalPrice,
-        photoFile,
-      } = formData;
       const formDataToSend = new FormData();
-      formDataToSend.append("testName", testName);
-      formDataToSend.append("testType", testType);
-      formDataToSend.append("testDescription", testDescription);
-      formDataToSend.append("actualPrice", actualPrice);
-      formDataToSend.append("discount", discount);
-      formDataToSend.append("finalPrice", finalPrice);
-      formDataToSend.append("photoFile", photoFile);
+      formDataToSend.append("testName", formData.testName);
+      formDataToSend.append("testType", formData.testType);
+      formDataToSend.append("testDescription", formData.testDescription);
+      formDataToSend.append("actualPrice", formData.actualPrice);
+      formDataToSend.append("discount", formData.discount);
+      formDataToSend.append("finalPrice", formData.finalPrice);
+      formDataToSend.append("photoFile", formData.photoFile);
 
-      await Services.addTest(formDataToSend)
-        .then((res) => {
-          //alert("Test registered successfully!");
-          toast.success("Test Registered Successfully!", { autoClose: 1000 });
-        })
-        .catch((err) => {
-          //console.log(err);
-          toast.error("Failed to register test. Please try again later!", {autoClose: 1000});
-
-        })
-
+      let response;
+      if (isUpdate) {
+        response = await Services.updateTest(testId, formDataToSend);
+      } else {
+        response = await Services.addTest(formDataToSend);
+      }
+      
+      alert(response.data.message);
       setFormData({
         testName: "",
         testType: "",
@@ -149,20 +106,18 @@ export default function AddTest() {
         photoFile: null,
       });
     } catch (error) {
-      console.error("Error registering test:", error);
-      //alert("Failed to register test. Please try again later.");
-      toast.error("Failed to register test. Please try again later!", { autoClose: 2000 });
+      console.error("Error:", error);
+      alert("Failed to submit. Please try again later.");
     }
   };
+
   return (
     <>
-      <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-        <h3 class="font-weight-bold">Add Test</h3>
+      <div className="col-12 col-xl-8 mb-4 mb-xl-0">
+        <h3 className="font-weight-bold">{isUpdate ? "Update Test" : "Add Test"}</h3>
       </div>
-
       <div className="container mt-5 mb-3 pb-3 bg-white pt-3">
-
-        <div className="text-center">
+      <div className="text-center">
           <h2 className="mb-4">Upload Photo</h2>
           <label
             htmlFor="photo-input"
@@ -267,8 +222,8 @@ export default function AddTest() {
         <button type="button" class="btn btn-primary" onClick={handleSubmit}>
           Add Test
         </button>
-
       </div>
+      
     </>
   );
 }

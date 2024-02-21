@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Services from "../../Services/Services";
+import { toast } from "react-toastify";
 
 export default function AddDoctor() {
   const [pendingRequests, setPendingRequests] = useState([]);
@@ -10,27 +11,37 @@ export default function AddDoctor() {
         setPendingRequests(res.data);
       })
       .catch((err) => {
-        alert(err.message);
+        //alert(err.message);
+        toast.error(err.message,{autoClose: 1000});
       });
   }, []);
 
   const handleApporved = (doctorId) => {
     Services.updateRequestStatus(doctorId)
       .then((res) => {
-        window.location.reload();
+        toast.success("Docter Apporved Successfully!", { autoClose: 1000 });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+
       })
       .catch((err) => {
-        alert(err.message);
+        //alert(err.message);
+        toast.error(err.message, { autoClose: 1000 });
       });
   };
 
   const handleRejected = (doctorId) => {
     Services.rejectDoctorRequest(doctorId)
       .then((res) => {
-        window.location.reload();
+        toast.success("Docter Rejected Successfully!", { autoClose: 1000 });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       })
       .catch((err) => {
-        alert(err.message);
+        //alert(err.message);
+        toast.error(err.message, {autoClose: 1000});
       });
   };
 
@@ -82,7 +93,7 @@ export default function AddDoctor() {
                   <td>
                     <button
                       onClick={() => handleApporved(pendingRequest.doctorId)}
-                      className="btn btn-success"
+                      className="btn btn-outline-success"
                     >
                       Approve
                     </button>
@@ -90,7 +101,7 @@ export default function AddDoctor() {
                   <td>
                     <button
                       onClick={() => handleRejected(pendingRequest.doctorId)}
-                      className="btn btn-danger"
+                      className="btn btn-outline-danger"
                     >
                       Reject
                     </button>
