@@ -9,6 +9,17 @@ class Services {
     return axios.get(BACKEND_API + "/tests/bestOffers");
   }
 
+  getUserByid(userId) {
+    return axios.get(BACKEND_API + "/user/" + userId);
+  }
+
+  verifyUser(user) {
+    return axios.put(BACKEND_API + "/user/verify-account", user);
+  }
+
+  reGenerateOTP(formData) {
+    return axios.put(BACKEND_API + "/user/regenerate-otp", formData);
+  }
   userRegistration(user) {
     return axios.post(BACKEND_API + "/user/create", user);
   }
@@ -70,7 +81,7 @@ class Services {
     });
   }
 
-  deleteTestById(id){
+  deleteTestById(id) {
     return axios.delete(BACKEND_API + "/tests/" + id);
   }
 
