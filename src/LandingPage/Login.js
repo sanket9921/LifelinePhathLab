@@ -91,17 +91,17 @@ export default function Login() {
               </div>
               <br />
 
-              <a
-                href="#"
+              <Link
+                to={"/fotgotPassword"}
                 style={{
                   textDecoration: "underline",
                   color: "blue",
-                  textAlign: "right",
+                  textAlign: "center",
                 }}
                 className="forgotanchor"
               >
                 Forgot Password
-              </a>
+              </Link>
               <div className="Buttons-container">
                 <button
                   className="button login-btn"

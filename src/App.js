@@ -19,6 +19,7 @@ import Signup from "./LandingPage/Signup";
 import { ToastContainer } from "react-toastify";
 import UserProfile from "./component/UserProfile";
 import Otp from "./LandingPage/Otp";
+import ForgotPassword from "./LandingPage/ForgotPassword";
 
 export default function App() {
   return (
@@ -48,9 +49,9 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/userProfile" element={<UserProfile />} />
           <Route path="/verifyOtp/:email" element={<Otp />} />
-
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          <Route path="/fotgotPassword" element={<ForgotPassword />} />
         </Routes>
         <Footer />
       </Provider>

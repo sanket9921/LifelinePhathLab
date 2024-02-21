@@ -49,13 +49,14 @@ public class UserService {
 	public String verifyAccount(String email, String otp) {
 	    User user = userRepositoryRef.findByEmailId(email);
 	    if (user.getOtp().equals(otp) && Duration.between(user.getOtpGeneratedTime(),
-	        LocalDateTime.now()).getSeconds() < (1 * 60)) {
+	        LocalDateTime.now()).getSeconds() < (5 * 60)) {
 	      user.setActive(true);
 	      userRepositoryRef.save(user);
 	      return "OTPVERIFIED";
 	    }
 	    return "Please regenerate otp and try again";
 	  }
+	
 	
 	public String regenerateOtp(String email) {
 	    User user = userRepositoryRef.findByEmailId(email);
@@ -122,5 +123,16 @@ public class UserService {
 				User user = userRepositoryRef.findByEmailId(username);
 				return user;
 			}
+	
+	public String resetPassword(String email, String otp, String password) {
+		 User user = userRepositoryRef.findByEmailId(email);
+		    if (user.getOtp().equals(otp) && Duration.between(user.getOtpGeneratedTime(),
+		        LocalDateTime.now()).getSeconds() < (5 * 60)) {
+		      user.setActive(true);
+		      userRepositoryRef.save(user);
+		      return "OTPVERIFIED";
+		    }
+		    return "Please regenerate otp and try again";
+	}
 
 }

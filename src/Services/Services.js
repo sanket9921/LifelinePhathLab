@@ -49,9 +49,9 @@ class Services {
   }
 
   getClientFeedbacks() {
-    return axios.get(BACKEND_API + "/feedback/review",
-    {headers: { "Authorization": "Bearer "+jwt }}
-    );
+    return axios.get(BACKEND_API + "/feedback/review", {
+      headers: { Authorization: "Bearer " + jwt },
+    });
   }
 
   getAllTests() {
@@ -65,12 +65,12 @@ class Services {
   getAppointmentById(id) {
     return axios.get(BACKEND_API + "/appointments/" + id);
   }
-  SheduleAppointment(formData){
-    return axios.post(BACKEND_API + "/appointments/schedule",formData,{
-      headers: { "Content-Type": "multipart/form-data",
-      "Authorization": "Bearer "+jwt
-    },
-
+  SheduleAppointment(formData) {
+    return axios.post(BACKEND_API + "/appointments/schedule", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: "Bearer " + jwt,
+      },
     });
   }
   // Test Services
@@ -85,7 +85,7 @@ class Services {
     return axios.delete(BACKEND_API + "/tests/" + id);
   }
 
-  editTestById(id){
+  editTestById(id) {
     return axios.put(BACKEND_API + "/tests/" + id);
   }
   getAllTest() {
@@ -117,8 +117,8 @@ class Services {
     return axios.get(BACKEND_API + "/doctors/list");
   }
 
-  getAllApprovalDoctor(){
-    return axios.get(BACKEND_API + "/doctors/approved")
+  getAllApprovalDoctor() {
+    return axios.get(BACKEND_API + "/doctors/approved");
   }
   updateRequestStatus(doctorId) {
     return axios.put(BACKEND_API + "/doctors/request/" + doctorId);
@@ -149,9 +149,9 @@ class Services {
   }
 
   showFeedbackToClient(feedbackId) {
-    return axios.put(BACKEND_API + "/feedback/" + feedbackId
-    // {headers: { "Authorization": "Bearer "+jwt }}
-
+    return axios.put(
+      BACKEND_API + "/feedback/" + feedbackId
+      // {headers: { "Authorization": "Bearer "+jwt }}
     );
     // return axios.get(BACKEND_API + "/tests/all");
   }
@@ -159,10 +159,10 @@ class Services {
   // Report Service
   addReport(formDataToSend) {
     return axios.post(BACKEND_API + "/reports/upload", formDataToSend, {
-      headers: { "Content-Type": "multipart/form-data",
-      "Authorization": "Bearer "+jwt
-
-    },
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: "Bearer " + jwt,
+      },
     });
   }
 }

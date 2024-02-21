@@ -32,7 +32,7 @@ export default function Otp() {
           />
         </div>
         <small className="fw-light text-secondary">
-          OTP will be expire in 1 min
+          OTP will be expire in 5 min
         </small>
         <div className="row">
           <div className="col-md-6 mt-3">
