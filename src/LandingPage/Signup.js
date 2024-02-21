@@ -33,7 +33,7 @@ export default function Signup() {
     Services.userRegistration(user)
       .then((res) => {
         // console.log(res);
-        navigate("/login");
+        navigate("/verifyOtp/" + emailId1);
       })
       .catch((err) => {
         alert(err.message);

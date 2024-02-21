@@ -47,6 +47,9 @@ public class SecurityConfig {
                 		
                 		
                 		.requestMatchers("api/user/login").permitAll()
+                		.requestMatchers("api/user/regenerate-otp").permitAll()
+
+                		.requestMatchers("api/user/verify-account").permitAll()
                 		.requestMatchers("/api/user/**").permitAll()
                 		.requestMatchers("/api/feedback/**").permitAll()
                 		

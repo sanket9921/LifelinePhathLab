@@ -17,6 +17,7 @@ import Cart from "./component/Cart";
 import Login from "./LandingPage/Login";
 import Signup from "./LandingPage/Signup";
 import UserProfile from "./component/UserProfile";
+import Otp from "./LandingPage/Otp";
 
 export default function App() {
   return (
@@ -43,6 +44,7 @@ export default function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/userProfile" element={<UserProfile />} />
+          <Route path="/verifyOtp/:email" element={<Otp />} />
 
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />

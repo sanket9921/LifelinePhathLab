@@ -1,6 +1,8 @@
 package com.lifelinepathlab.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,11 @@ import com.lifelinepathlab.exception.ResourceNotFoundException;
 import com.lifelinepathlab.model.ClientFeedback;
 import com.lifelinepathlab.model.User;
 import com.lifelinepathlab.repository.UserRepository;
+import com.lifelinepathlab.util.EmailUtil;
+import com.lifelinepathlab.util.OtpUtil;
+import java.time.Duration;
+
+import jakarta.mail.MessagingException;
 
 @Service
 public class UserService {
@@ -19,13 +26,50 @@ public class UserService {
 	private UserRepository userRepositoryRef;
 	
 	@Autowired
+	private OtpUtil otpUtil;
+	@Autowired
+	private EmailUtil emailUtil;
+	
+	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
 	public void addUser(User user) {
+		String otp = otpUtil.generateOtp();
+	    try {
+	      emailUtil.sendOtpEmail(user.getEmailId(), otp);
+	    } catch (MessagingException e) {
+	      throw new RuntimeException("Unable to send otp please try again");
+	    }
 		user.setUuid(UUID.randomUUID().toString());
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		user.setOtp(otp);
+	    user.setOtpGeneratedTime(LocalDateTime.now());
 		userRepositoryRef.save(user);
-	}
+	} 
+	public String verifyAccount(String email, String otp) {
+	    User user = userRepositoryRef.findByEmailId(email);
+	    if (user.getOtp().equals(otp) && Duration.between(user.getOtpGeneratedTime(),
+	        LocalDateTime.now()).getSeconds() < (1 * 60)) {
+	      user.setActive(true);
+	      userRepositoryRef.save(user);
+	      return "OTPVERIFIED";
+	    }
+	    return "Please regenerate otp and try again";
+	  }
+	
+	public String regenerateOtp(String email) {
+	    User user = userRepositoryRef.findByEmailId(email);
+	    String otp = otpUtil.generateOtp();
+	    try {
+	      emailUtil.sendOtpEmail(email, otp);
+	    } catch (MessagingException e) {
+	      return "Unable to send otp please try again";
+	    }
+	    user.setOtp(otp);
+	    user.setOtpGeneratedTime(LocalDateTime.now());
+	    userRepositoryRef.save(user);
+	    return "Email sent... please verify account within 1 minute";
+	  }
 	
 	public List<User> getUsers() {
 		List<User> users = userRepositoryRef.findAll();

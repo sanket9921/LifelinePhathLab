@@ -903,3 +903,8 @@ h2 {
   height: 100px;
   width: 200px;
 }
+
+.otp-container {
+  width: 60%;
+  margin: auto;
+}
