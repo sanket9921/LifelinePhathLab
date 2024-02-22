@@ -58,6 +58,10 @@ class Services {
     });
   }
 
+  deleteTestById(id) {
+    return axios.delete(BACKEND_API + "/tests/" + id);
+  }
+
   getAllTest() {
     return axios.get(BACKEND_API + "/tests/all/");
   }
@@ -117,7 +121,6 @@ class Services {
 
   showFeedbackToClient(feedbackId) {
     return axios.put(BACKEND_API + "/feedback/" + feedbackId);
-    return axios.get(BACKEND_API + "/tests/all");
   }
 
   // Report Service
@@ -125,6 +128,16 @@ class Services {
     return axios.post(BACKEND_API + "/reports/upload", formDataToSend, {
       headers: { "Content-Type": "multipart/form-data" },
     });
+  }
+
+  //to get the cart orders
+  getCartOrdersByUserId(userId) {
+    return axios.get(BACKEND_API + "/orders/cartOrders/" + userId);
+  }
+
+  //to delete cart orders
+  deleteCartOrderById(id) {
+    return axios.delete(BACKEND_API + "/orders/" + id);
   }
 }
 

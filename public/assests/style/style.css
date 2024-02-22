@@ -892,3 +892,7 @@ h2 {
   height: 100px;
   width: 200px;
 }
+
+.cart-price {
+  display: inline-flex;
+}

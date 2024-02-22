@@ -43,15 +43,20 @@ public class SecurityConfig {
                 		.requestMatchers("api/user/login").permitAll()
                 		.requestMatchers("/api/user/**").permitAll()
                 		.requestMatchers("/api/feedback/**").permitAll()
+        
                 		.requestMatchers("/api/tests/all/**").permitAll()
                 		.requestMatchers("/api/tests/**").permitAll()
+                		.requestMatchers("/api/tests/create/**").permitAll()
                 		.requestMatchers("/api/tests/testName/**").permitAll()
                 		.requestMatchers("/api/tests/TestType").permitAll()
                 		.requestMatchers("/api/tests/bestOffers").permitAll()
+                		.requestMatchers("/api/orders/**").permitAll()
                 		.requestMatchers("/api/tests/create/**").permitAll()
                 		.requestMatchers("/api/orders/addOrder/**").permitAll()
+                		.requestMatchers("/api/orders/cartOrders/**").permitAll()
                 		.anyRequest().authenticated()                		
                 )              
+                		
                 .exceptionHandling(ex ->ex.authenticationEntryPoint(point))
                 .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 ; 

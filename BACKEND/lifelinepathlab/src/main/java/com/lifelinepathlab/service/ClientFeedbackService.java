@@ -42,6 +42,7 @@ public class ClientFeedbackService {
 
 	}
 	
+	
     public List<ClientFeedback> getFeedbacksForClient() {
     	List<ClientFeedback> clientFeedbacks = clientFeedbackRepositoryRef.findByDisplayToClient("Y");
         return clientFeedbacks;

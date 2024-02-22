@@ -15,7 +15,7 @@ export default function SearchBar() {
         const response = await axios.get(
           "http://localhost:8083/api/tests/all/"
         );
-        console.log(response);
+
         // Assuming the API returns an array of objects with a 'name' property representing the test name
         const names = response.data.map((item) => item.testName);
         setFilteredOptions(names);

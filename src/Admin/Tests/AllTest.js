@@ -14,6 +14,14 @@ export default function AllTest() {
       });
   }, []);
 
+  const deleteTest = (id) => {
+    Services.deleteTestById(id).then((res) => {
+      // alert(res.data);
+      window.location.reload();
+    }).catch((err) => { });
+  };
+
+
   return (
     <>
       <div class="col-12 col-xl-8 mb-4 mb-xl-0">
@@ -55,7 +63,8 @@ export default function AllTest() {
               <th style={{ padding: 8, textAlign: "left" }}>Actual price</th>
               <th style={{ padding: 8, textAlign: "left" }}>Discount</th>
               <th style={{ padding: 8, textAlign: "left" }}>Final price</th>
-              
+              <th style={{ padding: 8, textAlign: "left" }}>Edit</th>
+              <th style={{ padding: 8, textAlign: "left" }}>Delete</th>
             </tr>
           </thead>
 
@@ -119,6 +128,22 @@ export default function AllTest() {
                     }}
                   >
                     {test.finalPrice}
+                  </td>
+                  <td
+                    style={{
+                      borderTop: "1px solid lightgray",
+                      padding: 8,
+                    }}
+                  ><button type="button" class="btn btn-outline-warning">Edit</button>
+
+                  </td>
+                  <td
+                    style={{
+                      borderTop: "1px solid lightgray",
+                      padding: 8,
+                    }}
+                  ><button type="button" class="btn btn-outline-danger" onClick={() => deleteTest(test.testId)}>Delete</button>
+
                   </td>
                 </tr>
               ))}

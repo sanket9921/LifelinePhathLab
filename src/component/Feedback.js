@@ -26,7 +26,7 @@ export default function Feedback() {
     <div class="container rounded feedback-post-container">
       <div class="row">
         <div className="col-sm-6">
-          <h1>Leave Your Fedback Here</h1>
+          <h1>Leave Your Feedback Here</h1>
           <br />
           <div className="input-icons ">
             <i className="mdi mdi-account" />
@@ -48,6 +48,7 @@ export default function Feedback() {
             />
           </div>
           <br />
+          <p>Thanks for your feedback. We're constantly trying to improve our services, so your input is valuable.</p>
         </div>
         <div className="col-sm-6 vl">
           <label>Write your feedback:</label>
