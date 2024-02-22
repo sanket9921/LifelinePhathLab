@@ -10,7 +10,7 @@ class Services {
     return axios.post(BACKEND_API + "/user/create", user);
   }
 
-  bookOrder(order) {
+  addOrderToCart(order) {
     return axios.post(BACKEND_API + "/orders/addOrder", order);
   }
 
