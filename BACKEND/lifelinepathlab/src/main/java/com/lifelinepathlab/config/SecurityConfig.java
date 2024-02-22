@@ -36,16 +36,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.csrf(csrf -> csrf.disable())
-        
-        
+        http.csrf(csrf -> csrf.disable())  
                 .cors(cors -> cors.disable())
 
                 .authorizeHttpRequests((auth) -> auth.requestMatchers(HttpMethod.POST,"home/**").authenticated()
-                		
-                		
-                		
-                		
+ 	
                 		.requestMatchers("api/user/login").permitAll()
                 		.requestMatchers("api/user/regenerate-otp").permitAll()
 
@@ -76,7 +71,9 @@ public class SecurityConfig {
                 		
                 		//All api appointments
                 		.requestMatchers("/api/appointments/**").permitAll()
-                		.requestMatchers("/api/appointments/schedule/**").hasRole("USER")
+//                		.requestMatchers("/api/appointments/schedule/**").hasRole("USER")
+                		.requestMatchers("/api/appointments/schedule/**").permitAll()
+
                 		.requestMatchers("/api/appointments/list/**").permitAll()
                 		
                 		//All api reports
@@ -88,17 +85,14 @@ public class SecurityConfig {
                 
                 		
                 		.requestMatchers("/api/orders/addOrder/**").permitAll()
-                		.requestMatchers("/api/enquiry/**").permitAll()
-                		.anyRequest().authenticated()
+                		.requestMatchers("/api/orders/cartOrders/**").permitAll()
+                		.anyRequest().authenticated()                		
+                )              
                 		
-                )
-                
                 .exceptionHandling(ex ->ex.authenticationEntryPoint(point))
                 .sessionManagement(session-> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 ; 
-        
-        
-                
+                  
         http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }

@@ -161,11 +161,7 @@ class Services {
   }
 
   showFeedbackToClient(feedbackId) {
-    return axios.put(
-      BACKEND_API + "/feedback/" + feedbackId
-      // {headers: { "Authorization": "Bearer "+jwt }}
-    );
-    // return axios.get(BACKEND_API + "/tests/all");
+    return axios.put(BACKEND_API + "/feedback/" + feedbackId);
   }
 
   // Report Service
@@ -176,6 +172,26 @@ class Services {
         Authorization: "Bearer " + jwt,
       },
     });
+  }
+
+  //to get the cart orders
+  getCartOrdersByUserId(userId) {
+    return axios.get(BACKEND_API + "/orders/cartOrders/" + userId);
+  }
+
+  //to delete cart orders
+  deleteCartOrderById(id) {
+    return axios.delete(BACKEND_API + "/orders/" + id);
+  }
+
+  //to get the cart orders
+  getCartOrdersByUserId(userId) {
+    return axios.get(BACKEND_API + "/orders/cartOrders/" + userId);
+  }
+
+  //to delete cart orders
+  deleteCartOrderById(id) {
+    return axios.delete(BACKEND_API + "/orders/" + id);
   }
 }
 

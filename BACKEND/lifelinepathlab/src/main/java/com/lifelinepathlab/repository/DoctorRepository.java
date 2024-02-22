@@ -16,7 +16,6 @@ public interface DoctorRepository extends JpaRepository<Doctor, Integer> {
 	List<Doctor> findByRequestStatus(String requestStatus);
 	
 
-//    @Query("SELECT * FROM Doctor d WHERE d.requestStatus = 'A' ")
     List<Doctor> findDoctorsByRequestStatus(String status);
 
 }

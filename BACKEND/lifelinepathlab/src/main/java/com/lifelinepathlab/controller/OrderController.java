@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lifelinepathlab.model.Doctor;
 import com.lifelinepathlab.model.Orders;
+import com.lifelinepathlab.model.Test;
+import com.lifelinepathlab.model.User;
 import com.lifelinepathlab.service.OrderService;
 
 
@@ -34,10 +36,24 @@ public class OrderController {
 		return ResponseEntity.ok(orders);
 	}
 	@GetMapping("/{id}")
-	public ResponseEntity<Orders> getDoctor(@PathVariable int id) {
+	public ResponseEntity<Orders> getOrders(@PathVariable int id) {
 		Orders orders = orderService.getOrdersByid(id);
 		return ResponseEntity.ok(orders);
 	}
+	
+//	@GetMapping("/cartOrders/{userid}")
+//	public ResponseEntity<List<Test>> getAllTestsByUserId(@PathVariable int userid) {
+//		List<Test> tests = orderService.getAllTestsByUserId(userid);
+//		return ResponseEntity.ok(tests);
+//	}
+	
+	@GetMapping("/cartOrders/{userid}")
+	public ResponseEntity<List<Orders>> getAllTestsByUserId(@PathVariable int userid) {
+		List<Orders> orders = orderService.getAllTestsByUserId(userid);
+		return ResponseEntity.ok(orders);
+	}
+	
+	
 	@PostMapping("/addOrder")
 	public ResponseEntity<String> addOrder(@RequestBody Orders orders) {
 		orderService.addorder(orders);

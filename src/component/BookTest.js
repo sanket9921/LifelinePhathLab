@@ -4,6 +4,7 @@ import Services from "../Services/Services";
 import TestTypes from "./TestTypes";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import AddToCart from "./AddToCart";
 
 export default function BookTest() {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ export default function BookTest() {
                     </div>
                   </div>
                   <div className="action-btn mt-3 ">
-                    <button className="card">Add to cart</button>
+                    <AddToCart id={test.testId}/>
                     <button className="buy">Buy Now</button>
                   </div>
                 </div>

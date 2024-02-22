@@ -48,6 +48,7 @@ public class User implements UserDetails {
 	public int getUserId() {
 		return this.userId;
 	}
+	
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
