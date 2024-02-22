@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lifelinepathlab.dto.OtpVarifacationDto;
+import com.lifelinepathlab.dto.ResetpasswordDto;
 import com.lifelinepathlab.model.ClientFeedback;
 import com.lifelinepathlab.model.JwtRequest;
 import com.lifelinepathlab.model.JwtResponse;
@@ -151,12 +152,20 @@ public class UserController {
 		userServiceRef.deleteUser(userId);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
+	@PutMapping("/reset-password")
+	public ResponseEntity<String> resetPassword(@RequestParam("email") String email, 
+			@RequestParam("otp") String otp, 
+			@RequestParam("password") String password){
+		System.out.println("reset password hit");
+		System.out.println(email + otp + password);
+	    return  ResponseEntity.ok(userServiceRef.resetPassword(email,otp,password));
+	}
 	  @PutMapping("/verify-account")
 	  public ResponseEntity<String> verifyAccount(@RequestBody OtpVarifacationDto dto) {
 	    return new ResponseEntity<>(userServiceRef.verifyAccount(dto.getEmail(), dto.getOtp()), HttpStatus.OK);
 	  }
 	  @PutMapping("/regenerate-otp")
 	  public ResponseEntity<String> regenerateOtp(@RequestParam("email") String email) {
-	    return new ResponseEntity<>(userServiceRef.regenerateOtp(email), HttpStatus.OK);
+	    return  ResponseEntity.ok(userServiceRef.regenerateOtp(email));
 	  }
 }

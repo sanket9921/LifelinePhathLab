@@ -20,6 +20,11 @@ class Services {
   reGenerateOTP(formData) {
     return axios.put(BACKEND_API + "/user/regenerate-otp", formData);
   }
+  resetPassword(formData) {
+    return axios.put(BACKEND_API + "/user/reset-password", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  }
   userRegistration(user) {
     return axios.post(BACKEND_API + "/user/create", user);
   }
@@ -49,9 +54,9 @@ class Services {
   }
 
   getClientFeedbacks() {
-    return axios.get(BACKEND_API + "/feedback/review",
-    {headers: { "Authorization": "Bearer "+jwt }}
-    );
+    return axios.get(BACKEND_API + "/feedback/review", {
+      headers: { Authorization: "Bearer " + jwt },
+    });
   }
 
   getAllTests() {
@@ -69,6 +74,7 @@ class Services {
     return axios.post(BACKEND_API + "/appointments/schedule",formData,{
       headers: { "Content-Type": "multipart/form-data",
       "Authorization": "Bearer "+jwt}});
+
   }
   // Test Services
 
@@ -121,8 +127,8 @@ class Services {
     return axios.get(BACKEND_API + "/doctors/list");
   }
 
-  getAllApprovalDoctor(){
-    return axios.get(BACKEND_API + "/doctors/approved")
+  getAllApprovalDoctor() {
+    return axios.get(BACKEND_API + "/doctors/approved");
   }
   updateRequestStatus(doctorId) {
     return axios.put(BACKEND_API + "/doctors/request/" + doctorId);
@@ -153,9 +159,9 @@ class Services {
   }
 
   showFeedbackToClient(feedbackId) {
-    return axios.put(BACKEND_API + "/feedback/" + feedbackId
-    // {headers: { "Authorization": "Bearer "+jwt }}
-
+    return axios.put(
+      BACKEND_API + "/feedback/" + feedbackId
+      // {headers: { "Authorization": "Bearer "+jwt }}
     );
     // return axios.get(BACKEND_API + "/tests/all");
   }
@@ -163,10 +169,10 @@ class Services {
   // Report Service
   addReport(formDataToSend) {
     return axios.post(BACKEND_API + "/reports/upload", formDataToSend, {
-      headers: { "Content-Type": "multipart/form-data",
-      "Authorization": "Bearer "+jwt
-
-    },
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: "Bearer " + jwt,
+      },
     });
   }
 }

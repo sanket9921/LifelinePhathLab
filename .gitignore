@@ -2,7 +2,7 @@
 
 # dependencies
 /node_modules
-src/Files
+src/Files/*
 public/Files
 
 /.pnp
