@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Services from "../Services/Services";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 export default function BestOffers() {
   const navigate = useNavigate();
@@ -28,10 +29,12 @@ export default function BestOffers() {
     // console.log(booking);
     Services.bookOrder(booking)
       .then((res) => {
-        alert(res.data);
+        ///alert(res.data);
+        toast.success(res.data,{onClose:100});
       })
       .catch((err) => {
-        alert(err.message);
+        //alert(err.message);
+        toast.error(err.message,{onClose:100});
       });
   };
 

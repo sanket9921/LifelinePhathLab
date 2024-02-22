@@ -77,9 +77,9 @@ public class TestController {
                            @RequestParam String testDescription,
                            @RequestParam int actualPrice,
                            @RequestParam int discount,
-                           @RequestParam int finalPrice,
-                           @RequestParam(required = false) MultipartFile photoFile) throws IOException {
-        testService.updateTest(id, testName, testType, testDescription, actualPrice, discount, finalPrice, photoFile);
+                           @RequestParam int finalPrice)
+                           throws IOException {
+        testService.updateTest(id, testName, testType, testDescription, actualPrice, discount, finalPrice);
     }
 
     @DeleteMapping("/{id}")

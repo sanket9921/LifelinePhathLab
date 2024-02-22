@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Services from "../Services/Services";
 import { useNavigate, useParams } from "react-router-dom";
-
+import { toast } from "react-toastify";
 export default function Otp() {
   const { email } = useParams();
   const navigate = useNavigate();
@@ -9,14 +9,18 @@ export default function Otp() {
   const handleVerification = async () => {
     const response = await Services.verifyUser({ email, otp });
     if (response.data === "OTPVERIFIED") {
+      toast.success("Otp Verified successfully!!!",{onClose:1000});
       navigate("/login");
-    } else alert(response.data);
+    } else toast.error(response.data,{onClose:1000});
+    //alert(response.data);
   };
   const handleReGernarateOtp = () => {
     const formData = new FormData();
     formData.append("email", email);
     const response = Services.reGenerateOTP(formData);
-    alert(response.data);
+    //alert(response.data);
+    toast.success("Resend Otp sent on Mail successfully!!!",{onClose:1000});
+
   };
   return (
     <div className="container mt-4 p-lg-5   rounded bg-white">

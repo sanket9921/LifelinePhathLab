@@ -90,9 +90,16 @@ class Services {
     return axios.delete(BACKEND_API + "/tests/" + id);
   }
 
-  editTestById(id) {
-    return axios.put(BACKEND_API + "/tests/" + id);
+  editTestById(id, formData) {
+    return axios.put(BACKEND_API + "/tests/" + id, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
   }
+
+  getTestById(id) {
+    return axios.get(BACKEND_API + "/tests/" + id);
+  }
+
   getAllTest() {
     return axios.get(BACKEND_API + "/tests/all/");
   }

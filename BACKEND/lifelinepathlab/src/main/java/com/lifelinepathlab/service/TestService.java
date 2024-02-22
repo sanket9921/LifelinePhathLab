@@ -66,8 +66,7 @@ public class TestService {
 
     @Transactional
     public void updateTest(int id, String testName, String testType, String testDescription,
-                           int actualPrice, int discount, int finalPrice,
-                           MultipartFile photoFile) throws IOException {
+                           int actualPrice, int discount, int finalPrice) throws IOException {
         // Find the existing test
         Test test = testRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Test not found with id: " , id));
@@ -78,13 +77,8 @@ public class TestService {
         test.setTestDescription(testDescription);
         test.setActualPrice(actualPrice);
         test.setDiscount(discount);
-        test.setFinalPrice(finalPrice);
 
-        // Handle file upload if photoFile is provided
-        if (photoFile != null) {
-        	String photoFileName = SaveTestFile(photoFile);
-            test.setTestImagePath(photoFileName);
-        }
+     
 
         // Save updated test to database
         testRepository.save(test);
