@@ -3,6 +3,7 @@ import "../mdi/css/materialdesignicons.min.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Services from "../Services/Services";
+import { toast } from "react-toastify";
 
 export default function Signup() {
   const [firstName1, setFirstName1] = useState("");
@@ -33,10 +34,12 @@ export default function Signup() {
     Services.userRegistration(user)
       .then((res) => {
         // console.log(res);
-        navigate("/login");
+        toast.success("Otp sent on Mail successfully!!!",{onClose:1000});
+        navigate("/verifyOtp/" + emailId1);
       })
       .catch((err) => {
-        alert(err.message);
+        //alert(err.message);
+        toast.error(err.message,{onClose:1000});
       });
   };
 

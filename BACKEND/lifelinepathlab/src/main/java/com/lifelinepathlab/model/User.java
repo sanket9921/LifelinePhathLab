@@ -1,5 +1,6 @@
 package com.lifelinepathlab.model;
 
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 import java.util.Date;
@@ -39,6 +40,9 @@ public class User implements UserDetails {
 	private String address;
 	private String password;
 	private String role="USER";
+	private boolean active;
+	private String otp;
+	private LocalDateTime otpGeneratedTime;
 	
 	
 	public int getUserId() {

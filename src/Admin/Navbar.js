@@ -127,9 +127,9 @@ function Navbar() {
               </Link>
             </li>
             <li className="nav-item">
-              <div className="nav-link text-danger" onClick={handleLogout}>
+              <button className="btn btn-outline-danger" onClick={handleLogout}>
                 Logout
-              </div>
+              </button>
             </li>
           </ul>
         </div>

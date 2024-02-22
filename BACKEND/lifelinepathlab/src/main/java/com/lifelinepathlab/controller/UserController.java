@@ -19,8 +19,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lifelinepathlab.dto.OtpVarifacationDto;
 import com.lifelinepathlab.model.ClientFeedback;
 import com.lifelinepathlab.model.JwtRequest;
 import com.lifelinepathlab.model.JwtResponse;
@@ -149,5 +151,12 @@ public class UserController {
 		userServiceRef.deleteUser(userId);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-
+	  @PutMapping("/verify-account")
+	  public ResponseEntity<String> verifyAccount(@RequestBody OtpVarifacationDto dto) {
+	    return new ResponseEntity<>(userServiceRef.verifyAccount(dto.getEmail(), dto.getOtp()), HttpStatus.OK);
+	  }
+	  @PutMapping("/regenerate-otp")
+	  public ResponseEntity<String> regenerateOtp(@RequestParam("email") String email) {
+	    return new ResponseEntity<>(userServiceRef.regenerateOtp(email), HttpStatus.OK);
+	  }
 }

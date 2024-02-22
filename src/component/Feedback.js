@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import Services from "../Services/Services";
+import { toast } from "react-toastify";
 export default function Feedback() {
   const [clientName1, setClientName1] = useState("");
   const [contactNo1, setContactNo1] = useState("");
@@ -15,11 +16,16 @@ export default function Feedback() {
 
     Services.addClientFeedback(clientFeedback)
       .then((res) => {
-        alert(res.data);
+        //alert(res.data);
+        toast.success(res.data,{onclose:1000});
+        setTimeout(() => {
+          window.location.reload()
+        }, 1000);
       })
       .catch((err) => {
-        alert(err.message);
-      });
+        //alert(err.message);
+        toast.error(err.message,{onclose:1000});
+       } )
   };
 
   return (

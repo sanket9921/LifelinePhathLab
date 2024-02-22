@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -41,15 +42,46 @@ public class SecurityConfig {
                 .authorizeHttpRequests((auth) -> auth.requestMatchers(HttpMethod.POST,"home/**").authenticated()
  	
                 		.requestMatchers("api/user/login").permitAll()
+                		.requestMatchers("api/user/regenerate-otp").permitAll()
+
+                		.requestMatchers("api/user/verify-account").permitAll()
                 		.requestMatchers("/api/user/**").permitAll()
                 		.requestMatchers("/api/feedback/**").permitAll()
-        
-                		.requestMatchers("/api/tests/all/**").permitAll()
+                		
                 		.requestMatchers("/api/tests/**").permitAll()
+                		.requestMatchers("/api/tests/all/**").permitAll()
                 		.requestMatchers("/api/tests/create/**").permitAll()
                 		.requestMatchers("/api/tests/testName/**").permitAll()
                 		.requestMatchers("/api/tests/TestType").permitAll()
                 		.requestMatchers("/api/tests/bestOffers").permitAll()
+                		
+                		//Docter All Api
+                		.requestMatchers("/api/doctors/**").permitAll()
+                		.requestMatchers("/api/doctors/register/**").permitAll()
+                		.requestMatchers("/api/doctors/list/**").permitAll()
+                		.requestMatchers("/api/doctors/pending/**").permitAll()
+                		.requestMatchers("api/doctors/approved/**").permitAll()
+                		.requestMatchers("api/doctors/request/**").permitAll()
+                		.requestMatchers("api/doctors/reject/**").permitAll()
+
+                		//All api feedback
+                		.requestMatchers("/api/feedback").permitAll()
+                		.requestMatchers("/api/feedback/**").permitAll()
+                		.requestMatchers("/api/feedback/review/**").permitAll()
+                		
+                		//All api appointments
+                		.requestMatchers("/api/appointments/**").permitAll()
+                		.requestMatchers("/api/appointments/schedule/**").hasRole("USER")
+                		.requestMatchers("/api/appointments/list/**").permitAll()
+                		
+                		//All api reports
+                		.requestMatchers("/api/reports/**").permitAll()
+                		.requestMatchers("/api/reports/upload/**").hasRole("ADMIN")
+                		
+                		
+                		
+                
+                		
                 		.requestMatchers("/api/orders/**").permitAll()
                 		.requestMatchers("/api/tests/create/**").permitAll()
                 		.requestMatchers("/api/orders/addOrder/**").permitAll()

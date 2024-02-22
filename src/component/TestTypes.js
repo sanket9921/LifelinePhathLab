@@ -20,7 +20,7 @@ export default function TestTypes() {
   }, []);
   return (
     <>
-      <h5 className="filters">Fillter</h5>
+      <h5 className="filters">Filter</h5>
       <div className="filter-items">
         <div className="ms-4 mt-2">
           <div

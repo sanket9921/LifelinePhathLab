@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Services from "../../Services/Services";
+import { toast } from "react-toastify";
 export default function AddTest() {
   const [previewSrc, setPreviewSrc] = useState("");
   const previewImage = (input) => {
@@ -128,11 +129,14 @@ export default function AddTest() {
 
       await Services.addTest(formDataToSend)
         .then((res) => {
-          alert("Test registered successfully!");
+          //alert("Test registered successfully!");
+          toast.success("Test Registered Successfully!", { autoClose: 1000 });
         })
         .catch((err) => {
-          console.log(err);
-        });
+          //console.log(err);
+          toast.error("Failed to register test. Please try again later!", {autoClose: 1000});
+
+        })
 
       setFormData({
         testName: "",
@@ -145,7 +149,8 @@ export default function AddTest() {
       });
     } catch (error) {
       console.error("Error registering test:", error);
-      alert("Failed to register test. Please try again later.");
+      //alert("Failed to register test. Please try again later.");
+      toast.error("Failed to register test. Please try again later!", { autoClose: 2000 });
     }
   };
   return (
@@ -153,7 +158,9 @@ export default function AddTest() {
       <div class="col-12 col-xl-8 mb-4 mb-xl-0">
         <h3 class="font-weight-bold">Add Test</h3>
       </div>
+
       <div className="container mt-5 mb-3 pb-3 bg-white pt-3">
+
         <div className="text-center">
           <h2 className="mb-4">Upload Photo</h2>
           <label
@@ -259,6 +266,7 @@ export default function AddTest() {
         <button type="button" class="btn btn-primary" onClick={handleSubmit}>
           Add Test
         </button>
+
       </div>
     </>
   );

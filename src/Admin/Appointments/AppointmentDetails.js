@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useId } from "react";
 import { useParams } from "react-router-dom";
 import Services from "../../Services/Services";
-
+import { toast } from "react-toastify";
 export default function AppointmentDetails() {
   const { id } = useParams();
   const [appointment, setAppointment] = useState([]);
@@ -10,14 +10,15 @@ export default function AppointmentDetails() {
     Services.getAppointmentById(id)
       .then((response) => {
         setAppointment(response.data);
-        console.log(appointment?.doctor?.doctorId);
+       // console.log(appointment?.doctor?.doctorId);
       })
       .catch((error) => {
-        console.log(error);
+       // console.log(error);
+        toast.error(error.message,{onClose:1000});
       });
   }, []);
-  const [userId, setUserId] = useState("");
-  const [doctorId, setDoctorId] = useState("");
+  // const [userId, setUserId] = useState("");
+  // const [doctorId, setDoctorId] = useState("");
   const [reportFile, setReportFile] = useState(null);
   const [comment, setComment] = useState("");
   const [message, setMessage] = useState("");
@@ -31,10 +32,10 @@ export default function AppointmentDetails() {
 
     const formData = new FormData();
     formData.append("file", reportFile);
-    formData.append("userId", 1);
+    formData.append("userId",appointment?.user?.userId);
     formData.append("doctorId", appointment?.doctor?.doctorId);
     formData.append("comment", comment);
-
+    console.log(appointment)
     try {
       await Services.addReport(formData);
 
@@ -43,9 +44,16 @@ export default function AppointmentDetails() {
       //     "Content-Type": "multipart/form-data",
       //   },
       // });
-      setMessage("Report uploaded successfully!");
+      
+     // alert("Report uploaded successfully!");
+      toast.success("Report uploaded successfully!",{onClose:1000});
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000);
+
     } catch (error) {
-      setMessage("Failed to upload report: " + error.message);
+      //alert("Failed to upload report: " + error.message);
+      toast.error("Failed to upload report: " + error.message,{onClose:1000});
     }
   };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Services from "../Services/Services";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 export default function BestOffers() {
   const navigate = useNavigate();
@@ -51,12 +52,15 @@ export default function BestOffers() {
     //function call to add order to cart....
     Services.addOrderToCart(booking)
       .then((res) => {
+        ///alert(res.data);
+        toast.success(res.data,{onClose:100});
         fetchBestOffers();
         getTestData();
         // alert(res.data);
       })
       .catch((err) => {
-        alert(err.message);
+        //alert(err.message);
+        toast.error(err.message,{onClose:100});
       });
   };
   /*Add to cart*/

@@ -1,11 +1,25 @@
 import axios from "axios";
+import Cookies from "js-cookie";
 const BACKEND_API = "http://localhost:8083/api";
+const jwt = Cookies.get("jwtToken");
+
 class Services {
   //Homepage Best Offers
   getBestOffers() {
     return axios.get(BACKEND_API + "/tests/bestOffers");
   }
 
+  getUserByid(userId) {
+    return axios.get(BACKEND_API + "/user/" + userId);
+  }
+
+  verifyUser(user) {
+    return axios.put(BACKEND_API + "/user/verify-account", user);
+  }
+
+  reGenerateOTP(formData) {
+    return axios.put(BACKEND_API + "/user/regenerate-otp", formData);
+  }
   userRegistration(user) {
     return axios.post(BACKEND_API + "/user/create", user);
   }
@@ -35,7 +49,9 @@ class Services {
   }
 
   getClientFeedbacks() {
-    return axios.get(BACKEND_API + "/feedback/review");
+    return axios.get(BACKEND_API + "/feedback/review",
+    {headers: { "Authorization": "Bearer "+jwt }}
+    );
   }
 
   getAllTests() {
@@ -49,7 +65,11 @@ class Services {
   getAppointmentById(id) {
     return axios.get(BACKEND_API + "/appointments/" + id);
   }
-
+  SheduleAppointment(formData){
+    return axios.post(BACKEND_API + "/appointments/schedule",formData,{
+      headers: { "Content-Type": "multipart/form-data",
+      "Authorization": "Bearer "+jwt}});
+  }
   // Test Services
 
   addTest(formDataToSend) {
@@ -60,6 +80,16 @@ class Services {
 
   deleteTestById(id) {
     return axios.delete(BACKEND_API + "/tests/" + id);
+  }
+
+  editTestById(id,formData) {
+    return axios.put(BACKEND_API + "/tests/" + id,formData, 
+    { headers: { "Content-Type": "multipart/form-data" },
+  });
+  }
+
+  getTestById(id) {
+    return axios.get(BACKEND_API + "/tests/" + id);
   }
 
   getAllTest() {
@@ -91,6 +121,9 @@ class Services {
     return axios.get(BACKEND_API + "/doctors/list");
   }
 
+  getAllApprovalDoctor(){
+    return axios.get(BACKEND_API + "/doctors/approved")
+  }
   updateRequestStatus(doctorId) {
     return axios.put(BACKEND_API + "/doctors/request/" + doctorId);
   }
@@ -126,8 +159,21 @@ class Services {
   // Report Service
   addReport(formDataToSend) {
     return axios.post(BACKEND_API + "/reports/upload", formDataToSend, {
-      headers: { "Content-Type": "multipart/form-data" },
+      headers: { "Content-Type": "multipart/form-data",
+      "Authorization": "Bearer "+jwt
+
+    },
     });
+  }
+
+  //to get the cart orders
+  getCartOrdersByUserId(userId) {
+    return axios.get(BACKEND_API + "/orders/cartOrders/" + userId);
+  }
+
+  //to delete cart orders
+  deleteCartOrderById(id) {
+    return axios.delete(BACKEND_API + "/orders/" + id);
   }
 
   //to get the cart orders

@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import Feedback from "./Feedback";
 import Review from "./Review";
 import BestOffers from "./BestOffers";
+import TestFilter from "./TestFilter";
+import About from "./About";
 export default function Home() {
   return (
     <>
@@ -19,74 +21,9 @@ export default function Home() {
       {/* End Hero */}
 
       {/* start Scroll bar */}
-      <div className=" container mt-3 rounded scroll-container">
-        <div className="text-center my-3 mt-3">
-          <h3>Test by Health Risks</h3>
-        </div>
-        <div className="scroll-wrapper">
-          <div className="scroll-item">
-            <div className="circle">
-              <img src="assests/image/allergy.png" alt="Image 1" />
-              <p>Allergy</p>
-            </div>
-          </div>
-          <div className="scroll-item">
-            <div className="circle">
-              <img src="assests/image/allergy.png" alt="Image 1" />
-              <p>Allergy</p>
-            </div>
-          </div>
-          <div className="scroll-item">
-            <div className="circle">
-              <img src="assests/image/allergy.png" alt="Image 1" />
-              <p>Allergy</p>
-            </div>
-          </div>
-          <div className="scroll-item">
-            <div className="circle">
-              <img src="assests/image/allergy.png" alt="Image 1" />
-              <p>Allergy</p>
-            </div>
-          </div>
-          <div className="scroll-item">
-            <div className="circle">
-              <img src="assests/image/allergy.png" alt="Image 1" />
-              <p>Allergy</p>
-            </div>
-          </div>
-          <div className="scroll-item">
-            <div className="circle">
-              <img src="assests/image/allergy.png" alt="Image 1" />
-              <p>Allergy</p>
-            </div>
-          </div>
-          <div className="scroll-item">
-            <div className="circle">
-              <img src="assests/image/allergy.png" alt="Image 1" />
-              <p>Allergy</p>
-            </div>
-          </div>
-          <div className="scroll-item">
-            <div className="circle">
-              <img src="assests/image/allergy.png" alt="Image 1" />
-              <p>Allergy</p>
-            </div>
-          </div>
-          <div className="scroll-item">
-            <div className="circle">
-              <img src="assests/image/allergy.png" alt="Image 1" />
-              <p>Allergy</p>
-            </div>
-          </div>
-          <div className="scroll-item">
-            <div className="circle">
-              <img src="assests/image/allergy.png" alt="Image 1" />
-              <p>Allergy</p>
-            </div>
-          </div>
-          {/* Add more scroll items as needed */}
-        </div>
-      </div>
+
+      <TestFilter />
+
       {/* Add more scroll items as needed */}
       {/* end scroll bar */}
       {/*  Start Offer Section */}
@@ -98,6 +35,8 @@ export default function Home() {
       {/*review Section starts here*/}
       <Review />
       {/*review Section starts here*/}
+
+      <About/>
     </>
   );
 }

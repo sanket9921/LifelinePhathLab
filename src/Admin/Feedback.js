@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Services from "../Services/Services";
+import { toast } from "react-toastify";
 
 export default function Feedback() {
   const [feedbacks, setFeedbacks] = useState([]);
@@ -10,17 +11,22 @@ export default function Feedback() {
         setFeedbacks(res.data);
       })
       .catch((err) => {
-        alert(err.message);
+       // alert(err.message);
+        toast.error(err.message,{onClose:1000});
       });
   }, []);
 
   const showHandler = (feedbackId) => {
     Services.showFeedbackToClient(feedbackId)
       .then((res) => {
-        // window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
+        toast.success("Show HomePage Feedback successfully",{onClose:1000});
       })
       .catch((err) => {
-        alert(err.message);
+        //alert(err.message);
+        toast.error(err.message,{onClose:1000});
       });
   };
 
@@ -108,7 +114,7 @@ export default function Feedback() {
                     }}
                   >
                     <button
-                      className="btn btn-warning"
+                      className="btn btn-outline-warning"
                       onClick={() => showHandler(feedback.feedbackId)}
                     >
                       Show

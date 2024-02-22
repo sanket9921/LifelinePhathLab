@@ -3,7 +3,7 @@ import "../mdi/css/materialdesignicons.min.css";
 import { Link } from "react-router-dom";
 import Services from "../Services/Services";
 import Cookies from "js-cookie";
-
+import { toast } from "react-toastify";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,7 +14,7 @@ export default function Login() {
       // Perform login request to backend, get token
       const response = await Services.userLogin({ email, password });
       const data = response.data;
-
+      toast.success(response.data.message,{onclose:1000});
       // Store token in cookie if login successful
       if (response.status === 200) {
         Cookies.set("jwtToken", data.jwtToken);
@@ -29,11 +29,16 @@ export default function Login() {
         setLoggedIn(true);
       } else {
         // Handle login failure
-        setError(data.message);
+        //setError(data.message);
+        toast.error(data.message,{onclose:1000});
       }
     } catch (error) {
       // Handle network errors
-      setError("Network error. Please try again later.");
+      //setError("Network error. Please try again later.");
+      toast.error("Wrong Password,Please try again later.",{onclose:1000});
+      setTimeout(() => {
+        window.location.reload()
+      }, 1500);
     }
   };
 
