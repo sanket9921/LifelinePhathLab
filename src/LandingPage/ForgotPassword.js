@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Services from "../Services/Services";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
@@ -11,8 +11,9 @@ export default function ForgotPassword() {
   const handleReGernarateOtp = () => {
     const formData = new FormData();
     formData.append("email", email);
-    const response = Services.reGenerateOTP(formData);
-    alert(response.data);
+    Services.reGenerateOTP(formData).then((response) => {
+      alert(response.data);
+    });
   };
 
   const handleResetPassword = () => {
@@ -21,12 +22,13 @@ export default function ForgotPassword() {
     formData.append("password", password);
     formData.append("otp", otp);
 
-    const response = Services.resetPassword(formData);
-    if (response.data === "PASSWORDRESETED") {
-      navigate("/login");
-    } else {
-      alert(response.data);
-    }
+    Services.resetPassword(formData).then((response) => {
+      if (response.data == "PASSWORDRESETED") {
+        navigate("/login");
+      } else {
+        alert(response.data);
+      }
+    });
   };
 
   return (
@@ -51,9 +53,9 @@ export default function ForgotPassword() {
               <i className="mdi mdi-lock" />
               <input
                 className="input-field"
-                type="email"
+                type="text"
                 placeholder="Enter the OTP"
-                onClick={(e) => {
+                onChange={(e) => {
                   setOtp(e.target.value);
                 }}
               />
@@ -76,7 +78,7 @@ export default function ForgotPassword() {
               className="input-field"
               type="email"
               placeholder="Enter New Password"
-              onClick={(e) => {
+              onChange={(e) => {
                 setPassword(e.target.value);
               }}
             />

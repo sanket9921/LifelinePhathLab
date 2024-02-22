@@ -20,6 +20,11 @@ class Services {
   reGenerateOTP(formData) {
     return axios.put(BACKEND_API + "/user/regenerate-otp", formData);
   }
+  resetPassword(formData) {
+    return axios.put(BACKEND_API + "/user/reset-password", formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
+  }
   userRegistration(user) {
     return axios.post(BACKEND_API + "/user/create", user);
   }

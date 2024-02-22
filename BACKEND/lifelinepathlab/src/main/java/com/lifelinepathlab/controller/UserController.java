@@ -153,8 +153,12 @@ public class UserController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	@PutMapping("/reset-password")
-	public ResponseEntity<String> resetPassword(@RequestBody ResetpasswordDto resetpassword){
-	    return new ResponseEntity<>(userServiceRef.resetPassword(resetpassword.getEmail(), resetpassword.getOtp(),resetpassword.getPassword()), HttpStatus.OK);
+	public ResponseEntity<String> resetPassword(@RequestParam("email") String email, 
+			@RequestParam("otp") String otp, 
+			@RequestParam("password") String password){
+		System.out.println("reset password hit");
+		System.out.println(email + otp + password);
+	    return  ResponseEntity.ok(userServiceRef.resetPassword(email,otp,password));
 	}
 	  @PutMapping("/verify-account")
 	  public ResponseEntity<String> verifyAccount(@RequestBody OtpVarifacationDto dto) {
@@ -162,6 +166,6 @@ public class UserController {
 	  }
 	  @PutMapping("/regenerate-otp")
 	  public ResponseEntity<String> regenerateOtp(@RequestParam("email") String email) {
-	    return new ResponseEntity<>(userServiceRef.regenerateOtp(email), HttpStatus.OK);
+	    return  ResponseEntity.ok(userServiceRef.regenerateOtp(email));
 	  }
 }
