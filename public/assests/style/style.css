@@ -576,22 +576,24 @@ input[type="date"]:valid:before {
 /*About section styling starts here*/
 
 .about-container {
+  background-image: url("../image/about-bg-img.png");
   font-weight: 500;
+  
   color: white;
   border: 1px solid #2e9aec;
   border-radius: 15px;
-  /* padding: 8% 2% 5% 3%; */
-}
-
-.background-img {
-  background-image: url("About+Us+photo.jpeg");
-
-  position: absolute;
-  height: 100%;
+  /* position: absolute; */
+  height: 400px;
   width: 100%;
 
   background-size: cover;
   background-position: center;
+  /* padding: 8% 2% 5% 3%; */
+}
+
+.background-img {
+
+
   filter: blur(4px);
 }
 /*About section Styling ends here*/
@@ -722,11 +724,12 @@ input[type="date"]:valid:before {
 .feedback-card {
   flex: 0 0 auto;
   width: 300px; /* Adjust the width of each feedback card */
+  height:150px;
   margin-right: 10px;
   padding: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 15px;
-  box-shadow: 5px 10px 5px lightblue;
+  box-shadow: 5px 10px 5px rgba(68, 78, 81, 0.804);
 }
 
 .feedback-pri-text {

@@ -53,8 +53,8 @@ public class SecurityConfig {
                 		.requestMatchers("/api/user/**").permitAll()
                 		.requestMatchers("/api/feedback/**").permitAll()
                 		
-                		.requestMatchers("/api/tests/all/**").permitAll()
                 		.requestMatchers("/api/tests/**").permitAll()
+                		.requestMatchers("/api/tests/all/**").permitAll()
                 		.requestMatchers("/api/tests/create/**").permitAll()
                 		.requestMatchers("/api/tests/testName/**").permitAll()
                 		.requestMatchers("/api/tests/TestType").permitAll()
@@ -85,7 +85,7 @@ public class SecurityConfig {
                 		
                 		
                 		
-                		
+                
                 		
                 		.requestMatchers("/api/orders/addOrder/**").permitAll()
                 		.requestMatchers("/api/enquiry/**").permitAll()

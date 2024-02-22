@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Services from "../../Services/Services";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 export default function AllTest() {
   const [Tests, setTest] = useState([]);
 
@@ -29,7 +30,7 @@ export default function AllTest() {
   }
 
   const navigateToNewPage = () => {
-    // window.location.href = '/editTest1'; 
+     window.location.href = '/EditTest'; 
     // Change the URL to the desired page
 };
 
@@ -147,13 +148,12 @@ return (
                     borderTop: "1px solid lightgray",
                     padding: 8,
                   }}
-                ><button
+                ><Link
                   class=" btn btn-outline-warning"
-                  onClick={navigateToNewPage}
-                >
+                 to= {"/editTest/"+test.testId}               >
                   Edit
                 
-                  </button>
+                  </Link>
 
                 </td>
                 <td

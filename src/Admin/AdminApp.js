@@ -19,6 +19,7 @@ import Appointments from "./Appointments/Appointments";
 import AppointmentDetails from "./Appointments/AppointmentDetails";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import EditTest from "./Tests/EditTest";
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
             <Route path="/admins" element={<Admin />} />
             <Route path="/addtest" element={<AddTest />} />
             <Route path="/allTest" element={<AllTest />} />
+            <Route path="/editTest/:id" element={<EditTest />} />
             <Route path="/addDoctor" element={<AddDoctor />} />
             <Route path="/feedback" element={<Feedback />} />
             <Route path="/enquiry" element={<Enquiry />} />

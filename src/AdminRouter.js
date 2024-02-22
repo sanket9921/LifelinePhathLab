@@ -13,6 +13,7 @@ import Feedback from "./Admin/Feedback";
 import Enquiry from "./Admin/Enquiry";
 import AppointmentDetails from "./Admin/Appointments/AppointmentDetails.js";
 
+
 const adminRouter = createBrowserRouter([
   {
     path: "/",

@@ -68,10 +68,7 @@ class Services {
   SheduleAppointment(formData){
     return axios.post(BACKEND_API + "/appointments/schedule",formData,{
       headers: { "Content-Type": "multipart/form-data",
-      "Authorization": "Bearer "+jwt
-    },
-
-    });
+      "Authorization": "Bearer "+jwt}});
   }
   // Test Services
 
@@ -85,9 +82,16 @@ class Services {
     return axios.delete(BACKEND_API + "/tests/" + id);
   }
 
-  editTestById(id){
-    return axios.put(BACKEND_API + "/tests/" + id);
+  editTestById(id,formData) {
+    return axios.put(BACKEND_API + "/tests/" + id,formData, 
+    { headers: { "Content-Type": "multipart/form-data" },
+  });
   }
+
+  getTestById(id) {
+    return axios.get(BACKEND_API + "/tests/" + id);
+  }
+
   getAllTest() {
     return axios.get(BACKEND_API + "/tests/all/");
   }

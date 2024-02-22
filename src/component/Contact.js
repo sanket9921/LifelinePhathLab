@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Services from "../Services/Services";
-
+import { toast } from "react-toastify";
 export default function Contact() {
   const [name1, setName1] = useState("");
   const [contactNo1, setContactNo1] = useState("");
@@ -17,10 +17,15 @@ export default function Contact() {
 
     Services.addEnquiry(enquiry)
       .then((res) => {
-        alert(res.data);
+       // alert(res.data);
+        toast.success(res.data,{onclose:1000});
+        setTimeout(() => {
+          window.location.reload()
+        }, 1500);
       })
       .catch((err) => {
-        alert(err.message);
+        //alert(err.message);
+        toast.error(err.message,{onclose:1000});
       });
   };
 

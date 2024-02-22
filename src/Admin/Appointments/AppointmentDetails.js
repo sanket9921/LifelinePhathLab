@@ -45,9 +45,15 @@ export default function AppointmentDetails() {
       //   },
       // });
       
-      alert("Report uploaded successfully!");
+     // alert("Report uploaded successfully!");
+      toast.success("Report uploaded successfully!",{onClose:1000});
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000);
+
     } catch (error) {
-      alert("Failed to upload report: " + error.message);
+      //alert("Failed to upload report: " + error.message);
+      toast.error("Failed to upload report: " + error.message,{onClose:1000});
     }
   };
 

@@ -3,7 +3,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 import Services from "../Services/Services";
-
+import { toast } from "react-toastify";
 export default function UploadPrescription() {
   const navigator = new useNavigate();
   const [patientName, setPatientName] = useState("");
@@ -60,9 +60,15 @@ export default function UploadPrescription() {
           },
         }
       );
-      console.log("Appointment scheduled successfully");
+     // console.log("Appointment scheduled successfully");
+      toast.success("Appointment scheduled successfully",{onclose:1000});
+      setTimeout(() => {
+        window.location.reload()
+      }, 1000);
+
     } catch (error) {
-      console.error("Error scheduling appointment:", error);
+      //console.error("Error scheduling appointment:", error);
+      toast.error("Error scheduling appointment:", error,{onclose:1000});
     }
   };
 

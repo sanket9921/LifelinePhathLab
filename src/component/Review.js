@@ -15,12 +15,12 @@ export default function Review() {
 
   return (
     <div className="container bg-white rounded mt-3 pt-3">
-      <h3 className="text-center feedback-heading">Patient's feedback</h3>
+      <h3 className="text-center feedback-heading">Patient's Feedback</h3>
           <div class="feedback-container">
             {feedbacks &&
         feedbacks.map((fBack) => (
             <div class="feedback-card">
-              <div className="feedback-pri-text">{fBack.clientName}</div>
+              <div className="feedback-pri-text" style={{fontFamily:"monospace"}}>{fBack.clientName}</div>
               <div className="feedback-sec-text">{fBack.feedback}</div>
             </div>
             ))}
