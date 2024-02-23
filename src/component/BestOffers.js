@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Services from "../Services/Services";
 import { useNavigate } from "react-router-dom";
-import AddToCart from "./AddToCart";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 
 export default function BestOffers() {
   const navigate = useNavigate();
   const [offers, setOffers] = useState([]);
-  const [btnHandler, setBtnHandler] = useState(false);
   const [cartOrders, setCartOrders] = useState();
+  const testIds = [];
   const userId = Cookies.get("userId");
 
   useEffect(() => {
+    fetchBestOffers();
+    getTestData();
+  }, []);
+
+  //To fetch best 5 offers on discount
+
+  const fetchBestOffers = () => {
     Services.getBestOffers()
       .then((res) => {
         setOffers(res.data);
@@ -20,25 +26,35 @@ export default function BestOffers() {
       .catch((err) => {
         alert(err.message);
       });
+  };
 
-    getTestData();
-  }, []);
-
-  console.log(typeof cartOrders);
+  //To navigate to the detials page
   const NavigationHandler = (testName) => {
     navigate("/testDetails/" + testName);
   };
 
-  /*Add to cart*/
+  //Making an array of Test id's to to check condition in conditional rendering
+  cartOrders &&
+    cartOrders.map((cartOrder) => {
+      testIds.push(cartOrder.tests[0].testId);
+    });
 
+  // console.log(testIds);
+  // console.log(testIds.includes(9));
+
+  /*Add to cart function*/
   const AddToCartHandler = (id) => {
     const booking = {
       user: { userId: userId },
       tests: [{ testId: id }],
     };
     // console.log(booking);
-    Services.bookOrder(booking)
+    //function call to add order to cart....
+    Services.addOrderToCart(booking)
       .then((res) => {
+        fetchBestOffers();
+        getTestData();
+        // alert(res.data);
         ///alert(res.data);
         toast.success(res.data, { onClose: 100 });
         setBtnHandler(false);
@@ -49,24 +65,26 @@ export default function BestOffers() {
         toast.error(err.message, { onClose: 100 });
       });
   };
-
   /*Add to cart*/
 
-  /*delete button*/
+  /*Remove from cart*/
 
+  //To fecth cart orders of user
   const getTestData = async () => {
     await Services.getCartOrdersByUserId(userId).then((res) => {
       setCartOrders(res.data);
     });
   };
 
-  const RemoveHandler = (testid) => {
+  //Function to remove order from cart
+  const RemoveFromCartHandler = (testid) => {
     cartOrders.forEach((cartOrder) => {
       if (cartOrder.tests[0].testId === testid) {
         Services.deleteCartOrderById(cartOrder.id)
           .then((res) => {
-            setBtnHandler(true);
-            alert(res.data);
+            fetchBestOffers();
+            getTestData();
+            // alert(res.data);
           })
           .catch((err) => {
             alert(err.message);
@@ -74,7 +92,6 @@ export default function BestOffers() {
       }
     });
   };
-
   /*Remove From Cart*/
 
   return (
@@ -106,7 +123,8 @@ export default function BestOffers() {
               </div>
 
               <div className="action-btn mt-3 ">
-                {true ? (
+                {/* Conditonal rendering of buttons */}
+                {!testIds.includes(offer.testId) ? (
                   <button
                     className="card"
                     onClick={() => AddToCartHandler(offer.testId)}
@@ -115,12 +133,13 @@ export default function BestOffers() {
                   </button>
                 ) : (
                   <button
-                    className="card"
-                    onClick={() => RemoveHandler(offer.testId)}
+                    className="card btn btn-danger "
+                    onClick={() => RemoveFromCartHandler(offer.testId)}
                   >
                     Remove
                   </button>
                 )}
+                {/* Conditonal rendering of buttons */}
                 <button className="buy">Buy Now</button>
               </div>
             </div>
