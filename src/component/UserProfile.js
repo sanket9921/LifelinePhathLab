@@ -98,7 +98,7 @@ export default function UserProfile() {
                 <hr />
                 <div className="row">
                   <div className="col-sm-3">
-                    <h6 className="mb-0">Bloo Group</h6>
+                    <h6 className="mb-0">Blood Group</h6>
                   </div>
                   <div className="col-sm-9 text-secondary">
                     {user?.bloodGroup}

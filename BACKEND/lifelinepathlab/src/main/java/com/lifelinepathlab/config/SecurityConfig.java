@@ -85,7 +85,8 @@ public class SecurityConfig {
                 		
                 		
                 
-                		
+                		.requestMatchers("/api/orders/**").permitAll()
+
                 		.requestMatchers("/api/orders/addOrder/**").permitAll()
                 		.requestMatchers("/api/orders/cartOrders/**").permitAll()
                 		.anyRequest().authenticated()                		

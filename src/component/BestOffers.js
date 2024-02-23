@@ -57,7 +57,6 @@ export default function BestOffers() {
         // alert(res.data);
         ///alert(res.data);
         toast.success(res.data, { onClose: 100 });
-        setBtnHandler(false);
         alert(res.data);
       })
       .catch((err) => {
