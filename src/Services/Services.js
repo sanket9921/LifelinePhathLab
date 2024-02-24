@@ -49,9 +49,9 @@ class Services {
   }
 
   getClientFeedbacks() {
-    return axios.get(BACKEND_API + "/feedback/review",
-    {headers: { "Authorization": "Bearer "+jwt }}
-    );
+    return axios.get(BACKEND_API + "/feedback/review", {
+      headers: { Authorization: "Bearer " + jwt },
+    });
   }
 
   getAllTests() {
@@ -65,10 +65,13 @@ class Services {
   getAppointmentById(id) {
     return axios.get(BACKEND_API + "/appointments/" + id);
   }
-  SheduleAppointment(formData){
-    return axios.post(BACKEND_API + "/appointments/schedule",formData,{
-      headers: { "Content-Type": "multipart/form-data",
-      "Authorization": "Bearer "+jwt}});
+  SheduleAppointment(formData) {
+    return axios.post(BACKEND_API + "/appointments/schedule", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: "Bearer " + jwt,
+      },
+    });
   }
   // Test Services
 
@@ -82,10 +85,10 @@ class Services {
     return axios.delete(BACKEND_API + "/tests/" + id);
   }
 
-  editTestById(id,formData) {
-    return axios.put(BACKEND_API + "/tests/" + id,formData, 
-    { headers: { "Content-Type": "multipart/form-data" },
-  });
+  editTestById(id, formData) {
+    return axios.put(BACKEND_API + "/tests/" + id, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    });
   }
 
   getTestById(id) {
@@ -121,8 +124,8 @@ class Services {
     return axios.get(BACKEND_API + "/doctors/list");
   }
 
-  getAllApprovalDoctor(){
-    return axios.get(BACKEND_API + "/doctors/approved")
+  getAllApprovalDoctor() {
+    return axios.get(BACKEND_API + "/doctors/approved");
   }
   updateRequestStatus(doctorId) {
     return axios.put(BACKEND_API + "/doctors/request/" + doctorId);
@@ -159,10 +162,10 @@ class Services {
   // Report Service
   addReport(formDataToSend) {
     return axios.post(BACKEND_API + "/reports/upload", formDataToSend, {
-      headers: { "Content-Type": "multipart/form-data",
-      "Authorization": "Bearer "+jwt
-
-    },
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: "Bearer " + jwt,
+      },
     });
   }
 
@@ -182,8 +185,8 @@ class Services {
   }
 
   //to delete cart orders
-  deleteCartOrderById(id) {
-    return axios.delete(BACKEND_API + "/orders/" + id);
+  deleteCartOrderById(id, testId) {
+    return axios.put(BACKEND_API + "/orders/" + id + "/" + testId);
   }
 }
 

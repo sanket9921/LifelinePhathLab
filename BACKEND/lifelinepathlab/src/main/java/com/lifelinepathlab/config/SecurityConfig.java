@@ -22,7 +22,6 @@ import com.lifelinepathlab.security.JwtAuthenticationFilter;
 @EnableWebSecurity
 public class SecurityConfig {
 
-
     @Autowired
     private JwtAuthenticationEntryPoint point;
     @Autowired
@@ -30,6 +29,7 @@ public class SecurityConfig {
     
     @Autowired
     private UserDetailsService userDetailsService;
+    
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -78,14 +78,21 @@ public class SecurityConfig {
                 		.requestMatchers("/api/reports/**").permitAll()
                 		.requestMatchers("/api/reports/upload/**").hasRole("ADMIN")
                 		
-                		
-                		
-                
+                		           
                 		
                 		.requestMatchers("/api/orders/**").permitAll()
                 		.requestMatchers("/api/tests/create/**").permitAll()
                 		.requestMatchers("/api/orders/addOrder/**").permitAll()
+                		.requestMatchers("/api/orders/orderStatus/**").permitAll()
                 		.requestMatchers("/api/orders/cartOrders/**").permitAll()
+                		.requestMatchers("/api/enquiry/**").permitAll()
+                		
+                		
+                		.requestMatchers("/api/paymentDetails/**").permitAll()
+                		
+                		
+                		
+                		
                 		.anyRequest().authenticated()                		
                 )              
                 		

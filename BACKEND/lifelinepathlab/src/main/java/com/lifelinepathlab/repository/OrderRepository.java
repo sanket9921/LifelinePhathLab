@@ -9,6 +9,8 @@ import com.lifelinepathlab.model.Orders;
 public interface OrderRepository extends JpaRepository<Orders, Integer>{
 	
 	@Query("SELECT o FROM Orders o WHERE o.user.userId = :userId AND o.status=:status")
-	List<Orders> findByUserId(@Param("userId") int userId, String status);
+	Orders findByUserId(@Param("userId") int userId, String status);
+	
+	List<Orders> findByStatus(String status);
 	
 }

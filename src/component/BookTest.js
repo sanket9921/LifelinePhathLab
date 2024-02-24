@@ -4,6 +4,7 @@ import TestTypes from "./TestTypes";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 export default function BookTest() {
   const navigate = useNavigate();
@@ -11,16 +12,17 @@ export default function BookTest() {
   const [tests, setTests] = useState([]);
   const testIds = [];
   const userId = Cookies.get("userId");
-  const [cartOrders, setCartOrders] = useState([]);
+  const isLoggedIn = Cookies.get("isLoggedIn");
+  const [cartOrders, setCartOrders] = useState();
 
   const getTestsByCatagory = () => {
     Services.getTestByTestType(testCategory)
       .then((res) => {
         setTests(res.data);
-        console.log(res.data);
+        //console.log(res.data);
       })
       .catch((err) => {
-        alert(err.message);
+        toast.error(err.message, { onClose: 100 });
       });
     // console.log(tests)
   };
@@ -28,36 +30,49 @@ export default function BookTest() {
   useEffect(() => {
     // console.log(testCategory);
     getTestsByCatagory();
-    getTestData();
+    if (isLoggedIn) {
+      getTestData();
+    }
   }, [testCategory]);
 
   const NavigationHandler = (testName) => {
     navigate("/testDetails/" + testName);
   };
 
+  //To handle user login
+  const userLogInHandler = () => {
+    navigate("/login");
+  };
+
   //Making an array of Test id's to to check condition in conditional rendering
   cartOrders &&
-    cartOrders.map((cartOrder) => {
-      testIds.push(cartOrder.tests[0].testId);
+    cartOrders.tests.map((test) => {
+      testIds.push(test.testId);
     });
 
   /*Add to cart function*/
   const AddToCartHandler = (id) => {
-    const booking = {
-      user: { userId: userId },
-      tests: [{ testId: id }],
-    };
-    // console.log(booking);
-    //function call to add order to cart....
-    Services.addOrderToCart(booking)
-      .then((res) => {
-        getTestsByCatagory();
-        getTestData();
-        // alert(res.data);
-      })
-      .catch((err) => {
-        alert(err.message);
-      });
+    if (!isLoggedIn) {
+      userLogInHandler();
+    } else {
+      const booking = {
+        user: { userId: userId },
+        tests: [{ testId: id }],
+      };
+      // console.log(booking);
+      //function call to add order to cart....
+      Services.addOrderToCart(booking)
+        .then((res) => {
+          toast.success(res.data, { onClose: 100 });
+          getTestsByCatagory();
+          getTestData();
+          // alert(res.data);
+        })
+        .catch((err) => {
+          toast.error(err.message, { onClose: 100 });
+          // alert(err.message);
+        });
+    }
   };
   /*Add to cart*/
 
@@ -72,16 +87,17 @@ export default function BookTest() {
 
   //Function to remove order from cart
   const RemoveFromCartHandler = (testid) => {
-    cartOrders.forEach((cartOrder) => {
-      if (cartOrder.tests[0].testId === testid) {
-        Services.deleteCartOrderById(cartOrder.id)
+    cartOrders.tests.forEach((cartOrder) => {
+      if (cartOrder.testId === testid) {
+        Services.deleteCartOrderById(cartOrders.id, cartOrder.testId)
           .then((res) => {
+            toast.success(res.data, { onClose: 100 });
             getTestsByCatagory();
             getTestData();
             // alert(res.data);
           })
           .catch((err) => {
-            alert(err.message);
+            toast.error(err.message, { onClose: 100 });
           });
       }
     });
@@ -149,3 +165,4 @@ export default function BookTest() {
     </div>
   );
 }
+

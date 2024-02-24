@@ -8,7 +8,6 @@ import Contact from "./component/Contact";
 import Cart from "./component/Cart";
 import Login from "./LandingPage/Login";
 import Signup from "./LandingPage/Signup";
-import DisplayReports from "./component/DisplayReports";
 import DoctorRegistration from "./component/DoctorRegistration";
 import TestDetails from "./component/TestDetails";
 

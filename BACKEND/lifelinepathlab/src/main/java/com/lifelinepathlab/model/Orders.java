@@ -3,6 +3,8 @@ package com.lifelinepathlab.model;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.annotations.CascadeType;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -12,6 +14,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Orders {
@@ -28,26 +31,29 @@ public class Orders {
             name = "order_tests",
             joinColumns = @JoinColumn(name = "order_id"),
             inverseJoinColumns = @JoinColumn(name = "test_id")
+            
     )
     private List<Test> tests;
 	
 	private Date date;
 	private String status;
+
+	private double totalAmount;
 	
 	public Orders() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Orders(int id, User user, List<Test> tests, Date date, String status) {
+	public Orders(int id, User user, List<Test> tests, Date date, String status, double totalAmount) {
 		super();
 		this.id = id;
 		this.user = user;
 		this.tests = tests;
 		this.date = date;
 		this.status = status;
+		this.totalAmount = totalAmount;
 	}
 
-	
 	public int getId() {
 		return id;
 	}
@@ -88,12 +94,18 @@ public class Orders {
 		this.status = status;
 	}
 
+	public double getTotalAmount() {
+		return totalAmount;
+	}
+
+	public void setTotalAmount(double totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+
 	@Override
 	public String toString() {
 		return "Orders [id=" + id + ", user=" + user + ", tests=" + tests + ", date=" + date + ", status=" + status
-				+ "]";
+				+ ", totalAmount=" + totalAmount + "]";
 	}
-	
- 
 	
 }

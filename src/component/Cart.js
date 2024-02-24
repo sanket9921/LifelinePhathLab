@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from "react";
 import Services from "../Services/Services";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 export default function Cart() {
+  const navigate = useNavigate();
   const [totalAmount, setTotalAmount] = useState(0);
   const [toBePaidAmount, setToBePaidAmount] = useState(0);
   const [discountPrice, setDiscountPrice] = useState(0);
   const [cartOrders, setCartOrders] = useState([]);
   const userId = Cookies.get("userId");
+  const isLoggedIn = Cookies.get("isLoggedIn");
+
+  //To remove from cart
   const deleteHandler = (id) => {
-    Services.deleteCartOrderById(id)
+    Services.deleteCartOrderById(cartOrders.id, id)
       .then((res) => {
         getTestData();
         // alert(res.data);
@@ -19,27 +24,45 @@ export default function Cart() {
       });
   };
 
-  const getTestData = () => {
-    Services.getCartOrdersByUserId(userId).then((res) => {
-      setCartOrders(res.data);
-      const calculatedTotalAmount = res.data.reduce((acc, cartOrder) => {
-        return acc + cartOrder.tests[0].actualPrice;
-      }, 0);
+  const getTestData = async () => {
+    await Services.getCartOrdersByUserId(userId)
+      .then((res) => {
+        setCartOrders(res.data);
+        const calculatedTotalAmount = res.data.tests.reduce(
+          (acc, cartOrder) => {
+            return acc + cartOrder.actualPrice;
+          },
+          0
+        );
 
-      setTotalAmount(calculatedTotalAmount);
+        setTotalAmount(calculatedTotalAmount);
 
-      const calculatedToBePaidAmount = res.data.reduce((acc, cartOrder) => {
-        return acc + cartOrder.tests[0].finalPrice;
-      }, 0);
+        const calculatedToBePaidAmount = res.data.tests.reduce(
+          (acc, cartOrder) => {
+            return acc + cartOrder.finalPrice;
+          },
+          0
+        );
 
-      setToBePaidAmount(calculatedToBePaidAmount);
-
-      setDiscountPrice(calculatedTotalAmount - calculatedToBePaidAmount);
-    });
+        setToBePaidAmount(calculatedToBePaidAmount);
+        setDiscountPrice(calculatedTotalAmount - calculatedToBePaidAmount);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
   };
   useEffect(() => {
-    getTestData();
+    if (!isLoggedIn) {
+      userLogInHandler();
+    } else {
+      getTestData();
+    }
   }, []);
+
+  //To handle user login
+  const userLogInHandler = () => {
+    navigate("/login");
+  };
 
   return (
     <>
@@ -49,37 +72,37 @@ export default function Cart() {
           <div className="col-md-8 mx-auto">
             <h3 className="text-center">Order Overview</h3>
             <div className="container bg-white rounded mt-2 mb-2 p-4">
-              {cartOrders &&
-                cartOrders.map((cartOrder) => (
+              {cartOrders.tests &&
+                cartOrders.tests.map((cartOrder) => (
                   <>
                     <div key={cartOrder.id} className="row mt-3">
                       <div className="col-md-7">
                         <div className="">
                           <div className="primary-text">
-                            {cartOrder.tests[0].testName}
+                            {cartOrder.testName}
                           </div>
                           <div className="secondary-text">
-                            {cartOrder.tests[0].testDescription}
+                            {cartOrder.testDescription}
                           </div>
                         </div>
                       </div>
                       <div className="col-md-3">
                         <div className="text-end">
                           <span className="col-6 text-end text-primary fw-semibold">
-                            {cartOrder.tests[0].discount}% off
+                            {cartOrder.discount}% off
                           </span>
                           <del className="col-6 ps-2 text-end text-danger fw-semibold">
-                            ₹{cartOrder.tests[0].actualPrice}
+                            ₹{cartOrder.actualPrice}
                           </del>
                         </div>
 
                         <div className=" text-success text-end  fw-semibold">
-                          ₹{cartOrder.tests[0].finalPrice}
+                          ₹{cartOrder.finalPrice}
                         </div>
                       </div>
                       <div className="col-2 text-end">
                         <div
-                          onClick={() => deleteHandler(cartOrder.id)}
+                          onClick={() => deleteHandler(cartOrder.testId)}
                           className="delete-item me-3"
                           style={{
                             fontSize: "32px",

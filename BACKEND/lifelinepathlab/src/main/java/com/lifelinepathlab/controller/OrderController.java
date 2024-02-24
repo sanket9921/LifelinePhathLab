@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.lifelinepathlab.model.Doctor;
@@ -24,7 +25,7 @@ import com.lifelinepathlab.service.OrderService;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/orders")
+@RequestMapping("/api/orders/")
 public class OrderController {
 	
 	@Autowired
@@ -35,39 +36,42 @@ public class OrderController {
 		List<Orders> orders = orderService.getAllOrders();
 		return ResponseEntity.ok(orders);
 	}
+	
+	@GetMapping("/orderStatus/{status}")
+	public ResponseEntity<List<Orders>> getOrdersByStatus(@PathVariable String status){
+		List<Orders> orders = orderService.getOrdersByStatus(status);
+		return ResponseEntity.ok(orders);
+	}
+	
 	@GetMapping("/{id}")
 	public ResponseEntity<Orders> getOrders(@PathVariable int id) {
 		Orders orders = orderService.getOrdersByid(id);
 		return ResponseEntity.ok(orders);
 	}
 	
-//	@GetMapping("/cartOrders/{userid}")
-//	public ResponseEntity<List<Test>> getAllTestsByUserId(@PathVariable int userid) {
-//		List<Test> tests = orderService.getAllTestsByUserId(userid);
-//		return ResponseEntity.ok(tests);
-//	}
 	
 	@GetMapping("/cartOrders/{userid}")
-	public ResponseEntity<List<Orders>> getAllTestsByUserId(@PathVariable int userid) {
-		List<Orders> orders = orderService.getAllTestsByUserId(userid);
+	public ResponseEntity<Orders> getAllTestsByUserId(@PathVariable int userid) {
+		Orders orders = orderService.getOrderByUserId(userid);
 		return ResponseEntity.ok(orders);
 	}
 	
 	
 	@PostMapping("/addOrder")
 	public ResponseEntity<String> addOrder(@RequestBody Orders orders) {
-		orderService.addorder(orders);
+		orderService.addOrder(orders);
 		return ResponseEntity.ok("Orders added successfully...!!!");
 	}
 	
-	@PutMapping("/{id}")
-	public ResponseEntity<String> UpdateOrder(@RequestBody Orders orders, @PathVariable int id){
-		orderService.updateOrder(orders, id);
-		return ResponseEntity.ok("Order update successfully");
-	}
-	@DeleteMapping("/{id}")
-	public ResponseEntity<String> deleteOrder(@PathVariable int id){
-		orderService.deleteOrder(id);
+//	@PutMapping("/{id}")
+//	public ResponseEntity<String> UpdateOrder(@RequestBody Orders orders, @PathVariable int id){
+//		orderService.updateOrder(orders, id);
+//		return ResponseEntity.ok("Order update successfully");
+//	}
+	
+	@PutMapping("/{id}/{testid}")
+	public ResponseEntity<String> deleteOrder(@PathVariable int id, @PathVariable("testid") int testid){
+		orderService.deleteTestFromOrder(id, testid);
 		return ResponseEntity.ok("Order Deleted Successfully");
 	}
 }

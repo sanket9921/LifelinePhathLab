@@ -578,7 +578,7 @@ input[type="date"]:valid:before {
 .about-container {
   background-image: url("../image/about-bg-img.png");
   font-weight: 500;
-  
+
   color: white;
   border: 1px solid #2e9aec;
   border-radius: 15px;
@@ -592,8 +592,6 @@ input[type="date"]:valid:before {
 }
 
 .background-img {
-
-
   filter: blur(4px);
 }
 /*About section Styling ends here*/
@@ -724,7 +722,7 @@ input[type="date"]:valid:before {
 .feedback-card {
   flex: 0 0 auto;
   width: 300px; /* Adjust the width of each feedback card */
-  height:150px;
+  height: 150px;
   margin-right: 10px;
   padding: 10px;
   border: 1px solid #cccccc;

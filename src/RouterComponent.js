@@ -5,9 +5,7 @@ import App from "./App";
 import AdminApp from "./Admin/AdminApp";
 import Cookies from "js-cookie";
 
-// Function to determine user's role (user or admin)
 const getUserRole = () => {
-  // Replace this with your actual logic to get the user's role
   const role = Cookies.get("role");
   return role;
 };

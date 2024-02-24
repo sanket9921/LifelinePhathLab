@@ -48,7 +48,6 @@ export default function App() {
           <Route path="/cart" element={<Cart />} />
           <Route path="/userProfile" element={<UserProfile />} />
           <Route path="/verifyOtp/:email" element={<Otp />} />
-
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
         </Routes>
