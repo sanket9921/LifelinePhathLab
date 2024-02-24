@@ -188,6 +188,11 @@ class Services {
   deleteCartOrderById(id, testId) {
     return axios.put(BACKEND_API + "/orders/" + id + "/" + testId);
   }
+
+  //To get all oders by status
+  getOrdersByOrderStatus(status) {
+    return axios.get(BACKEND_API + "/orders/all/" + status);
+  }
 }
 
 export default new Services();
