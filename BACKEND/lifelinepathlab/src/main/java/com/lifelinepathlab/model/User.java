@@ -39,6 +39,7 @@ public class User implements UserDetails {
 	private String bloodGroup;
 	private String address;
 	private String password;
+	
 	private String role="USER";
 	private boolean active;
 	private String otp;

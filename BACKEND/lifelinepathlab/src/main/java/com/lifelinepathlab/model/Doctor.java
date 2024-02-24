@@ -21,7 +21,9 @@ public class Doctor {
 	private int experience;
 	private String address;
 	private String licencePath;
+	
 	private String requestStatus="P";
+	
 	private String password;
 
 	public Doctor() {

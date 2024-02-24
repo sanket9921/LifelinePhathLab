@@ -14,14 +14,22 @@ export default function Login() {
       // Perform login request to backend, get token
       const response = await Services.userLogin({ email, password });
       const data = response.data;
-      toast.success(response.data.message,{onclose:1000});
+      toast.success(response.data.message, { onclose: 1000 });
       // Store token in cookie if login successful
+
+      const { jwtToken, username, userId, role, firstName } = response.data;
       if (response.status === 200) {
-        Cookies.set("jwtToken", data.jwtToken);
-        Cookies.set("username", data.username);
-        Cookies.set("userId", data.userId);
-        Cookies.set("role", data.role);
-        Cookies.set("firstName", data.firstName);
+        Cookies.set(
+          "UserData",
+          { jwtToken, username, userId, role, firstName },
+          { expires: 3 }
+        );
+
+        // Cookies.set("jwtToken", data.jwtToken);
+        // Cookies.set("username", data.username);
+        // Cookies.set("userId", data.userId);
+        // Cookies.set("role", data.role);
+        // Cookies.set("firstName", data.firstName);
         Cookies.set("isLoggedIn", true);
 
         // Set loggedIn to true to trigger redirection
@@ -30,14 +38,14 @@ export default function Login() {
       } else {
         // Handle login failure
         //setError(data.message);
-        toast.error(data.message,{onclose:1000});
+        toast.error(data.message, { onclose: 1000 });
       }
     } catch (error) {
       // Handle network errors
       //setError("Network error. Please try again later.");
-      toast.error("Wrong Password,Please try again later.",{onclose:1000});
+      toast.error("Wrong Password,Please try again later.", { onclose: 1000 });
       setTimeout(() => {
-        window.location.reload()
+        window.location.reload();
       }, 1500);
     }
   };
@@ -131,6 +139,13 @@ export default function Login() {
                 </Link>
                 <br />
               </div>
+
+              <p className="mt-2">
+                Are you doctor?{" "}
+                <Link to="/doctorResister" className="text-primary">
+                  Tie up with us
+                </Link>
+              </p>
             </div>
           </div>
         </div>

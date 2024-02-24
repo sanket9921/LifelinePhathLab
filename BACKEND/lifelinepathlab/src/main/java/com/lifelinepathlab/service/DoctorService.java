@@ -4,13 +4,16 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.lifelinepathlab.exception.ResourceNotFoundException;
 import com.lifelinepathlab.model.ClientFeedback;
 import com.lifelinepathlab.model.Doctor;
 import com.lifelinepathlab.model.ScheduleAppointment;
+import com.lifelinepathlab.model.User;
 import com.lifelinepathlab.repository.DoctorRepository;
 import com.lifelinepathlab.repository.ScheduleAppointmentRepository;
+import com.lifelinepathlab.repository.UserRepository;
 
 import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
@@ -23,10 +26,17 @@ public class DoctorService {
     private DoctorRepository doctorRepository;
     
     @Autowired
+    private UserRepository userRepository;
+    
+    @Autowired
     private ScheduleAppointmentRepository scheduleAppointment;
 
     @Autowired
     private FileStorageService fileStorageService;
+    
+    @Autowired
+    PasswordEncoder passwordEncoder;
+    
 
     public String saveDoctorLicense(MultipartFile licenseFile) throws IOException {
         String fileId = UUID.randomUUID().toString();
@@ -52,6 +62,13 @@ public class DoctorService {
         doctor.setLicencePath(licenseFileId);
         System.out.println(doctor);
 
+        User user = new User();
+        
+        user.setEmailId(email);
+        user.setRole("DOCTOR");
+        user.setPassword(passwordEncoder.encode(password));
+        userRepository.save(user);
+        
         return doctorRepository.save(doctor);
     }
 

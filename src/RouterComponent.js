@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import App from "./App";
 import AdminApp from "./Admin/AdminApp";
 import Cookies from "js-cookie";
+import DoctorApp from "./Doctor/DoctorApp";
 
 // Function to determine user's role (user or admin)
 const getUserRole = () => {
@@ -20,6 +21,8 @@ const RouterComponent = () => {
       <Routes>
         {userRole === "ADMIN" ? (
           <Route path="/*" element={<AdminApp />} />
+        ) : userRole === "DOCTOR" ? (
+          <Route path="/*" element={<DoctorApp />} />
         ) : (
           <Route path="/*" element={<App />} />
         )}

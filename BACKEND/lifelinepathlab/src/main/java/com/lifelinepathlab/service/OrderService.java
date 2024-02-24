@@ -29,15 +29,7 @@ public class OrderService {
 		return orderRepository.findAll();
 	}
 	
-//	  public List<Test> getAllTestsByUserId(int userId) {
-//		  
-//	        List<Orders> userOrders = orderRepository.findByUserId(userId , "AC");
-//
-//	        // Extracting all tests from user orders
-//	        return userOrders.stream()
-//	                .flatMap(order -> order.getTests().stream())
-//	                .collect(Collectors.toList());
-//	    }
+
 	
 	  public List<Orders> getAllTestsByUserId(int userId) {
 	  

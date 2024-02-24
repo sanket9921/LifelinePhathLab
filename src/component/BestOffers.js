@@ -132,7 +132,7 @@ export default function BestOffers() {
                   </button>
                 ) : (
                   <button
-                    className="card btn btn-danger "
+                    className="card btn btn-danger  "
                     onClick={() => RemoveFromCartHandler(offer.testId)}
                   >
                     Remove

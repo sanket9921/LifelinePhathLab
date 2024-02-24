@@ -15,6 +15,7 @@ public class ClientFeedback {
 	private String clientName;
 	private String contactNo;
 	private String feedback;
+	
 	private String displayToClient="N";
 	
 	public ClientFeedback() {

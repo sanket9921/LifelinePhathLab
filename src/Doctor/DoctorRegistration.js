@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import style from "../assests/style/style.css";
+import { Link } from "react-router-dom";
 
 export default function DoctorRegistration() {
   const [formData, setFormData] = useState({
@@ -60,7 +61,7 @@ export default function DoctorRegistration() {
         <div className="row">
           <div className="col-md-6 col-12">
             <div className="input-icons ">
-              <i className="fa fa-user icon" />
+              <i className="mdi mdi-account" />
               <input
                 className="input-field"
                 type="text"
@@ -71,7 +72,7 @@ export default function DoctorRegistration() {
               />
             </div>
             <div className="input-icons ">
-              <i className="fa fa-user icon" />
+              <i className="mdi mdi-hospital" />
               <input
                 className="input-field"
                 type="text"
@@ -82,7 +83,7 @@ export default function DoctorRegistration() {
               />
             </div>
             <div className="input-icons ">
-              <i className="fa fa-user icon" />
+              <i className="mdi mdi-email" />
               <input
                 className="input-field"
                 type="email"
@@ -92,7 +93,7 @@ export default function DoctorRegistration() {
               />
             </div>
             <div className="input-icons ">
-              <i className="fa fa-user icon" />
+              <i className="mdi mdi-cellphone" />
               <input
                 className="input-field"
                 type="text"
@@ -103,7 +104,7 @@ export default function DoctorRegistration() {
               />
             </div>
             <div className="input-icons ">
-              <i className="fa fa-user icon" />
+              <i className="mdi mdi-lock-outline" />
               <input
                 className="input-field"
                 type="password"
@@ -114,7 +115,7 @@ export default function DoctorRegistration() {
               />
             </div>
             <div className="input-icons ">
-              <i className="fa fa-user icon" />
+              <i className="mdi mdi-lock-outline" />
               <input
                 className="input-field"
                 type="password"
@@ -125,6 +126,7 @@ export default function DoctorRegistration() {
           </div>
           <div className="col-md-6 col-12 vl">
             <div className="input-icons ">
+              <i className="mdi mdi-account-network" />
               <input
                 className="input-field"
                 type="text"
@@ -134,7 +136,7 @@ export default function DoctorRegistration() {
               />
             </div>
             <div className="input-icons ">
-              <i className="fa fa-user icon" />
+              <i className="mdi mdi-account-settings" />
               <input
                 className="input-field"
                 type="number"
@@ -144,7 +146,7 @@ export default function DoctorRegistration() {
               />
             </div>
             <div className="input-icons ">
-              <i className="fa fa-user icon" />
+              <i className="icofont-location-pin" />
               <input
                 className="input-field"
                 type="text"
@@ -180,7 +182,11 @@ export default function DoctorRegistration() {
               <b>Register</b>
             </button>
             <p className="redirect">
-              Already Have An Account<a href="#"> Click Here</a>
+              Already Have An Account
+              <Link to="/login" className="text-primary">
+                {" "}
+                Click Here
+              </Link>
             </p>
           </div>
         </div>

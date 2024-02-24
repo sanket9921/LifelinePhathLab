@@ -20,6 +20,7 @@ import { ToastContainer } from "react-toastify";
 import UserProfile from "./component/UserProfile";
 import Otp from "./LandingPage/Otp";
 import ForgotPassword from "./LandingPage/ForgotPassword";
+import DoctorRegistration from "./Doctor/DoctorRegistration";
 
 export default function App() {
   return (
@@ -52,7 +53,9 @@ export default function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/fotgotPassword" element={<ForgotPassword />} />
+          <Route path="/doctorResister" element={<DoctorRegistration />} />
         </Routes>
+
         <Footer />
       </Provider>
     </>
