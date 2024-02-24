@@ -30,20 +30,20 @@ import com.razorpay.*;
 
 @CrossOrigin("*")
 @RestController
-@RequestMapping("/api/orders/")
+@RequestMapping("/api/orders")
 public class OrderController {
 	 
 	
 	@Autowired
 	private OrderService orderService;
 	
-	@GetMapping
+	@GetMapping("/all/")
 	public ResponseEntity<List<Orders>> getAllorders(){
 		List<Orders> orders = orderService.getAllOrders();
 		return ResponseEntity.ok(orders);
 	}
 	
-	@GetMapping("/orderStatus/{status}")
+	@GetMapping("/all/{status}")
 	public ResponseEntity<List<Orders>> getOrdersByStatus(@PathVariable String status){
 		List<Orders> orders = orderService.getOrdersByStatus(status);
 		return ResponseEntity.ok(orders);

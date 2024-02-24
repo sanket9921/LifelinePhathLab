@@ -30,7 +30,8 @@ export default function Cart() {
     await Services.getCartOrdersByUserId(userId)
       .then((res) => {
         setCartOrders(res.data);
-        const calculatedTotalAmount = res.data.tests.reduce(
+        // console.log(res.data);
+        const calculatedTotalAmount = res.data?.tests?.reduce(
           (acc, cartOrder) => {
             return acc + cartOrder.actualPrice;
           },
@@ -38,8 +39,7 @@ export default function Cart() {
         );
 
         setTotalAmount(calculatedTotalAmount);
-
-        const calculatedToBePaidAmount = res.data.tests.reduce(
+        const calculatedToBePaidAmount = res.data?.tests?.reduce(
           (acc, cartOrder) => {
             return acc + cartOrder.finalPrice;
           },
