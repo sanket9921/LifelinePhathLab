@@ -193,6 +193,42 @@ class Services {
   deleteCartOrderById(id) {
     return axios.delete(BACKEND_API + "/orders/" + id);
   }
+
+  //to get the cart orders
+  getCartOrdersByUserId(userId) {
+    return axios.get(BACKEND_API + "/orders/cartOrders/" + userId);
+  }
+
+  //to delete cart orders
+  deleteCartOrderById(id) {
+    return axios.delete(BACKEND_API + "/orders/" + id);
+  }
+
+  //to get the cart orders
+  getCartOrdersByUserId(userId) {
+    return axios.get(BACKEND_API + "/orders/cartOrders/" + userId);
+  }
+
+  createorder(data) {
+    return axios.post(BACKEND_API + "/orders/create-order", data, {
+      headers: {
+        Authorization: "Bearer " + jwt,
+      },
+    });
+  }
+
+  updateOrderStatus(id) {
+    alert(id);
+    return axios.get(BACKEND_API + "/orders/update-satus/" + id, {
+      headers: {
+        Authorization: "Bearer " + jwt,
+      },
+    });
+  }
+  //to delete cart orders
+  deleteCartOrderById(id, testId) {
+    return axios.put(BACKEND_API + "/orders/" + id + "/" + testId);
+  }
 }
 
 export default new Services();

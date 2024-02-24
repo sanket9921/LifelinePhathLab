@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import Services from "../Services/Services";
 import Cookies from "js-cookie";
 
 export default function SearchBar() {
   const navigate = useNavigate();
+  const isLoggedIn = Cookies.get("isLoggedIn");
   const [inputValue, setInputValue] = useState();
   const [filteredOptions, setFilteredOptions] = useState([]);
 
@@ -46,8 +46,6 @@ export default function SearchBar() {
   const handleSubmit = () => {
     navigate("/testDetails/" + inputValue);
   };
-
-  const isLoggedIn = Cookies.get("isLoggedIn");
 
   const handleLogout = () => {
     // Clear all cookies
@@ -117,7 +115,7 @@ export default function SearchBar() {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      {Cookies.get("userData").firstName}
+                      {Cookies.get("username")}
                     </div>
                     <ul class="dropdown-menu">
                       <li>

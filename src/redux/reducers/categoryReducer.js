@@ -4,6 +4,7 @@ export const categorySlice = createSlice({
   name: "TestCategory",
   initialState: {
     value: "",
+
   },
   reducers: {
     sendTestCategoryData: (state, action) => {
@@ -14,3 +15,4 @@ export const categorySlice = createSlice({
 
 export const { sendTestCategoryData } = categorySlice.actions;
 export default categorySlice.reducer;
+

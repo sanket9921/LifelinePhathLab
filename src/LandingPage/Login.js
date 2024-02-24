@@ -19,17 +19,17 @@ export default function Login() {
 
       const { jwtToken, username, userId, role, firstName } = response.data;
       if (response.status === 200) {
-        Cookies.set(
-          "UserData",
-          { jwtToken, username, userId, role, firstName },
-          { expires: 3 }
-        );
+        // Cookies.set(
+        //   "UserData",
+        //   { jwtToken, username, userId, role, firstName },
+        //   { expires: 3 }
+        // );
 
-        // Cookies.set("jwtToken", data.jwtToken);
-        // Cookies.set("username", data.username);
-        // Cookies.set("userId", data.userId);
-        // Cookies.set("role", data.role);
-        // Cookies.set("firstName", data.firstName);
+        Cookies.set("jwtToken", data.jwtToken);
+        Cookies.set("username", data.username);
+        Cookies.set("userId", data.userId);
+        Cookies.set("role", data.role);
+        Cookies.set("firstName", data.firstName);
         Cookies.set("isLoggedIn", true);
 
         // Set loggedIn to true to trigger redirection

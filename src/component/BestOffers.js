@@ -10,10 +10,13 @@ export default function BestOffers() {
   const [cartOrders, setCartOrders] = useState();
   const testIds = [];
   const userId = Cookies.get("userId");
+  const isLoggedIn = Cookies.get("isLoggedIn");
 
   useEffect(() => {
     fetchBestOffers();
-    getTestData();
+    if (isLoggedIn) {
+      getTestData();
+    }
   }, []);
 
   //To fetch best 5 offers on discount
@@ -33,10 +36,15 @@ export default function BestOffers() {
     navigate("/testDetails/" + testName);
   };
 
+  //To handle user login
+  const userLogInHandler = () => {
+    navigate("/login");
+  };
+
   //Making an array of Test id's to to check condition in conditional rendering
   cartOrders &&
-    cartOrders.map((cartOrder) => {
-      testIds.push(cartOrder.tests[0].testId);
+    cartOrders.tests.map((test) => {
+      testIds.push(test.testId);
     });
 
   // console.log(testIds);
@@ -44,25 +52,25 @@ export default function BestOffers() {
 
   /*Add to cart function*/
   const AddToCartHandler = (id) => {
-    const booking = {
-      user: { userId: userId },
-      tests: [{ testId: id }],
-    };
-    // console.log(booking);
-    //function call to add order to cart....
-    Services.addOrderToCart(booking)
-      .then((res) => {
-        fetchBestOffers();
-        getTestData();
-        // alert(res.data);
-        ///alert(res.data);
-        toast.success(res.data, { onClose: 100 });
-        alert(res.data);
-      })
-      .catch((err) => {
-        //alert(err.message);
-        toast.error(err.message, { onClose: 100 });
-      });
+    if (!isLoggedIn) {
+      userLogInHandler();
+    } else {
+      const booking = {
+        user: { userId: userId },
+        tests: [{ testId: id }],
+      };
+
+      //function call to add order to cart....
+      Services.addOrderToCart(booking)
+        .then((res) => {
+          toast.success(res.data, { onClose: 100 });
+          fetchBestOffers();
+          getTestData();
+        })
+        .catch((err) => {
+          toast.error(err.message, { onClose: 100 });
+        });
+    }
   };
   /*Add to cart*/
 
@@ -77,16 +85,17 @@ export default function BestOffers() {
 
   //Function to remove order from cart
   const RemoveFromCartHandler = (testid) => {
-    cartOrders.forEach((cartOrder) => {
-      if (cartOrder.tests[0].testId === testid) {
-        Services.deleteCartOrderById(cartOrder.id)
+    cartOrders.tests.forEach((cartOrder) => {
+      if (cartOrder.testId === testid) {
+        Services.deleteCartOrderById(cartOrders.id, cartOrder.testId)
           .then((res) => {
+            toast.success(res.data, { onClose: 100 });
             fetchBestOffers();
             getTestData();
             // alert(res.data);
           })
           .catch((err) => {
-            alert(err.message);
+            toast.error(err.message, { onClose: 100 });
           });
       }
     });

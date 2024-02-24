@@ -22,7 +22,6 @@ import com.lifelinepathlab.security.JwtAuthenticationFilter;
 @EnableWebSecurity
 public class SecurityConfig {
 
-
     @Autowired
     private JwtAuthenticationEntryPoint point;
     @Autowired
@@ -30,6 +29,7 @@ public class SecurityConfig {
     
     @Autowired
     private UserDetailsService userDetailsService;
+    
     @Autowired
     private PasswordEncoder passwordEncoder;
 
@@ -43,7 +43,7 @@ public class SecurityConfig {
  	
                 		.requestMatchers("api/user/login").permitAll()
                 		.requestMatchers("api/user/regenerate-otp").permitAll()
-
+                		
                 		.requestMatchers("api/user/verify-account").permitAll()
                 		.requestMatchers("/api/user/**").permitAll()
                 		.requestMatchers("/api/feedback/**").permitAll()
@@ -82,13 +82,28 @@ public class SecurityConfig {
                 		.requestMatchers("/api/reports/upload/**").permitAll()
 
                 		
-                		
+                		           
                 		
                 
                 		.requestMatchers("/api/orders/**").permitAll()
+                		.requestMatchers("/api/orders/create-order/**").permitAll()
+                		.requestMatchers("/api/orders/update-satus/**").permitAll()
 
+                		
+                		
+                		
+                		.requestMatchers("/api/tests/create/**").permitAll()
                 		.requestMatchers("/api/orders/addOrder/**").permitAll()
+                		.requestMatchers("/api/orders/orderStatus/**").permitAll()
                 		.requestMatchers("/api/orders/cartOrders/**").permitAll()
+                		.requestMatchers("/api/enquiry/**").permitAll()
+                		
+                		
+                		.requestMatchers("/api/paymentDetails/**").permitAll()
+                		
+                		
+                		
+                		
                 		.anyRequest().authenticated()                		
                 )              
                 		
