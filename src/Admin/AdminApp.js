@@ -1,7 +1,5 @@
 import React from "react";
 import Navbar from "./Navbar";
-import Sidebar from "./Sidebar";
-import Content from "./Content";
 import { Outlet, Route, Routes } from "react-router-dom";
 import { Provider } from "react-redux";
 import store from "../redux/store";
@@ -18,8 +16,9 @@ import Dashboard from "./Dashboard";
 import Appointments from "./Appointments/Appointments";
 import AppointmentDetails from "./Appointments/AppointmentDetails";
 import { ToastContainer } from "react-toastify";
-import 'react-toastify/dist/ReactToastify.css';
+import "react-toastify/dist/ReactToastify.css";
 import EditTest from "./Tests/EditTest";
+import UploadReport from "./UploadReport";
 
 function App() {
   return (
@@ -32,7 +31,7 @@ function App() {
       </Provider> */}
       <Provider store={store}>
         <Navbar />
-        <ToastContainer/>
+        <ToastContainer />
 
         <div className="container">
           <Routes>
@@ -43,6 +42,7 @@ function App() {
               element={<AppointmentDetails />}
             />
             <Route path="/testBookings" element={<TestBook />} />
+            <Route path="/uploadReport/:id" element={<UploadReport />} />
             <Route path="/patients" element={<Patients />} />
             <Route path="/doctors" element={<Doctors />} />
             <Route path="/admins" element={<Admin />} />

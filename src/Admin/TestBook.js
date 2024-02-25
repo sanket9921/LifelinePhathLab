@@ -3,6 +3,7 @@ import OrderFilter from "./OrderFilter";
 import { useSelector } from "react-redux";
 import Services from "../Services/Services";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 export default function TestBook() {
   const orderStatus = useSelector((state) => state.OrderStatus.value);
@@ -42,6 +43,7 @@ export default function TestBook() {
                 <th>Test</th>
                 <th>Total Amount</th>
                 <th>Status</th>
+                <th>Upload Report</th>
               </tr>
             </thead>
             <tbody>
@@ -56,6 +58,14 @@ export default function TestBook() {
                     <td>{order?.tests[0]?.testType}</td>
                     <td>{order?.totalAmount}</td>
                     <td>{order?.status}</td>
+                    <td>
+                    <Link
+                      class=" btn btn-outline-primary"
+                      to={"/uploadReport/" + order.id}
+                    >
+                      Upload Report
+                    </Link>
+                    </td>
                   </tr>
                 ))}
             </tbody>

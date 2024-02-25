@@ -70,7 +70,7 @@ function Navbar() {
               <ul className="dropdown-menu">
                 <li>
                   <Link className="dropdown-item" to="/patients">
-                    Patinets
+                    Patients
                   </Link>
                 </li>
                 <li>

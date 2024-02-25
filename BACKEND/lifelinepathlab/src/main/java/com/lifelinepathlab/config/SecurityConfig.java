@@ -100,9 +100,7 @@ public class SecurityConfig {
                 		
                 		
                 		.requestMatchers("/api/paymentDetails/**").permitAll()
-                		
-                		
-                		
+                		           		
                 		
                 		.anyRequest().authenticated()                		
                 )              

@@ -21,7 +21,6 @@ export default function AppointmentDetails() {
   // const [doctorId, setDoctorId] = useState("");
   const [reportFile, setReportFile] = useState(null);
   const [comment, setComment] = useState("");
-  const [message, setMessage] = useState("");
 
   const handleFileChange = (e) => {
     setReportFile(e.target.files[0]);
@@ -38,13 +37,6 @@ export default function AppointmentDetails() {
     console.log(appointment)
     try {
       await Services.addReport(formData);
-
-      // await axios.post("http://localhost:8083/api/reports/upload", formData, {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // });
-      
      // alert("Report uploaded successfully!");
       toast.success("Report uploaded successfully!",{onClose:1000});
       setTimeout(() => {

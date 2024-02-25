@@ -174,11 +174,6 @@ class Services {
     });
   }
 
-  //to get the cart orders
-  getCartOrdersByUserId(userId) {
-    return axios.get(BACKEND_API + "/orders/cartOrders/" + userId);
-  }
-
   //to delete cart orders
   deleteCartOrderById(id) {
     return axios.delete(BACKEND_API + "/orders/" + id);
@@ -192,21 +187,6 @@ class Services {
   //to delete cart orders
   deleteCartOrderById(id) {
     return axios.delete(BACKEND_API + "/orders/" + id);
-  }
-
-  //to get the cart orders
-  getCartOrdersByUserId(userId) {
-    return axios.get(BACKEND_API + "/orders/cartOrders/" + userId);
-  }
-
-  //to delete cart orders
-  deleteCartOrderById(id) {
-    return axios.delete(BACKEND_API + "/orders/" + id);
-  }
-
-  //to get the cart orders
-  getCartOrdersByUserId(userId) {
-    return axios.get(BACKEND_API + "/orders/cartOrders/" + userId);
   }
 
   createorder(data) {
@@ -247,6 +227,16 @@ class Services {
 
   getReportsByDoctorId(userEmail) {
     return axios.get(BACKEND_API + "/reports/email/" + userEmail);
+  }
+
+  //To get all oders by orders count
+  getAllOrdersCount() {
+    return axios.get(BACKEND_API + "/orders/all/");
+  }
+
+  //To get order by order id
+  getOrdersById(id) {
+    return axios.get(BACKEND_API + "/orders/" + id);
   }
 }
 

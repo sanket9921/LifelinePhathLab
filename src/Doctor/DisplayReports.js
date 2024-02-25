@@ -48,7 +48,7 @@ export default function DisplayReports() {
                 <td>{report?.user?.contactNo}</td>
                 <td>
                   <a
-                    href={`../Files/doctor-licenses/${report?.licencePath}`}
+                    href={`Files/doctor-licenses/${report?.licencePath}`}
                     download
                   >
                     Download
