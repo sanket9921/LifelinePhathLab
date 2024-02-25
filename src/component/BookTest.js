@@ -63,9 +63,9 @@ export default function BookTest() {
       //function call to add order to cart....
       await Services.addOrderToCart(booking)
         .then((res) => {
-          toast.success(res.data, { onClose: 100 });
           getTestsByCatagory();
           getTestData();
+          toast.success(res.data, { onClose: 100 });
           // alert(res.data);
         })
         .catch((err) => {
@@ -91,9 +91,9 @@ export default function BookTest() {
       if (cartOrder.testId === testid) {
         Services.deleteCartOrderById(cartOrders.id, cartOrder.testId)
           .then((res) => {
-            toast.success(res.data, { onClose: 100 });
             getTestsByCatagory();
             getTestData();
+            toast.success(res.data, { onClose: 100 });
             // alert(res.data);
           })
           .catch((err) => {
@@ -134,7 +134,7 @@ export default function BookTest() {
   //   await axios.post("http://localhost:8082/api/payment", payment);
   // };
 
-  const getOptionsObject = (order) => {
+  const getOptionsObject = async (order) => {
     const options = {
       key: "rzp_test_9L81H2RGT2jv78",
       amount: order.data.amount,
@@ -153,7 +153,7 @@ export default function BookTest() {
         console.log("razorpay_order_id = ", res.razorpay_order_id);
         console.log("razorpay_signature = ", res.razorpay_signature);
 
-        Services.updateOrderStatus(cartOrders.id);
+        await Services.updateOrderStatus(cartOrders.id);
         window.location.reload();
       },
       prefill: {
@@ -212,7 +212,7 @@ export default function BookTest() {
         console.log(response.error.metadata.payment_id);
         console.log("******* Error Details End *******");
 
-        savePaymentToDb(res, amount, order.data.id, "Failed");
+        // savePaymentToDb(res, amount, order.data.id, "Failed");
 
         alert(
           "Oops Payment Failed!",
@@ -228,7 +228,7 @@ export default function BookTest() {
   };
 
   const handleBooking = async (id) => {
-    AddToCartHandler(id);
+    await AddToCartHandler(id);
     paymentHandler();
   };
 

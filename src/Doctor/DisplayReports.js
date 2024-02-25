@@ -23,6 +23,7 @@ export default function DisplayReports() {
     getThePatientReports();
   }, []);
 
+  console.log(reports.licencePath);
   return (
     <div className="container mt-3 rounded display-report-container">
       <h3 className="text-center mb-5">Patient Reports</h3>
@@ -48,7 +49,7 @@ export default function DisplayReports() {
                 <td>{report?.user?.contactNo}</td>
                 <td>
                   <a
-                    href={`Files/doctor-licenses/${report?.licencePath}`}
+                    href={`../Files/Reports/${report?.reportFileName}`}
                     className="text-primary"
                     download
                   >

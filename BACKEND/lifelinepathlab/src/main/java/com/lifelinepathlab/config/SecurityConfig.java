@@ -78,6 +78,7 @@ public class SecurityConfig {
                 		
                 		//All api reports
                 		.requestMatchers("/api/reports/**").permitAll()
+                		.requestMatchers("/api/reports/user/**").permitAll()
                 		.requestMatchers("/api/reports//email/**").permitAll()
                 		.requestMatchers("/api/reports/upload/**").permitAll()
 

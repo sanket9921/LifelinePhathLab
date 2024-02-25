@@ -31,7 +31,7 @@ public class ReportService {
 		// Generate a UUID for the file
 		String fileId = UUID.randomUUID().toString();
 		// Save the file to the file storage location with the UUID as the filename
-		return fileStorageService.storeFile(reportFile, fileId, "prescriptions");
+		return fileStorageService.storeFile(reportFile, fileId, "Reports");
 	}
 
 	public void uploadReport(int id, int userId, String doctorId, MultipartFile reportFile, String comment) throws IOException {
@@ -62,7 +62,11 @@ public class ReportService {
     public List<Report> getAllReportsByDoctorEmailId(String email) {
         return reportRepository.getByDoctorByEmailId(email);
     }
-
+    
+    public List<Report> getAllReportByUserid(int userid){
+    	return reportRepository.getByUserid(userid);
+    }
+    
     public Report getReportById(int id) {
         return reportRepository.findById(id)
                                 .orElseThrow(() -> new ResourceNotFoundException("Report not found with id: " , id));
