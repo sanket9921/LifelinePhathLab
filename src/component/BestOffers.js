@@ -51,7 +51,7 @@ export default function BestOffers() {
   // console.log(testIds.includes(9));
 
   /*Add to cart function*/
-  const AddToCartHandler = (id) => {
+  const AddToCartHandler = async (id) => {
     if (!isLoggedIn) {
       userLogInHandler();
     } else {
@@ -61,7 +61,7 @@ export default function BestOffers() {
       };
 
       //function call to add order to cart....
-      Services.addOrderToCart(booking)
+      await Services.addOrderToCart(booking)
         .then((res) => {
           toast.success(res.data, { onClose: 100 });
           fetchBestOffers();
@@ -102,14 +102,145 @@ export default function BestOffers() {
   };
   /*Remove From Cart*/
 
+  // Razorpay implementation
+  // Razor payment method
+  const loadScript = (src) => {
+    return new Promise((resolve) => {
+      const script = document.createElement("script");
+      script.src = src;
+      script.onload = () => {
+        resolve(true);
+      };
+      script.onerror = () => {
+        resolve(false);
+      };
+      document.body.appendChild(script);
+    });
+  };
+
+  // const savePaymentToDb = async (razorpayRes, amount, orderId, status) => {
+  //   const payment = {
+  //     orderId: orderId,
+  //     amount: amount,
+  //     razorpayPaymentId: razorpayRes ? razorpayRes.razorpay_payment_id : null,
+  //     razorpayOrderId: razorpayRes ? razorpayRes.razorpay_order_id : null,
+  //     razorpaySignature: razorpayRes ? razorpayRes.razorpay_signature : null,
+  //     paymentDateTime: "",
+  //     status: status,
+  //   };
+
+  //   await axios.post("http://localhost:8082/api/payment", payment);
+  // };
+
+  const getOptionsObject = (order) => {
+    const options = {
+      key: "rzp_test_9L81H2RGT2jv78",
+      amount: order.data.amount,
+      currency: order.data.currency,
+      name: "",
+      image: "https://www.svgrepo.com/show/261072/rupee.svg",
+      // description: "For Testing purpose",
+      order_id: order.data.id,
+      handler: async (res) => {
+        alert(
+          "Payment Successfull!",
+          `Your Payment Id is : ${res.razorpay_payment_id}`,
+          "success"
+        );
+        console.log("razorpay_payment_id = ", res.razorpay_payment_id);
+        console.log("razorpay_order_id = ", res.razorpay_order_id);
+        console.log("razorpay_signature = ", res.razorpay_signature);
+
+        Services.updateOrderStatus(cartOrders.id);
+        window.location.reload();
+      },
+      prefill: {
+        name: "",
+        email: "",
+        contact: "",
+      },
+      notes: {
+        address: "This is test note",
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+    return options;
+  };
+
+  const paymentHandler = async (e) => {
+    // e.preventDefault();
+
+    // load razorpay checkout script
+    const res = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+    if (!res) {
+      alert("Razorpay SDK failed to load. Are you online?");
+      return;
+    }
+
+    const order = await Services.createorder({
+      order: cartOrders.id,
+    });
+
+    // const order = await axios.post(
+    //   "http://localhost:8083/api/orders/create_order",
+    //   {
+    //     order: cartOrders.id,
+    //   },
+    //   {}
+    // );
+
+    if (order.data.status === "created") {
+      console.log("Order Created ", order);
+      const options = getOptionsObject(order);
+
+      const rzp = new window.Razorpay(options);
+
+      rzp.on("payment.failed", function (response) {
+        console.log("******* Error Details Start *******");
+        console.log(response.error.code);
+        console.log(response.error.description);
+        console.log(response.error.source);
+        console.log(response.error.step);
+        console.log(response.error.reason);
+        console.log(response.error.metadata.order_id);
+        console.log(response.error.metadata.payment_id);
+        console.log("******* Error Details End *******");
+
+        // savePaymentToDb(res, amount, order.data.id, "Failed");
+
+        alert(
+          "Oops Payment Failed!",
+          `Error Description : ${response.error.description}`,
+          "error"
+        );
+      });
+
+      rzp.open();
+    } else {
+      alert("Oops Order Creation Failed!", "Check backend code", "error");
+    }
+  };
+
+  const handleBooking = async (id) => {
+    await AddToCartHandler(id);
+    await paymentHandler();
+  };
+
   return (
     <div className="container mt-3 rounded Test">
       <h3 className="text-center">Best Offers</h3>
       <div className="row">
         {/* ===================================== */}
         {offers &&
-          offers.map((offer) => (
-            <div className="product-cart rounded bk-test col-md-3 col-xs-6 mt-3">
+          offers.map((offer, index) => (
+            <div
+              className="product-cart rounded bk-test col-md-3 col-xs-6 mt-3"
+              key={index}
+            >
               <div onClick={() => NavigationHandler(offer.testName)}>
                 <div className="img">
                   <img
@@ -119,7 +250,7 @@ export default function BestOffers() {
                   />
                 </div>
                 <div className="title mt-3 text-center">
-                  <h6>{offer.testType}</h6>
+                  <h6>{offer.testName}</h6>
                 </div>
                 <div className="price">
                   <span className="off">{offer.discount}% off</span>
@@ -148,7 +279,12 @@ export default function BestOffers() {
                   </button>
                 )}
                 {/* Conditonal rendering of buttons */}
-                <button className="buy">Buy Now</button>
+                <button
+                  className="buy"
+                  onClick={() => handleBooking(offer.testId)}
+                >
+                  Buy Now
+                </button>
               </div>
             </div>
           ))}

@@ -41,7 +41,7 @@ export default function AllTest() {
       <div class="col-12 col-xl-8 mb-4 mb-xl-0">
         <h3 class="font-weight-bold">All Test</h3>
       </div>
-      <form class="d-flex" role="search">
+      {/* <form class="d-flex" role="search">
         <input
           class="form-control me-2"
           type="search"
@@ -51,7 +51,7 @@ export default function AllTest() {
         <button class="btn btn-primary" type="submit">
           Search
         </button>
-      </form>
+      </form> */}
 
       <div className="card mt-2 p-3">
         <table

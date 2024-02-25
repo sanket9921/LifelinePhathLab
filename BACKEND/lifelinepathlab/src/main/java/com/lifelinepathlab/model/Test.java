@@ -2,10 +2,12 @@ package com.lifelinepathlab.model;
 
 import java.util.Objects;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 
 @Entity
@@ -24,7 +26,6 @@ public class Test {
 	private String testImagePath="D:\\LifelinePhathLab\\public\\images\\logo.svg";
 
 	public Test() {
-		// TODO Auto-generated constructor stub
 	}
 	public Test(int testId, String testName, String testType, String testDescription, int actualPrice, int discount,
 			int finalPrice, String testImagePath) {
@@ -38,6 +39,7 @@ public class Test {
 		this.finalPrice = finalPrice;
 		this.testImagePath = testImagePath;
 	}
+	
 
 	public int getTestId() {
 		return testId;

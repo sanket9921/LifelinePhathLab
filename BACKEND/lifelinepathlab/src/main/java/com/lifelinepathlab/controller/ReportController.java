@@ -30,13 +30,14 @@ public class ReportController {
     @PostMapping("/upload")
     public ResponseEntity<String> uploadReport(
     											@RequestParam("file") MultipartFile reportFile,
+    											@RequestParam("appoitmentid") int id,
     										   @RequestParam("userId") int userId,
-                                               @RequestParam("doctorId") int doctorId,
+                                               @RequestParam("doctorId") String doctorId,
                                                @RequestParam("comment") String comment) 
    
     {
         try {
-            reportService.uploadReport(userId, doctorId, reportFile, comment);
+            reportService.uploadReport(id,userId, doctorId, reportFile, comment);
             return ResponseEntity.ok("Report uploaded successfully!");
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
