@@ -44,6 +44,10 @@ public class ReportService {
     public List<Report> getAllReports() {
         return reportRepository.findAll();
     }
+    
+    public List<Report> getAllReportsByDoctorEmailId(String email) {
+        return reportRepository.getByDoctorByEmailId(email);
+    }
 
     public Report getReportById(int id) {
         return reportRepository.findById(id)

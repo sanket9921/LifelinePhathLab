@@ -174,7 +174,7 @@ export default function Cart() {
         console.log(response.error.metadata.payment_id);
         console.log("******* Error Details End *******");
 
-        savePaymentToDb(res, amount, order.data.id, "Failed");
+        // savePaymentToDb(res, amount, order.data.id, "Failed");
 
         alert(
           "Oops Payment Failed!",

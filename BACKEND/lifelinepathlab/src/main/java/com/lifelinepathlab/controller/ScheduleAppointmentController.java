@@ -87,6 +87,11 @@ public class ScheduleAppointmentController {
         return ResponseEntity.ok(appointments);
     }
     
+    @GetMapping("/today")
+    public ResponseEntity<List<ScheduleAppointment>> getAppointmentByDate() {
+    	List <ScheduleAppointment> appointments = appointmentService.getAppointmentByDate();
+        return ResponseEntity.ok(appointments);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<ScheduleAppointment> getAppointmentById(@PathVariable("id") int id) {

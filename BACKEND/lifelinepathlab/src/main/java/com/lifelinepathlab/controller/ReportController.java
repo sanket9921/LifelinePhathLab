@@ -49,6 +49,12 @@ public class ReportController {
         List<Report> reports = reportService.getAllReports();
         return ResponseEntity.ok(reports);
     }
+    
+    @GetMapping("/email/{emailId}")
+    public ResponseEntity<List<Report>> getAllReportsByDoctorEmailId(@PathVariable("emailId") String mail) {
+        List<Report> reports = reportService.getAllReportsByDoctorEmailId(mail);
+        return ResponseEntity.ok(reports);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Report> getReportById(@PathVariable int id) {

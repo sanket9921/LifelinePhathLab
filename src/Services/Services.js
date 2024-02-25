@@ -234,6 +234,20 @@ class Services {
   getOrdersByOrderStatus(status) {
     return axios.get(BACKEND_API + "/orders/all/" + status);
   }
+
+  //To get Todays appointment's
+  getTodaysAppointments() {
+    return axios.get(BACKEND_API + "/appointments/today");
+  }
+
+  //To get all pending oders by status
+  getPendingOrdersByOrderStatus() {
+    return axios.get(BACKEND_API + "/orders/all/" + "P");
+  }
+
+  getReportsByDoctorId(userEmail) {
+    return axios.get(BACKEND_API + "/reports/email/" + userEmail);
+  }
 }
 
 export default new Services();
