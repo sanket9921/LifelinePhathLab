@@ -73,12 +73,12 @@ public class SecurityConfig {
                 		.requestMatchers("/api/appointments/**").permitAll()
 //                		.requestMatchers("/api/appointments/schedule/**").hasRole("USER")
                 		.requestMatchers("/api/appointments/schedule/**").permitAll()
-
+                		.requestMatchers("/api/appointments/today/**").permitAll()
                 		.requestMatchers("/api/appointments/list/**").permitAll()
                 		
                 		//All api reports
                 		.requestMatchers("/api/reports/**").permitAll()
-//                		.requestMatchers("/api/reports/upload/**").hasRole("ADMIN")
+                		.requestMatchers("/api/reports//email/**").permitAll()
                 		.requestMatchers("/api/reports/upload/**").permitAll()
 
                 		

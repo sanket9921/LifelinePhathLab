@@ -55,14 +55,19 @@ public class ReportService {
 
 	}
 
-	public List<Report> getAllReports() {
-		return reportRepository.findAll();
-	}
+    public List<Report> getAllReports() {
+        return reportRepository.findAll();
+    }
+    
+    public List<Report> getAllReportsByDoctorEmailId(String email) {
+        return reportRepository.getByDoctorByEmailId(email);
+    }
 
-	public Report getReportById(int id) {
-		return reportRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("Report not found with id: ", id));
-	}
+    public Report getReportById(int id) {
+        return reportRepository.findById(id)
+                                .orElseThrow(() -> new ResourceNotFoundException("Report not found with id: " , id));
+    }
+    
 
 	public void deleteReport(int id) {
 		reportRepository.deleteById(id);

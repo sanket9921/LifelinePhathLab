@@ -1,5 +1,6 @@
 package com.lifelinepathlab.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -43,6 +46,17 @@ public class AppointmentService {
 	public List<ScheduleAppointment> getAllAppointments() {
 		return appointmentRepository.findAll();
 	}
+	
+	public List<ScheduleAppointment> getAppointmentByDate() {
+		LocalDate localDate = LocalDate.now(); // replace with your desired date
+		Date startDate = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+		Date endDate = Date.from(localDate.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+		List<ScheduleAppointment> appointments = appointmentRepository.findByScheduledTime(startDate, endDate);
+		return appointments;
+	}
+	
+	
 
 	public ScheduleAppointment getAppointmentById(int id) {
 		return appointmentRepository.findById(id)

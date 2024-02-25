@@ -45,7 +45,7 @@ export default function Navbar() {
               </li>
               <li className="nav-item">
                 <Link className="nav-link" to="/uploadPrescription">
-                 Schedule Appointment
+                  Schedule Appointment
                 </Link>
               </li>
               <li className="nav-item">
@@ -53,11 +53,7 @@ export default function Navbar() {
                   Download Prescription
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/doctor">
-                  Doctor
-                </Link>
-              </li>
+
               <li className="nav-item">
                 <Link className="nav-link" to="/contact">
                   Contact
