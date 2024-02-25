@@ -33,7 +33,7 @@ export default function Feedback() {
   return (
     <>
       <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-        <h3 class="font-weight-bold">Feedback</h3>
+        <h3 class="font-weight-bold mt-3">Feedback</h3>
       </div>
 
       <div className="card mt-2 p-3">

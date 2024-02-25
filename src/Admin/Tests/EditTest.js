@@ -4,10 +4,8 @@ import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 
 export default function EditTest() {
-
   const { id } = useParams();
   // const [Test,setTest]=useState();
-
 
   const [testName1, settestName] = useState("");
   const [testType1, settestType] = useState("");
@@ -15,7 +13,6 @@ export default function EditTest() {
   const [actualPrice1, setactualPrice] = useState("");
   const [discount1, setdiscount] = useState("");
   const [finalPrice1, setfinalPrice] = useState("");
-
 
   useEffect(() => {
     Services.getTestById(id).then((res) => {
@@ -26,11 +23,10 @@ export default function EditTest() {
       setdiscount(res.data?.discount);
       setfinalPrice(res.data?.finalPrice);
       console.log(res.data);
-    })
+    });
   }, []);
 
   const calculateFinalPrice = () => {
-
     const actualPrice = actualPrice1;
     const discount = discount1;
 
@@ -39,14 +35,12 @@ export default function EditTest() {
       // Calculate final price with 2 decimal places
       const discountedAmount = (actualPrice * discount) / 100;
       setfinalPrice(actualPrice - discountedAmount);
-    };
-  }
-
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-
       const formDataToSend = new FormData();
       formDataToSend.append("testName", testName1);
       formDataToSend.append("testType", testType1);
@@ -62,27 +56,26 @@ export default function EditTest() {
         })
         .catch((err) => {
           //console.log(err);
-          toast.error("Failed to register test. Please try again later!", { autoClose: 1000 });
-
-        })
+          toast.error("Failed to register test. Please try again later!", {
+            autoClose: 1000,
+          });
+        });
     } catch (error) {
       console.error("Error registering test:", error);
       //alert("Failed to register test. Please try again later.");
-      toast.error("Failed to register test. Please try again later!", { autoClose: 2000 });
+      toast.error("Failed to register test. Please try again later!", {
+        autoClose: 2000,
+      });
     }
   };
-
 
   return (
     <>
       <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-        <h3 class="font-weight-bold">Edit Test</h3>
+        <h3 class="font-weight-bold mt-3">Edit Test Details</h3>
       </div>
 
       <div className="container mt-5 mb-3 p-4 bg-white pt-3">
-
-
-
         <div className="form-group">
           <label htmlFor="exampleInputName1">Test Name</label>
           <input
@@ -92,7 +85,9 @@ export default function EditTest() {
             name="testName"
             //value={formData.testName}
             value={testName1}
-            onChange={(e) => { settestName(e.target.value) }}
+            onChange={(e) => {
+              settestName(e.target.value);
+            }}
             placeholder="Enter name or the test or package"
           />
         </div>
@@ -104,7 +99,9 @@ export default function EditTest() {
             id="exampleInputName1"
             name="testType"
             value={testType1}
-            onChange={(e) => { settestType(e.target.value) }}
+            onChange={(e) => {
+              settestType(e.target.value);
+            }}
             placeholder="Enter type of the test or package eg. blood, liver, allergies etc."
           />
         </div>
@@ -115,7 +112,9 @@ export default function EditTest() {
             id="exampleTextarea1"
             name="testDescription"
             value={testDescription1}
-            onChange={(e) => { settestDescription(e.target.value) }}
+            onChange={(e) => {
+              settestDescription(e.target.value);
+            }}
             rows="4"
           ></textarea>
         </div>
@@ -127,10 +126,11 @@ export default function EditTest() {
                 className="typeahead"
                 type="text"
                 name="actualPrice"
-                onChange={(e) => { setactualPrice(e.target.value) }}
+                onChange={(e) => {
+                  setactualPrice(e.target.value);
+                }}
                 value={actualPrice1}
                 onBlur={calculateFinalPrice}
-
                 placeholder="Enter Actual price"
               />
             </div>
@@ -142,7 +142,9 @@ export default function EditTest() {
                 className="typeahead"
                 type="text"
                 name="discount"
-                onChange={(e) => { setdiscount(e.target.value) }}
+                onChange={(e) => {
+                  setdiscount(e.target.value);
+                }}
                 value={discount1}
                 onBlur={calculateFinalPrice}
                 placeholder="Enter Discount in %"
@@ -163,14 +165,11 @@ export default function EditTest() {
             </div>
           </div>
         </div>
+        <br />
         <button type="button" class="btn btn-primary" onClick={handleSubmit}>
-          Add Test
+          Update
         </button>
-
       </div>
     </>
   );
-
-
-
 }

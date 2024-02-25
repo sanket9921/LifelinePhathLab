@@ -5,8 +5,12 @@ import Cookies from "js-cookie";
 export default function Dashboard() {
   const [todaysAppointments, setTodaysAppointments] = useState([]);
   const [pendingBookings, setPendingBookings] = useState([]);
+  const [orders, setOrders] = useState([]);
+  const [allPatients, setALlPatients] = useState([]);
+  const [doctors, setDoctors] = useState([]);
   const userName = Cookies.get("firstName");
-  console.log(userName);
+
+  //console.log(userName);
   //To fetch today's appointments
   const appointmentsOfDay = () => {
     Services.getTodaysAppointments()
@@ -19,16 +23,55 @@ export default function Dashboard() {
   };
 
   //To fetch pending appointments
-
   const getPendingBookings = () => {
-    Services.getPendingOrdersByOrderStatus().then((res) => {
-      setPendingBookings(res.data);
-    });
+    Services.getPendingOrdersByOrderStatus()
+      .then((res) => {
+        setPendingBookings(res.data);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
+
+  //To fetch total clients
+  const fetchTotalPatients = () => {
+    Services.getAllPatients()
+      .then((res) => {
+        setALlPatients(res.data);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
+
+  //To fetch total doctors
+  const fetchTotalDoctors = () => {
+    Services.getAllDoctors()
+      .then((res) => {
+        setDoctors(res.data);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
+  };
+
+  //To fetch orders count
+  const fetchOrdersCount = () => {
+    Services.getAllOrdersCount()
+      .then((res) => {
+        setOrders(res.data);
+      })
+      .catch((err) => {
+        alert(err.message);
+      });
   };
 
   useEffect(() => {
     appointmentsOfDay();
     getPendingBookings();
+    fetchOrdersCount();
+    fetchTotalPatients();
+    fetchTotalDoctors();
   }, []);
 
   return (
@@ -42,8 +85,9 @@ export default function Dashboard() {
             <div class="card bg-primary-subtle ">
               <div class="card-body">
                 <p class="mb-4">Today’s Bookings</p>
-                <p class="fs-30 mb-2">4006</p>
-                <p>10.00% (30 days)</p>
+                <p class="fs-30 text-center mb-2 fw-light h2">
+                  00{todaysAppointments.length}
+                </p>
               </div>
             </div>
           </div>
@@ -52,8 +96,9 @@ export default function Dashboard() {
             <div class="card bg-danger-subtle">
               <div class="card-body">
                 <p class="mb-4">Total Bookings</p>
-                <p class="fs-30 mb-2">61344</p>
-                <p>22.00% (30 days)</p>
+                <p class="fs-30 mb-2 text-center fw-light h2">
+                  00{orders.length}
+                </p>
               </div>
             </div>
           </div>
@@ -61,9 +106,10 @@ export default function Dashboard() {
           <div class="col-md-3 mb-4 stretch-card transparent">
             <div class="card bg-warning-subtle">
               <div class="card-body">
-                <p class="mb-4">Number of Meetings</p>
-                <p class="fs-30 mb-2">34040</p>
-                <p>2.00% (30 days)</p>
+                <p class="mb-4">Number of Doctors</p>
+                <p class="fs-30 mb-2 text-center fw-light h2">
+                  00{doctors.length}
+                </p>
               </div>
             </div>
           </div>
@@ -72,8 +118,9 @@ export default function Dashboard() {
             <div class="card bg-info-subtle">
               <div class="card-body">
                 <p class="mb-4">Number of Clients</p>
-                <p class="fs-30 mb-2">47033</p>
-                <p>0.22% (30 days)</p>
+                <p class="fs-30 text-center fw-light h2 mb-2">
+                  00{allPatients.length}
+                </p>
               </div>
             </div>
           </div>

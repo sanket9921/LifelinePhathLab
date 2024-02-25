@@ -18,7 +18,7 @@ export default function Enquiry() {
   return (
     <>
       <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-        <h3 class="font-weight-bold">Users Enquiry</h3>
+        <h3 class="font-weight-bold mt-3">Users Enquiry</h3>
       </div>
       <div className="card mt-2 p-3">
         <table

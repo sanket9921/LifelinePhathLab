@@ -44,8 +44,7 @@ public class User implements UserDetails {
 	private boolean active;
 	private String otp;
 	private LocalDateTime otpGeneratedTime;
-	
-	
+
 	public int getUserId() {
 		return this.userId;
 	}

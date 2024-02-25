@@ -12,7 +12,7 @@ export default function AddDoctor() {
       })
       .catch((err) => {
         //alert(err.message);
-        toast.error(err.message,{autoClose: 1000});
+        toast.error(err.message, { autoClose: 1000 });
       });
   }, []);
 
@@ -23,7 +23,6 @@ export default function AddDoctor() {
         setTimeout(() => {
           window.location.reload();
         }, 1000);
-
       })
       .catch((err) => {
         //alert(err.message);
@@ -41,14 +40,14 @@ export default function AddDoctor() {
       })
       .catch((err) => {
         //alert(err.message);
-        toast.error(err.message, {autoClose: 1000});
+        toast.error(err.message, { autoClose: 1000 });
       });
   };
 
   return (
     <>
       <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-        <h3 class="font-weight-bold">Doctors Request For Tie-Up</h3>
+        <h3 class="font-weight-bold mt-3">Doctors Request For Tie-Up</h3>
       </div>
 
       <div className="card mt-3 p-3">

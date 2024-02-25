@@ -22,7 +22,6 @@ export default function AppointmentDetails() {
   // const [doctorId, setDoctorId] = useState("");
   const [reportFile, setReportFile] = useState(null);
   const [comment, setComment] = useState("");
-  const [message, setMessage] = useState("");
 
   const handleFileChange = (e) => {
     setReportFile(e.target.files[0]);

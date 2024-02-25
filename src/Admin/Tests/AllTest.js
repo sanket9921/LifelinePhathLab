@@ -45,7 +45,7 @@ export default function AllTest() {
         <input
           class="form-control me-2"
           type="search"
-          placeholder="Enter Patinet id"
+          placeholder="Enter Test id"
           aria-label="Search"
         />
         <button class="btn btn-primary" type="submit">
