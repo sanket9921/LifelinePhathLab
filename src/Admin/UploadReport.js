@@ -13,6 +13,7 @@ export default function UploadReport() {
     Services.getOrdersById(id)
       .then((response) => {
         setOrder(response.data);
+        console.log(response.data);
       })
       .catch((error) => {
         toast.error(error.message, { onClose: 1000 });
@@ -27,13 +28,13 @@ export default function UploadReport() {
     e.preventDefault();
 
     const formData = new FormData();
+    formData.append("orderid", id);
     formData.append("file", reportFile);
     formData.append("userId", order?.user?.userId);
-    formData.append("doctorId", order?.doctor?.doctorId);
     formData.append("comment", comment);
     // console.log(order)
     try {
-      await Services.addReport(formData);
+      await Services.addOrderReport(formData);
       // alert("Report uploaded successfully!");
       toast.success("Report uploaded successfully!", { onClose: 1000 });
       setTimeout(() => {

@@ -50,13 +50,19 @@ export default function Header() {
 
             <li className="nav-item">
               <Link className="nav-link" to="/prescription">
-                UploadPrescription
+                Schedule Appoitment
               </Link>
             </li>
             <li className="nav-item">
               <button className="btn btn-outline-danger" onClick={handleLogout}>
                 Logout
               </button>
+            </li>
+            <li className="nav-item">
+              <h5 className="fw-light mt-2 ms-5">
+                Welcome{" "}
+                <span className="text-primary"> {Cookies.get("username")}</span>
+              </h5>
             </li>
           </ul>
         </div>

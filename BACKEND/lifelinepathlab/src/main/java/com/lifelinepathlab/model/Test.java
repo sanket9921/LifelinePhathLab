@@ -23,7 +23,7 @@ public class Test {
 	private int actualPrice;
 	private int discount;
 	private int finalPrice;
-	private String testImagePath="D:\\LifelinePhathLab\\public\\images\\logo.svg";
+	private String testImagePath;
 
 	public Test() {
 	}

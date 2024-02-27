@@ -48,8 +48,8 @@ export default function TestBook() {
             </thead>
             <tbody>
               {orders &&
-                orders.map((order) => (
-                  <tr>
+                orders.map((order, index) => (
+                  <tr key={index}>
                     <td>{order?.id}</td>
                     <td>
                       {order?.user?.firstName} {order?.user?.lastName}
@@ -59,12 +59,12 @@ export default function TestBook() {
                     <td>{order?.totalAmount}</td>
                     <td>{order?.status}</td>
                     <td>
-                    <Link
-                      class=" btn btn-outline-primary"
-                      to={"/uploadReport/" + order.id}
-                    >
-                      Upload Report
-                    </Link>
+                      <Link
+                        class=" btn btn-outline-primary"
+                        to={"/uploadReport/" + order.id}
+                      >
+                        Upload Report
+                      </Link>
                     </td>
                   </tr>
                 ))}

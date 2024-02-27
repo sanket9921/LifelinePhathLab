@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Services from "../Services/Services";
 import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function DownloadReport() {
   const [modalSrc, setModalSrc] = useState("");
@@ -11,7 +12,9 @@ function DownloadReport() {
   const navigate = useNavigate();
   useEffect(() => {
     if (!isloggedIn) {
+      // toast.error("Please Login First", { onClose: 100 });
       navigate("/login");
+      return;
     }
 
     Services.getAllReportbyuserid(userid).then((res) => {

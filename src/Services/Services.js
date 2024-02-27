@@ -173,6 +173,15 @@ class Services {
       },
     });
   }
+
+  addOrderReport(formdata) {
+    return axios.post(BACKEND_API + "/reports/uploadOrderReport", formdata, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+        Authorization: "Bearer " + jwt,
+      },
+    });
+  }
   getAllReportbyuserid(userid) {
     return axios.get(BACKEND_API + "/reports/user/" + userid, {
       headers: {
@@ -198,6 +207,14 @@ class Services {
 
   createorder(data) {
     return axios.post(BACKEND_API + "/orders/create-order", data, {
+      headers: {
+        Authorization: "Bearer " + jwt,
+      },
+    });
+  }
+
+  createOrderByTest(data) {
+    return axios.post(BACKEND_API + "/orders/create_order_by_test", data, {
       headers: {
         Authorization: "Bearer " + jwt,
       },

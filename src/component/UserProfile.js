@@ -105,13 +105,6 @@ export default function UserProfile() {
                   </div>
                 </div>
                 <hr />
-                <div className="row">
-                  <div className="col-sm-12">
-                    <a className="btn btn-primary" target="__blank">
-                      Edit
-                    </a>
-                  </div>
-                </div>
               </div>
             </div>
           </div>

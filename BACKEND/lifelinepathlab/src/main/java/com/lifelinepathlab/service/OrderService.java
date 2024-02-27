@@ -1,5 +1,6 @@
 package com.lifelinepathlab.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +27,8 @@ public class OrderService {
 	private OrderRepository orderRepository;
 	@Autowired
 	private TestService service;
+	@Autowired
+	private UserService userService;
 
 	public void addOrder(Orders orders) {
 		User user = orders.getUser();
@@ -142,8 +145,47 @@ public class OrderService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+		return "Error in Payment";
 	
+		
+	}
+	
+	public List<Object> create_order_by_Test(int testid,int userid ) {
+			Test test = service.getTestById(testid).get();
+			User user = userService.getUser(userid);
+			System.out.println(user);
+			List<Test> tests = new ArrayList<Test>();
+			List<Object> list = new ArrayList<Object>();
+			tests.add(test);
+			Orders order1 = new Orders();
+			order1.setDate(new Date());
+			order1.setTests(tests);
+			order1.setUser(user);
+			order1.setTotalAmount(test.getFinalPrice());
+			orderRepository.save(order1);
+		
+		try {
+			var client = new RazorpayClient(RAZORPAY_KEY, RAZORPAY_SECRET);
+			JSONObject ob = new JSONObject();
+	        ob.put("amount", test.getFinalPrice()*100);
+	        ob.put("currency", "INR");
+	        ob.put("receipt", "rec_1234");
+//	        ob.put("orderId",order1.getId());
+
+	        Order order = client.Orders.create(ob);
+	        System.out.println(order);
+	        list.add(order.toString());
+	        list.add(order1.getId());
+	        
+	        return list;
+			
+			
+		} catch (RazorpayException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+		
 		
 	}
 	

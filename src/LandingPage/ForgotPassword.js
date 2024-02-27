@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Services from "../Services/Services";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function ForgotPassword() {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ export default function ForgotPassword() {
     const formData = new FormData();
     formData.append("email", email);
     Services.reGenerateOTP(formData).then((response) => {
-      alert(response.data);
+      toast.success(response.data, { onClose: 100 });
     });
   };
 

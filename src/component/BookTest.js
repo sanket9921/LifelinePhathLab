@@ -14,7 +14,7 @@ export default function BookTest() {
   const userId = Cookies.get("userId");
   const isLoggedIn = Cookies.get("isLoggedIn");
   const [cartOrders, setCartOrders] = useState();
-
+  let order_id;
   const getTestsByCatagory = () => {
     Services.getTestByTestType(testCategory)
       .then((res) => {
@@ -41,6 +41,8 @@ export default function BookTest() {
 
   //To handle user login
   const userLogInHandler = () => {
+    toast.error("Please Login First", { onClose: 100 });
+
     navigate("/login");
   };
 
@@ -134,15 +136,15 @@ export default function BookTest() {
   //   await axios.post("http://localhost:8082/api/payment", payment);
   // };
 
-  const getOptionsObject = async (order) => {
+  const getOptionsObject = (order) => {
     const options = {
       key: "rzp_test_9L81H2RGT2jv78",
-      amount: order.data.amount,
-      currency: order.data.currency,
+      amount: order.amount,
+      currency: order.currency,
       name: "",
       image: "https://www.svgrepo.com/show/261072/rupee.svg",
       // description: "For Testing purpose",
-      order_id: order.data.id,
+      order_id: order.id,
       handler: async (res) => {
         alert(
           "Payment Successfull!",
@@ -153,7 +155,7 @@ export default function BookTest() {
         console.log("razorpay_order_id = ", res.razorpay_order_id);
         console.log("razorpay_signature = ", res.razorpay_signature);
 
-        await Services.updateOrderStatus(cartOrders.id);
+        Services.updateOrderStatus(order_id);
         window.location.reload();
       },
       prefill: {
@@ -171,8 +173,14 @@ export default function BookTest() {
     return options;
   };
 
-  const paymentHandler = async (e) => {
+  const paymentHandler = async (testId) => {
     // e.preventDefault();
+
+    if (!isLoggedIn) {
+      toast.error("Please Login First", { onClose: 100 });
+      navigate("/login");
+      return;
+    }
 
     // load razorpay checkout script
     const res = await loadScript(
@@ -183,9 +191,14 @@ export default function BookTest() {
       return;
     }
 
-    const order = await Services.createorder({
-      order: cartOrders.id,
+    const response = await Services.createOrderByTest({
+      userId: userId,
+      testId: testId,
     });
+
+    // console.log(response.data);
+    const order = JSON.parse(response.data[0]);
+    order_id = response.data[1];
 
     // const order = await axios.post(
     //   "http://localhost:8083/api/orders/create_order",
@@ -195,7 +208,7 @@ export default function BookTest() {
     //   {}
     // );
 
-    if (order.data.status === "created") {
+    if (order.status === "created") {
       console.log("Order Created ", order);
       const options = getOptionsObject(order);
 
@@ -225,11 +238,6 @@ export default function BookTest() {
     } else {
       alert("Oops Order Creation Failed!", "Check backend code", "error");
     }
-  };
-
-  const handleBooking = async (id) => {
-    await AddToCartHandler(id);
-    paymentHandler();
   };
 
   return (
@@ -285,7 +293,7 @@ export default function BookTest() {
                     {/* Conditonal rendering of buttons */}
                     <button
                       className="buy"
-                      onClick={() => handleBooking(test.testId)}
+                      onClick={() => paymentHandler(test.testId)}
                     >
                       Buy Now
                     </button>

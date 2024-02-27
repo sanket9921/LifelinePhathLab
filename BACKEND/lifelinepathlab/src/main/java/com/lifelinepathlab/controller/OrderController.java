@@ -63,6 +63,7 @@ public class OrderController {
 	}
 	
 	
+	
 	@PostMapping("/addOrder")
 	public ResponseEntity<String> addOrder(@RequestBody Orders orders) {
 		orderService.addOrder(orders);
@@ -85,6 +86,19 @@ public class OrderController {
 	public String create_order(@RequestBody Map<String, Object> data)  {
 		int orderid = (int) data.get("order");
 		return orderService.create_order(orderid);	
+	}
+	
+	@PostMapping("/create_order_by_test")
+	public List<Object> createOrderByTest(@RequestBody Map<String, Object> data) {
+		
+//		System.out.println(data.get("testId") +" "+ data.get("userId"));
+		String testid = data.get("testId").toString();
+			
+		String userid = data.get("userId").toString();
+		
+		System.out.println(testid+ " "+ userid);
+		
+		return orderService.create_order_by_Test(Integer.parseInt(testid), Integer.parseInt( userid));
 	}
 	
 	@GetMapping("/update-satus/{id}")

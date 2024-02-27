@@ -44,6 +44,23 @@ public class ReportController {
                                  .body("Failed to upload report: " + e.getMessage());
         }
     }
+    
+    @PostMapping("/uploadOrderReport")
+    public ResponseEntity<String> uploadOrderReport(
+    											@RequestParam("file") MultipartFile reportFile,
+    											@RequestParam("orderid") int id,
+    										   @RequestParam("userId") int userId,
+                                               @RequestParam("comment") String comment) 
+   
+    {
+        try {
+            reportService.uploadOrderReport(id,userId, reportFile, comment);
+            return ResponseEntity.ok("Report uploaded successfully!");
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                                 .body("Failed to upload report: " + e.getMessage());
+        }
+    }
 
     @GetMapping
     public ResponseEntity<List<Report>> getAllReports() {

@@ -64,6 +64,8 @@ export default function Cart() {
 
   //To handle user login
   const userLogInHandler = () => {
+    // toast.error("Please Login First", { onClose: 100 });
+
     navigate("/login");
   };
 
@@ -135,6 +137,11 @@ export default function Cart() {
 
   const paymentHandler = async (e) => {
     e.preventDefault();
+    if (cartOrders.length === 0) {
+      toast.error("No cart items are available", { onClose: 100 });
+      return;
+    }
+
     // load razorpay checkout script
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"

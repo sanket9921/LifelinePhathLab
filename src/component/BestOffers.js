@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Services from "../Services/Services";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
 
@@ -11,7 +11,7 @@ export default function BestOffers() {
   const testIds = [];
   const userId = Cookies.get("userId");
   const isLoggedIn = Cookies.get("isLoggedIn");
-
+  let order_id;
   useEffect(() => {
     fetchBestOffers();
     if (isLoggedIn) {
@@ -53,6 +53,7 @@ export default function BestOffers() {
   /*Add to cart function*/
   const AddToCartHandler = async (id) => {
     if (!isLoggedIn) {
+      toast.error("Please Login First", { onClose: 100 });
       userLogInHandler();
     } else {
       const booking = {
@@ -135,23 +136,30 @@ export default function BestOffers() {
   const getOptionsObject = (order) => {
     const options = {
       key: "rzp_test_9L81H2RGT2jv78",
-      amount: order.data.amount,
-      currency: order.data.currency,
+      amount: order.amount,
+      currency: order.currency,
       name: "",
       image: "https://www.svgrepo.com/show/261072/rupee.svg",
       // description: "For Testing purpose",
-      order_id: order.data.id,
+      order_id: order.id,
       handler: async (res) => {
-        alert(
+        toast.success(
           "Payment Successfull!",
           `Your Payment Id is : ${res.razorpay_payment_id}`,
-          "success"
+          "success",
+          { onClose: 100 }
         );
+
+        // alert(
+        //   "Payment Successfull!",
+        //   `Your Payment Id is : ${res.razorpay_payment_id}`,
+        //   "success"
+        // );
         console.log("razorpay_payment_id = ", res.razorpay_payment_id);
         console.log("razorpay_order_id = ", res.razorpay_order_id);
         console.log("razorpay_signature = ", res.razorpay_signature);
 
-        Services.updateOrderStatus(cartOrders.id);
+        Services.updateOrderStatus(order_id);
         window.location.reload();
       },
       prefill: {
@@ -169,8 +177,14 @@ export default function BestOffers() {
     return options;
   };
 
-  const paymentHandler = async (e) => {
+  const paymentHandler = async (testId) => {
     // e.preventDefault();
+    if (!isLoggedIn) {
+      toast.error("Please Login First", { onClose: 100 });
+
+      navigate("/login");
+      return;
+    }
 
     // load razorpay checkout script
     const res = await loadScript(
@@ -181,9 +195,14 @@ export default function BestOffers() {
       return;
     }
 
-    const order = await Services.createorder({
-      order: cartOrders.id,
+    const response = await Services.createOrderByTest({
+      userId: userId,
+      testId: testId,
     });
+
+    // console.log(response.data);
+    const order = JSON.parse(response.data[0]);
+    order_id = response.data[1];
 
     // const order = await axios.post(
     //   "http://localhost:8083/api/orders/create_order",
@@ -193,7 +212,7 @@ export default function BestOffers() {
     //   {}
     // );
 
-    if (order.data.status === "created") {
+    if (order.status === "created") {
       console.log("Order Created ", order);
       const options = getOptionsObject(order);
 
@@ -212,10 +231,11 @@ export default function BestOffers() {
 
         // savePaymentToDb(res, amount, order.data.id, "Failed");
 
-        alert(
+        toast.error(
           "Oops Payment Failed!",
           `Error Description : ${response.error.description}`,
-          "error"
+          "error",
+          { onclose: 100 }
         );
       });
 
@@ -223,11 +243,6 @@ export default function BestOffers() {
     } else {
       alert("Oops Order Creation Failed!", "Check backend code", "error");
     }
-  };
-
-  const handleBooking = async (id) => {
-    await AddToCartHandler(id);
-    await paymentHandler();
   };
 
   return (
@@ -281,7 +296,7 @@ export default function BestOffers() {
                 {/* Conditonal rendering of buttons */}
                 <button
                   className="buy"
-                  onClick={() => handleBooking(offer.testId)}
+                  onClick={() => paymentHandler(offer.testId)}
                 >
                   Buy Now
                 </button>
