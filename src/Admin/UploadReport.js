@@ -68,10 +68,6 @@ export default function UploadReport() {
                 <p class="fw-semibold">Order Date</p>
                 <p>{order?.date}</p>
               </div>
-              <div>
-                <p class="fw-semibold">Contact</p>
-                <p>{order?.user?.contactNo}</p>
-              </div>
             </div>
             <div className="col-6">
               <div>
@@ -81,10 +77,6 @@ export default function UploadReport() {
               <div>
                 <p class="fw-semibold">Total Amount</p>
                 <p>{order?.totalAmount}</p>
-              </div>
-              <div>
-                <p class="fw-semibold">Order Date</p>
-                <p>{order?.date}</p>
               </div>
               <div>
                 <p class="fw-semibold">Contact</p>

@@ -4,6 +4,7 @@ import Cookies from "js-cookie";
 import { useNavigate } from "react-router-dom";
 
 import axios from "axios";
+import { toast } from "react-toastify";
 
 export default function Cart() {
   const navigate = useNavigate();
@@ -60,8 +61,6 @@ export default function Cart() {
       getTestData();
     }
   }, []);
-
-  console.log(cartOrders.id);
 
   //To handle user login
   const userLogInHandler = () => {
@@ -141,7 +140,7 @@ export default function Cart() {
       "https://checkout.razorpay.com/v1/checkout.js"
     );
     if (!res) {
-      alert("Razorpay SDK failed to load. Are you online?");
+      toast.error("Razorpay SDK failed to load. Are you online?");
       return;
     }
 
@@ -176,7 +175,7 @@ export default function Cart() {
 
         // savePaymentToDb(res, amount, order.data.id, "Failed");
 
-        alert(
+        toast.error(
           "Oops Payment Failed!",
           `Error Description : ${response.error.description}`,
           "error"
@@ -185,7 +184,7 @@ export default function Cart() {
 
       rzp.open();
     } else {
-      alert("Oops Order Creation Failed!", "Check backend code", "error");
+      toast.error("Oops Order Creation Failed!", "Check backend code", "error");
     }
   };
 

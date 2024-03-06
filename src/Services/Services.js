@@ -173,6 +173,13 @@ class Services {
       },
     });
   }
+  getAllReportbyuserid(userid) {
+    return axios.get(BACKEND_API + "/reports/user/" + userid, {
+      headers: {
+        Authorization: "Bearer " + jwt,
+      },
+    });
+  }
 
   //to delete cart orders
   deleteCartOrderById(id) {

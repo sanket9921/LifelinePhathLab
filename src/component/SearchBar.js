@@ -115,7 +115,7 @@ export default function SearchBar() {
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
-                      {Cookies.get("username")}
+                      {Cookies.get("firstName")}
                     </div>
                     <ul class="dropdown-menu">
                       <li>

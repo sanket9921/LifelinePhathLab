@@ -11,22 +11,21 @@ export default function Doctors() {
       })
       .catch((err) => {
         //alert(err.message);
-        toast.error(err.message,{onclose:1000});
-
+        toast.error(err.message, { onclose: 1000 });
       });
   }, []);
 
   const handleDelete = (doctorId) => {
     Services.deleteDoctorRecord(doctorId)
       .then((res) => {
-        toast.success("Doctor deleted successfully",{onclose:1000});
+        toast.success("Doctor deleted successfully", { onclose: 1000 });
         setTimeout(() => {
           window.location.reload();
         }, 1000);
       })
       .catch((err) => {
         //alert(err.message);
-        toast.error(err.message,{onclose:1000});
+        toast.error(err.message, { onclose: 1000 });
       });
   };
 
@@ -35,7 +34,7 @@ export default function Doctors() {
       <div class="col-12 col-xl-8 mb-4 mb-xl-0">
         <h3 class="font-weight-bold">Doctors</h3>
       </div>
-      <form class="d-flex" role="search">
+      {/* <form class="d-flex" role="search">
         <input
           class="form-control me-2"
           type="search"
@@ -45,7 +44,7 @@ export default function Doctors() {
         <button class="btn btn-primary" type="submit">
           Search
         </button>
-      </form>
+      </form> */}
 
       <div className="card mt-2 p-2">
         <table className="table table-hover">

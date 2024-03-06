@@ -10,11 +10,12 @@ export default function AppointmentDetails() {
     Services.getAppointmentById(id)
       .then((response) => {
         setAppointment(response.data);
-       // console.log(appointment?.doctor?.doctorId);
+        // console.log(appointment?.doctor?.doctorId);
+        console.log(appointment);
       })
       .catch((error) => {
-       // console.log(error);
-        toast.error(error.message,{onClose:1000});
+        // console.log(error);
+        toast.error(error.message, { onClose: 1000 });
       });
   }, []);
   // const [userId, setUserId] = useState("");
@@ -31,21 +32,27 @@ export default function AppointmentDetails() {
 
     const formData = new FormData();
     formData.append("file", reportFile);
-    formData.append("userId",appointment?.user?.userId);
+    formData.append("appoitmentid", id);
+    formData.append("userId", appointment?.user?.userId);
     formData.append("doctorId", appointment?.doctor?.doctorId);
     formData.append("comment", comment);
-    console.log(appointment)
+    // console.log(comment);
+    // console.log(appointment?.user?.userId);
+    // console.log(appointment?.doctor?.doctorId);
+    // console.log(reportFile);
+    // console.log(formData.get("userId"));
     try {
       await Services.addReport(formData);
      // alert("Report uploaded successfully!");
       toast.success("Report uploaded successfully!",{onClose:1000});
       setTimeout(() => {
-        window.location.reload()
+        window.location.reload();
       }, 1000);
-
     } catch (error) {
       //alert("Failed to upload report: " + error.message);
-      toast.error("Failed to upload report: " + error.message,{onClose:1000});
+      toast.error("Failed to upload report: " + error.message, {
+        onClose: 1000,
+      });
     }
   };
 

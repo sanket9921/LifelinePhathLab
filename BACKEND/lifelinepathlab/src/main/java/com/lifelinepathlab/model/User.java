@@ -25,7 +25,7 @@ import lombok.Setter;
 @Entity
 @Table(name="UserDetails")
 public class User implements UserDetails {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userId;
@@ -35,7 +35,7 @@ public class User implements UserDetails {
 	private String emailId;
 	private String contactNo;
 	private Date dateOfBirth;
-	private String gender;
+	private String gender;	
 	private String bloodGroup;
 	private String address;
 	private String password;

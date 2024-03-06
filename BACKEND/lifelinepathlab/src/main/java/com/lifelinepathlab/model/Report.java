@@ -39,6 +39,12 @@ public class Report {
         this.uploadDate = uploadDate;
     }
 
+    public Report(User user,  String reportFileName, String comment, Date uploadDate) {
+        this.user = user;
+        this.reportFileName = reportFileName;
+        this.comment = comment;
+        this.uploadDate = uploadDate;
+    }
     // Getters and setters
     public int getId() {
         return id;

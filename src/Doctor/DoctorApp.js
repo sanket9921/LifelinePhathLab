@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import DisplayReports from "./DisplayReports";
 import Header from "./Header";
-import UploadPrescriptionThroughDoctor from "./UploadPrescriptionThroughDoctor";
+import UploadPrescription from "../component/UploadPrescription";
 
 export default function DoctorApp() {
   return (
@@ -10,7 +10,7 @@ export default function DoctorApp() {
       <Header />
       <Routes>
         <Route path="/" element={<DisplayReports />} />
-        <Route path="/prescription" element={<UploadPrescriptionThroughDoctor />} />
+        <Route path="/prescription" element={<UploadPrescription />} />
       </Routes>
     </>
   );

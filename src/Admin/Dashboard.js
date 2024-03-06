@@ -143,14 +143,14 @@ export default function Dashboard() {
           </thead>
           <tbody>
             {todaysAppointments &&
-              todaysAppointments.map((todaysAppointment) => (
-                <tr>
-                  <td>{todaysAppointment.appointmentId}</td>
-                  <td>{todaysAppointment.patientName}</td>
-                  <td>{todaysAppointment.patientContactNo}</td>
-                  <td>{todaysAppointment.scheduledTime}</td>
-                  <td>{todaysAppointment.doctor.doctorName}</td>
-                  <td>{todaysAppointment.status}</td>
+              todaysAppointments.map((todaysAppointment, index) => (
+                <tr key={index}>
+                  <td>{todaysAppointment?.appointmentId}</td>
+                  <td>{todaysAppointment?.patientName}</td>
+                  <td>{todaysAppointment?.patientContactNo}</td>
+                  <td>{todaysAppointment?.scheduledTime}</td>
+                  <td>{todaysAppointment?.doctor?.doctorName}</td>
+                  <td>{todaysAppointment?.status}</td>
                 </tr>
               ))}
             {/* <tr>
@@ -215,8 +215,8 @@ export default function Dashboard() {
           </thead>
           <tbody>
             {pendingBookings &&
-              pendingBookings.map((pendingBooking) => (
-                <tr>
+              pendingBookings.map((pendingBooking, index) => (
+                <tr key={index}>
                   <td>{pendingBooking?.id}</td>
                   <td>
                     {pendingBooking?.user?.firstName}{" "}

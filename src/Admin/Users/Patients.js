@@ -11,21 +11,21 @@ export default function Patients() {
       })
       .catch((err) => {
         //alert(err.message);
-        toast.error(err.message,{onclose: 1000});
+        toast.error(err.message, { onclose: 1000 });
       });
   }, []);
 
   const handleDelete = (userId) => {
     Services.deletePatientById(userId)
       .then((res) => {
-        toast.success("Patient deleted successfully",{onclose: 1000});
+        toast.success("Patient deleted successfully", { onclose: 1000 });
         setTimeout(() => {
           window.location.reload();
         }, 1000);
       })
       .catch((err) => {
-       // alert(err.message);
-        toast.error(err.message,{onclose: 1000});
+        // alert(err.message);
+        toast.error(err.message, { onclose: 1000 });
       });
   };
 
@@ -35,7 +35,7 @@ export default function Patients() {
         <h3 class="font-weight-bold">Patients</h3>
       </div>
 
-      <form class="d-flex" role="search">
+      {/* <form class="d-flex" role="search">
         <input
           class="form-control me-2"
           type="search"
@@ -45,7 +45,7 @@ export default function Patients() {
         <button class="btn btn-primary" type="submit">
           Search
         </button>
-      </form>
+      </form> */}
       <div className="card mt-2 p-3">
         <table className="table table-hover">
           <thead>
