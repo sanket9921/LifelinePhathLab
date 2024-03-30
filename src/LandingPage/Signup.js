@@ -34,12 +34,12 @@ export default function Signup() {
     Services.userRegistration(user)
       .then((res) => {
         // console.log(res);
-        toast.success("Otp sent on Mail successfully!!!",{onClose:1000});
+        toast.success("Otp sent on Mail successfully!!!", { onClose: 1000 });
         navigate("/verifyOtp/" + emailId1);
       })
       .catch((err) => {
         //alert(err.message);
-        toast.error(err.message,{onClose:1000});
+        toast.error(err.message, { onClose: 1000 });
       });
   };
 
@@ -155,6 +155,7 @@ export default function Signup() {
               <br />
               <button
                 className="button"
+                // style={{"background:orange"}}
                 type="submit"
                 value="submit"
                 onClick={registerUser}
