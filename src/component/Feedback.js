@@ -17,15 +17,15 @@ export default function Feedback() {
     Services.addClientFeedback(clientFeedback)
       .then((res) => {
         //alert(res.data);
-        toast.success(res.data,{onclose:1000});
+        toast.success(res.data, { onclose: 1000 });
         setTimeout(() => {
-          window.location.reload()
+          window.location.reload();
         }, 1000);
       })
       .catch((err) => {
         //alert(err.message);
-        toast.error(err.message,{onclose:1000});
-       } )
+        toast.error(err.message, { onclose: 1000 });
+      });
   };
 
   return (
@@ -54,7 +54,10 @@ export default function Feedback() {
             />
           </div>
           <br />
-          <p>Thanks for your feedback. We're constantly trying to improve our services, so your input is valuable.</p>
+          <p>
+            Thanks for your feedback. We're constantly trying to improve our
+            services, so your input is valuable.
+          </p>
         </div>
         <div className="col-sm-6 vl">
           <label>Write your feedback:</label>
